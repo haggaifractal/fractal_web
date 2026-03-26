@@ -1,0 +1,60 @@
+---
+import ContactSection from '../../components/ContactSection.astro';
+import LayoutHe from '../../layouts/LayoutHe.astro';
+
+const services = [
+    {
+        title: "פתרונות אבטחת מידע",
+        desc: "יישום פתרונות אבטחת מידע גמישים הנתפרים עבור ארגונך שיפחיתו סיכוני IT באופן משמעותי, ישמרו על רציפות טכנולוגית, ויגדילו את רמת היציבות עבור התפעול השוטף של פעילות העסק שלך.",
+        icon: "security",
+        span: "col-span-1 md:col-span-2"
+    },
+    {
+        title: "תכנון והקמת רשתות",
+        desc: "אנו נפגשים ופועלים איתך ראש בראש כדי להבין לעומק את תכנון וארכיטקטורת הרשת הנוכחית שלך ואת מהות הפעילות העסקית הרלוונטית, בכדי לתפור ולייצב פתרון תשתית שיספק את האיזון המושלם שבין ביצועים חומריים ועלויות שוטפות.",
+        icon: "lan",
+        span: "col-span-1"
+    },
+    {
+        title: "תחזוקת מערכות אבטחה",
+        desc: "המומחים שלנו יעריכו את עוצמת האבטחה ברשת התקשורת הארגונית שלך וימליצו על ארכיטקטורה מותאמת אישית לפתרון איכותי שמספק אבטחת מידע גורפת ואמינה שמעניקה לעסק הגנה מערכתית מוחלטת לשמירת המידע העסקי שלך באפס סיכונים.",
+        icon: "videocam",
+        span: "col-span-1"
+    },
+    {
+        title: "תמיכת מערכות חכמות",
+        desc: "מחלקת ה-IT של פרקטל מספקת שירותי חבילות ותוכניות תחזוקה תפורות אישית בעולמות ניהול ותפעול מערכות (Software Management), טיפול בשירותי תוכנה מבוססי-דרישה (Request-Based Services) ותמיכה צמודה בפתרונות ואפליקציות צד שלישי המופעלות לשירות הארגון.",
+        icon: "memory",
+        span: "col-span-1 md:col-span-2"
+    }
+];
+---
+
+<LayoutHe title="השירותים שלנו">
+    <section class="pt-32 pb-16 px-8 max-w-7xl mx-auto text-right">
+        <div class="text-center mb-16 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold font-headline mb-8 text-on-surface tracking-tight">סל המוצרים <span class="text-primary">והמומחיות</span> שלנו</h1>
+            <p class="text-on-surface-variant text-lg md:text-xl font-light leading-relaxed">
+                אנו מחזיקים במומחיות-קצה בהקמת רשתות תקשורת, אבטחת מידע עסקית, ליווי ותמיכה מלאה במערכות תוכנה ואמצעים טכנולוגיים לתאגידים, חברות ביטוח ומוסדות רפואיים בישראל.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr">
+            {services.map((service) => (
+                <div class={`bg-surface-container-lowest p-8 md:p-10 rounded-[2.5rem] border border-outline-variant/30 flex flex-col items-start gap-6 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/40 transition-all duration-300 group ${service.span}`}>
+                    <div class="bg-primary/10 p-4 rounded-2xl group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-4xl text-primary group-hover:text-white">{service.icon}</span>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-2xl font-bold text-on-surface font-headline">{service.title}</h3>
+                        <p class="text-on-surface-variant text-base leading-relaxed">{service.desc}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <!-- Exact Contact Us Section from user specification -->
+    <ContactSection lang="he" />
+
+</LayoutHe>

@@ -1,0 +1,168 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Footer from '../components/Footer.astro';
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+const pathname = Astro.url.pathname;
+const enPath = pathname.replace(/^\/he\/?/, '/') || '/';
+---
+
+<!doctype html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Fractal - IT Systems" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | פרקטל - מחשוב בגישה עסקית</title>
+    <ClientRouter />
+
+    <!-- Heebo for high-quality Hebrew typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <style is:global>
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        :root {
+            --color-primary: 0, 104, 116;
+            --color-on-primary: 255, 255, 255;
+            --color-primary-container: 151, 240, 255;
+            --color-on-primary-container: 0, 31, 36;
+            --color-secondary: 74, 98, 103;
+            --color-surface: 244, 250, 250;
+            --color-on-surface: 22, 29, 29;
+            --color-outline: 111, 121, 122;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: rgb(var(--color-surface));
+            color: rgb(var(--color-on-surface));
+        }
+
+        .font-headline {
+            font-family: 'Heebo', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
+        <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
+            <a href="/he" class="group flex items-center gap-2 md:gap-3 no-underline outline-none">
+                <img src="/logo-icon.png" alt="Fractal Logo Icon" class="w-16 h-16 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -mr-2 -my-2 lg:-mr-4 lg:-my-6 transition-all duration-300" />
+
+                <div class="flex flex-col justify-center">
+                    <span class="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight leading-none translate-y-[1px]" style="font-family: Arial, Helvetica, sans-serif;">FRACTAL</span>
+                    <span class="text-[0.55rem] lg:text-[0.65rem] font-bold tracking-[0.16em] text-emerald-700/90 uppercase leading-none mt-1">מחשוב בגישה עסקית</span>
+                </div>
+            </a>
+        </div>
+        <div class="hidden lg:flex flex-1 items-center justify-end xl:justify-center pt-1 transition-all overflow-hidden">
+            <div class="flex items-center justify-end px-4 xl:px-8 w-full gap-4 xl:gap-8">
+                <a href="/he" class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-sm tracking-wide">ראשי</a>
+                <a href="/he/about" class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-sm tracking-wide">אודותינו</a>
+                <a href="/he/services" class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-sm tracking-wide">השירותים שלנו</a>
+                <a href="/he/customers" class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-sm tracking-wide">לקוחות</a>
+                
+                <!-- Language Switcher (HE -> EN) -->
+                <div class="h-4 w-px bg-outline-variant/50 mx-1 shrink-0"></div>
+                <a href={enPath} class="text-primary font-bold hover:text-primary-fixed transition-colors text-sm tracking-wide flex items-center gap-1 font-headline" dir="ltr">English</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 sm:gap-4 relative z-10">
+            <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 sm:px-7 sm:py-2 bg-gradient-to-br from-primary to-primary-container text-white rounded-full text-[10px] sm:text-sm font-semibold hover:scale-95 active:scale-90 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">תמיכה טכנית</a>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-btn-he" class="lg:hidden flex items-center justify-center p-2 rounded-full bg-surface-variant text-on-surface hover:bg-primary hover:text-white transition-all" aria-label="Toggle Menu">
+                <span class="material-symbols-outlined" id="mobile-icon-he">menu</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Full-Screen Overlay (RTL) -->
+    <div id="mobile-nav-he" class="fixed inset-0 z-[45] bg-surface/95 backdrop-blur-3xl transform translate-x-full transition-transform duration-500 lg:hidden flex flex-col pt-32 px-6 overscroll-none">
+        <div class="flex flex-col gap-2">
+            <a href="/he" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                ראשי <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_left</span>
+            </a>
+            <a href="/he/about" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                אודותינו <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_left</span>
+            </a>
+            <a href="/he/services" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                השירותים שלנו <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_left</span>
+            </a>
+            <a href="/he/customers" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                לקוחות <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_left</span>
+            </a>
+            <a href="/he#contact" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                צור קשר <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_left</span>
+            </a>
+            
+            <div class="mt-8 px-6">
+                <a href={enPath} dir="ltr" class="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-lg">language</span> 
+                    English (EN)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script is:inline>
+        document.addEventListener('astro:page-load', () => {
+            const btn = document.getElementById('mobile-btn-he');
+            const nav = document.getElementById('mobile-nav-he');
+            const icon = document.getElementById('mobile-icon-he');
+            const links = nav ? nav.querySelectorAll('a') : [];
+            let menuOpen = false;
+
+            if(btn && nav && icon) {
+                const toggleMenu = () => {
+                    menuOpen = !menuOpen;
+                    if(menuOpen) {
+                        nav.classList.remove('translate-x-full');
+                        icon.textContent = 'close';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        nav.classList.add('translate-x-full');
+                        icon.textContent = 'menu';
+                        document.body.style.overflow = '';
+                    }
+                };
+
+                btn.addEventListener('click', toggleMenu);
+                
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (menuOpen) toggleMenu();
+                    });
+                });
+            }
+        });
+    </script>
+
+    <main class="flex-grow w-full pb-16 pt-24 transition-opacity duration-1000 animate-in fade-in relative z-0" style="animation-duration: 1.2s">
+        <slot />
+    </main>
+
+    <Footer lang="he" />
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in {
+            animation: fadeIn ease-out forwards;
+        }
+    </style>
+</body>
+</html>

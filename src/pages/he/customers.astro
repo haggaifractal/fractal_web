@@ -1,0 +1,52 @@
+---
+import ContactSection from '../../components/ContactSection.astro';
+import LayoutHe from '../../layouts/LayoutHe.astro';
+
+const clients = [
+  { name: "אמדוקס", domain: "amdocs.com", url: "https://amdocs.com" },
+  { name: "אסיה מדיקל", domain: "assia.co.il", url: "https://www.assia.co.il/he/" },
+  { name: "T&M אבטחה ומשאבים", domain: "tmprotection.co.il", url: "https://tmprotection.co.il/" },
+  { name: "תעשיות קראוס", domain: "krausz.com", url: "https://krausz.com" },
+  { name: "נטלי שירותי רפואה", domain: "natali.co.il", url: "https://natali.co.il" },
+  { name: "מוקד אמון", domain: "emun.co.il", url: "https://www.emun.co.il/" },
+  { name: "חשמל סיטונאי", domain: "sitonai.co.il", url: "https://sitonai.co.il/" },
+  { name: "תיאטרון תמונע", domain: "tmu-na.org.il", url: "https://tmu-na.org.il" },
+  { name: "לייטרסדורף אדריכלים", domain: "leitersdorf.com", url: "https://leitersdorf.com" },
+  { name: "בריאות האשה - רמת אביב", domain: "bri.co.il", url: "https://bri.co.il/" },
+  { name: "מועצת גני תקווה", domain: "ganeytikva.org.il", url: "https://www.ganeytikva.org.il/" },
+  { name: "ל.כ. ציוד וטכנולוגיה", domain: "lkltd.co.il", url: "https://lkltd.co.il" },
+  { name: "מעגלות הפקות ציוד", domain: "producers.org.il", url: "https://producers.org.il/%D7%9E%D7%A2%D7%92%D7%9C%D7%95%D7%AA-%D7%94%D7%A4%D7%A7%D7%95%D7%AA-%D7%91%D7%A2%D7%9E/" },
+  { name: "רסנר תוכנות לוגיסטיות", domain: "rasner.co.il", url: "https://rasner.co.il/" },
+  { name: "איה מדיקל", domain: "share.google", url: "https://share.google/86dyonSVRPDLruQVv" }
+];
+---
+<LayoutHe title="לקוחותינו">
+    <section class="pt-36 pb-16 px-8 max-w-7xl mx-auto -mt-24 text-right">
+        <h1 class="text-5xl md:text-7xl font-bold font-headline mb-16 text-on-surface tracking-tight text-center">
+            לקוחות <span class="text-primary">מובילים...</span>
+        </h1>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {clients.map((client) => (
+                <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="bg-white h-36 rounded-2xl border border-surface-container shadow-[0_10px_20px_rgba(0,104,87,0.03)] flex flex-col items-center justify-center p-4 text-center hover:scale-105 active:scale-95 hover:border-primary/50 hover:shadow-xl transition-all group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <img 
+                        src={`https://s2.googleusercontent.com/s2/favicons?domain=${client.domain}&sz=128`} 
+                        alt={`לוגו ${client.name}`}
+                        class="w-12 h-12 object-contain relative z-10 transition-transform group-hover:scale-110 mb-3 rounded shadow-sm opacity-90 group-hover:opacity-100"
+                        onerror="this.style.display='none';"
+                    />
+                    
+                    <span class="font-bold text-on-surface-variant group-hover:text-primary transition-colors text-sm tracking-wide relative z-10 leading-snug">
+                        {client.name}
+                    </span>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <!-- Exact Contact Us Section -->
+    <ContactSection lang="he" />
+
+</LayoutHe>

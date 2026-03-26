@@ -1,0 +1,77 @@
+---
+import ContactSection from '../components/ContactSection.astro';
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="About Us">
+    <!-- Hero / Intro -->
+    <section class="relative pt-36 pb-24 bg-[#001a15] overflow-hidden text-center px-8 -mt-24">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#001a15]/80 to-[#001a15]"></div>
+        <div class="relative z-10 max-w-4xl mx-auto mt-12">
+            <h1 class="text-5xl md:text-7xl font-bold font-headline mb-8 text-white tracking-tight">About Us</h1>
+            <p class="text-emerald-100/80 text-xl md:text-2xl font-light leading-relaxed max-w-3xl mx-auto">
+                Fractal specializes in providing computing and IT support solutions to business and industrial customers.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Transition Gradient -->
+    <div class="h-16 bg-gradient-to-b from-[#001a15] to-surface"></div>
+
+    <!-- Main Content -->
+    <section class="max-w-6xl mx-auto px-8 py-24 text-left">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Technical Service Card -->
+            <div class="md:col-span-7 bg-surface-container-lowest p-10 md:p-14 rounded-[2.5rem] border border-outline-variant/30 shadow-[0_15px_40px_rgba(0,104,87,0.05)] relative overflow-hidden flex flex-col justify-center">
+                <span class="material-symbols-outlined text-primary text-5xl mb-6">memory</span>
+                <p class="text-on-surface-variant leading-loose text-lg font-medium relative z-10">
+                    We build dedicated systems tailored to the client's unique needs. The service includes a wide range of Activity: Establishment and maintenance of computer networks, information security solutions, software & Auto CAD maintenance, Handling and maintenance of security focal software, etc.
+                </p>
+            </div>
+            
+            <!-- 20+ Years Highlight -->
+            <div class="md:col-span-5 bg-surface-container p-10 md:p-12 rounded-[2.5rem] border border-outline-variant/30 text-center flex flex-col justify-center items-center">
+                <span class="text-7xl font-bold font-headline text-primary mb-2">20+</span>
+                <span class="text-sm tracking-[0.2em] font-bold uppercase text-outline">Years of Operations</span>
+                <p class="text-on-surface-variant leading-relaxed mt-6">
+                    We have been working for over 20 years in establishing computerized systems tailored to customer needs and in service provision And IT support.
+                </p>
+            </div>
+            
+            <!-- Experience Block -->
+            <div class="md:col-span-12 mt-4 bg-[#001a15] text-emerald-50 p-10 md:p-16 rounded-[2.5rem] shadow-2xl relative overflow-hidden border border-emerald-900/40 flex flex-col md:flex-row gap-12 items-center">
+                <div class="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+                <div class="flex-shrink-0 relative z-10 hidden md:block">
+                    <span class="material-symbols-outlined text-[100px] text-primary-fixed/80">domain</span>
+                </div>
+                <div class="relative z-10">
+                    <p class="leading-relaxed text-lg md:text-xl max-w-4xl font-light">
+                        The company's experience in establishing hundreds of different types of computer networks at Business and industrial customers, the professional care and control of the most advanced technologies In computer and computer communications, We ensure reliable and reliable installation and service and optimal fit Of the system for your needs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="bg-[#001712] py-32 px-8 mt-12 rounded-t-[3rem] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-16 font-headline">Testimonials</h2>
+            <div class="bg-white/5 backdrop-blur-md p-10 md:p-16 rounded-[2rem] border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative text-center">
+                <span class="material-symbols-outlined text-primary-fixed/20 text-8xl absolute -top-10 left-1/2 -translate-x-1/2">format_quote</span>
+                <p class="text-xl md:text-2xl font-light text-emerald-50 leading-relaxed mb-12 italic relative z-10 px-4 md:px-12">
+                    "To Fractal Company<br/>Thank you very much for the support and professional service, reliable and kind.<br/>We appreciate your dedicated work and smooth transfer to the new offices."
+                </p>
+                <div class="flex flex-col items-center justify-center gap-3">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-primary-container rounded-full flex items-center justify-center font-bold text-white text-xl shadow-lg">Z</div>
+                    <span class="font-bold text-primary-fixed tracking-wide">Zviran</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact section exactly matching provided text -->
+    <ContactSection lang="en" />
+
+</Layout>

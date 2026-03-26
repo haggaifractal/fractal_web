@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - Systems Offline">
+    <div class="relative w-full overflow-hidden min-h-[85vh] flex items-center justify-center bg-surface">
+        <!-- Ambient Background -->
+        <div class="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+            <div class="absolute top-[10%] left-[20%] w-[40vw] h-[40vw] min-w-[300px] min-h-[300px] bg-outline/5 blur-[100px] rounded-[100%]"></div>
+            <div class="absolute bottom-[20%] right-[10%] w-[35vw] h-[35vw] min-w-[250px] min-h-[250px] bg-primary/10 blur-[100px] rounded-[100%]"></div>
+        </div>
+
+        <section class="relative z-10 max-w-4xl mx-auto px-8 py-20 text-center flex flex-col items-center gap-6 mt-16">
+            <div class="text-[12rem] md:text-[18rem] font-bold font-headline text-on-surface/[0.03] leading-none select-none cursor-default">
+                404
+            </div>
+            <!-- The actual visible header overlaid on the giant low-opacity 404 -->
+            <h1 class="text-4xl md:text-5xl font-bold font-headline text-on-surface -mt-24 md:-mt-40 z-10 relative">
+                System Offline / Zone Unmapped
+            </h1>
+            <p class="text-on-surface-variant text-xl md:text-2xl font-light max-w-xl z-10 mt-4 relative">
+                The terminal destination you requested could not be located in our active server nodes. Returning to main bridge.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 mt-10 z-10 relative">
+                <a href="/" class="px-10 py-4 bg-primary text-on-primary rounded-xl font-bold hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1 transition-all text-lg flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    Return to English Home
+                </a>
+                <a href="/he/" class="px-10 py-4 border-2 border-outline-variant/50 text-on-surface rounded-xl font-bold hover:border-primary hover:text-primary hover:bg-surface-container transition-all text-lg flex items-center justify-center gap-2">
+                    חזור לעמוד הראשי בעברית
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+            </div>
+        </section>
+    </div>
+</Layout>

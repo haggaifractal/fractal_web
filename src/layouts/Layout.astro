@@ -1,0 +1,156 @@
+---
+// src/layouts/Layout.astro
+import { ClientRouter } from 'astro:transitions';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+const pathname = Astro.url.pathname;
+const hePath = "/he" + (pathname === "/" ? "" : pathname);
+---
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Fractal IT</title>
+    <ClientRouter />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style is:global>
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .bento-card { background-color: #ffffff; border-radius: 1.5rem; transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
+        <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
+            <a href="/" class="group flex items-center gap-2 md:gap-3 no-underline outline-none">
+                <!-- User's Custom Uploaded Logo Mark -->
+                <img src="/logo-icon.png" alt="Fractal Logo Icon" class="w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -ml-2 -my-2 md:-my-3 lg:-ml-4 lg:-my-6 transition-all duration-300" />
+
+                <div class="flex flex-col justify-center">
+                    <span class="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight leading-none translate-y-[1px]" style="font-family: Arial, Helvetica, sans-serif;">FRACTAL</span>
+                    <span class="text-[0.55rem] lg:text-[0.65rem] font-bold tracking-[0.16em] text-emerald-700/90 uppercase leading-none mt-1">Business-Driven IT</span>
+                </div>
+            </a>
+        </div>
+        <div class="hidden lg:flex flex-1 items-center justify-end xl:justify-center pt-1 transition-all overflow-hidden">
+            <div class="flex items-center justify-end px-4 xl:px-8 w-full gap-4 xl:gap-8">
+                <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/">Home</a>
+                <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/about">About Us</a>
+                <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/services">Our Services</a>
+                <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/customers">Our Customers</a>
+                
+                <!-- Language Toggle -->
+                <div class="h-4 w-px bg-emerald-900/20 mx-1 shrink-0"></div>
+                <a class="text-emerald-900 font-bold hover:text-emerald-700 transition-all duration-300 text-sm tracking-wide flex items-center pr-1 pl-4" href={hePath} dir="rtl">עברית</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 sm:gap-4 relative z-10">
+            <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 sm:px-7 sm:py-2 bg-gradient-to-br from-primary to-primary-container text-white rounded-full text-[10px] sm:text-sm font-semibold hover:scale-95 active:scale-90 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">Tech Support</a>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-btn-en" class="lg:hidden flex items-center justify-center p-2 rounded-full bg-surface-variant text-on-surface hover:bg-primary hover:text-white transition-all" aria-label="Toggle Menu">
+                <span class="material-symbols-outlined" id="mobile-icon-en">menu</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Full-Screen Overlay -->
+    <div id="mobile-nav-en" class="fixed inset-0 z-[45] bg-surface/95 backdrop-blur-3xl transform translate-x-full transition-transform duration-500 lg:hidden flex flex-col pt-32 px-6 overscroll-none">
+        <div class="flex flex-col gap-2">
+            <a href="/" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                Home <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
+            </a>
+            <a href="/about" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                About Us <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
+            </a>
+            <a href="/services" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                Our Services <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
+            </a>
+            <a href="/customers" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                Our Customers <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
+            </a>
+            <a href="/contact" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                Contact Us <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
+            </a>
+            
+            <div class="mt-8 px-6">
+                <a href={hePath} dir="rtl" class="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-lg">language</span> 
+                    עברית (Hebrew)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script is:inline>
+        document.addEventListener('astro:page-load', () => {
+            const btn = document.getElementById('mobile-btn-en');
+            const nav = document.getElementById('mobile-nav-en');
+            const icon = document.getElementById('mobile-icon-en');
+            const links = nav ? nav.querySelectorAll('a') : [];
+            let menuOpen = false;
+
+            if(btn && nav && icon) {
+                const toggleMenu = () => {
+                    menuOpen = !menuOpen;
+                    if(menuOpen) {
+                        nav.classList.remove('translate-x-full');
+                        icon.textContent = 'close';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        nav.classList.add('translate-x-full');
+                        icon.textContent = 'menu';
+                        document.body.style.overflow = '';
+                    }
+                };
+
+                btn.addEventListener('click', toggleMenu);
+                
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (menuOpen) toggleMenu();
+                    });
+                });
+            }
+        });
+    </script>
+
+    <main class="flex-grow pt-24 animate-in relative z-0">
+        <slot />
+    </main>
+
+    <Footer lang="en" />
+
+    <!-- Open Source Accessibility Widget -->
+    <script src="https://cdn.jsdelivr.net/npm/accessibility/dist/accessibility.min.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            new Accessibility({
+                labels: {
+                    menuTitle: 'Accessibility Options',
+                },
+                icon: {
+                    position: {
+                        bottom: { size: 30, units: 'px' },
+                        left: { size: 30, units: 'px' },
+                        type: 'fixed'
+                    }
+                }
+            });
+        }, false);
+    </script>
+</body>
+</html>

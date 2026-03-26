@@ -1,0 +1,78 @@
+---
+export interface Props {
+    lang?: 'en' | 'he';
+}
+
+const { lang = 'en' } = Astro.props;
+const isHe = lang === 'he';
+
+const texts = {
+    title: isHe ? 'צור קשר' : 'Contact Us',
+    subtitle: isHe ? 'שלח לנו הודעה ונחזור אליך בהקדם האפשרי.' : "Send us a message and we'll get back to you shortly.",
+    firstNameLabel: isHe ? 'שם פרטי' : 'First name',
+    firstNamePlaceholder: isHe ? 'הכנס שם פרטי...' : 'Enter your first name',
+    emailLabel: isHe ? '*דואר אלקטרוני' : 'Work Email*',
+    emailPlaceholder: isHe ? 'כתובת דוא״ל' : 'name@company.com',
+    phoneLabel: isHe ? 'מספר טלפון / נייד (רשות)' : 'Phone / Mobile (Optional)',
+    phonePlaceholder: isHe ? '+972 50-000-0000' : '+972 50-000-0000',
+    subjectLabel: isHe ? 'נושא הפנייה' : 'Inquiry Subject',
+    subjectPlaceholder: isHe ? 'למשל: תמיכה, מכירות' : 'e.g., IT Support, Cloud Migration',
+    messageLabel: isHe ? 'תוכן הפנייה' : 'Message Details',
+    messagePlaceholder: isHe ? 'הזן תוכן הודעה כאן...' : 'Describe your technical requirements...',
+    privacyPrefix: isHe ? 'אני מאשר/ת את ' : 'I agree to the ',
+    termsLink: isHe ? '/he/terms' : '/terms',
+    termsText: isHe ? 'תנאי השימוש' : 'Terms of Use',
+    andText: isHe ? ' ו' : ' and ',
+    privacyLink: isHe ? '/he/privacy' : '/privacy',
+    privacyText: isHe ? 'מדיניות הפרטיות' : 'Privacy Policy',
+    privacySuffix: isHe ? ', ומסכים/ה לשמירת פרטיי במאגר המידע לצורך טיפול בפנייתי (תיקון 13 לחוק הגנת הפרטיות).' : ', and successfully consent to my inquiry data being mapped securely to your system.',
+    submitBtn: isHe ? 'שלח' : 'Submit Request'
+};
+---
+
+<section id="contact" class={`max-w-4xl mx-auto px-8 py-24 scroll-mt-24 mt-8 ${isHe ? 'text-right' : ''}`} dir={isHe ? 'rtl' : 'ltr'}>
+    <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-bold text-on-surface mb-4 font-headline">{texts.title}</h2>
+        <p class="text-on-surface-variant text-lg">{texts.subtitle}</p>
+    </div>
+    
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-lowest p-10 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container">
+        <div class="flex flex-col gap-2">
+            <label class="text-sm font-bold text-primary tracking-wide" for="firstname">{texts.firstNameLabel}</label>
+            <input type="text" id="firstname" autocomplete="given-name" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : ''}`} placeholder={texts.firstNamePlaceholder} />
+        </div>
+        
+        <div class="flex flex-col gap-2">
+            <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="email">{texts.emailLabel}</label>
+            <input type="email" id="email" autocomplete="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all dir-ltr ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.emailPlaceholder} />
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="phone">{texts.phoneLabel}</label>
+            <input type="tel" id="phone" autocomplete="tel" pattern="^[+0-9 \-\(\)]*$" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all dir-ltr ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.phonePlaceholder} />
+        </div>
+        
+        <div class="flex flex-col gap-2">
+            <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="subject">{texts.subjectLabel}</label>
+            <input type="text" id="subject" dir="auto" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.subjectPlaceholder} />
+        </div>
+
+        <div class="flex flex-col gap-2 md:col-span-2">
+            <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="message">{texts.messageLabel}</label>
+            <textarea id="message" rows="5" dir="auto" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.messagePlaceholder}></textarea>
+        </div>
+
+        <div class={`flex items-start gap-4 md:col-span-2 mt-2 ${isHe ? 'flex-row-reverse' : ''}`}>
+            <div class={`flex items-center h-6 ${isHe ? 'mt-1' : ''}`}>
+                <input id="privacy" type="checkbox" required class="w-5 h-5 text-primary bg-surface border-outline-variant rounded focus:ring-primary focus:ring-2 cursor-pointer transition-colors" />
+            </div>
+            <div class={`text-sm text-on-surface-variant leading-relaxed ${isHe ? 'text-right' : ''}`}>
+                {texts.privacyPrefix} <a href={texts.termsLink} class="text-primary hover:underline font-bold">{texts.termsText}</a>{texts.andText}<a href={texts.privacyLink} class="text-primary hover:underline font-bold">{texts.privacyText}</a>{texts.privacySuffix}
+            </div>
+        </div>
+        
+        <div class="md:col-span-2 flex justify-start mt-4">
+            <button type="submit" class="w-full md:w-auto px-12 py-4 bg-primary text-white font-bold rounded-full hover:bg-surface-tint transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 text-lg">{texts.submitBtn}</button>
+        </div>
+    </form>
+</section>
