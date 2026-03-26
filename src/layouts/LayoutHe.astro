@@ -9,7 +9,7 @@ interface Props {
 const { title, description = "פרקטל מתמחה במתן פתרונות מחשוב מלאים, שירות ותמיכה טכנית מתקדמת ללקוחות עסקיים ותעשייתיים השואפים למצוינות." } = Astro.props;
 const pathname = Astro.url.pathname;
 const enPath = pathname.replace(/^\/he\/?/, '/') || '/';
-const ogImageUrl = new URL('/logo-icon.png', Astro.url).href;
+const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 ---
 
 <!doctype html>

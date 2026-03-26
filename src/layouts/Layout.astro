@@ -11,7 +11,7 @@ export interface Props {
 const { title, description = "Fractal specializes in providing IT consulting and support solutions to business and industrial customers who expect excellence." } = Astro.props;
 const pathname = Astro.url.pathname;
 const hePath = "/he" + (pathname === "/" ? "" : pathname);
-const ogImageUrl = new URL('/logo-icon.png', Astro.url).href;
+const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 ---
 <html lang="en">
 <head>
