@@ -38,37 +38,35 @@ const links = {
     </div>
     
     <div class="max-w-6xl mx-auto px-8 relative z-10 w-full flex flex-col text-white/70 text-sm" dir={isHe ? 'rtl' : 'ltr'}>
-        <!-- The Grid ensures proper mobile alignment (2 columns on mobile, 3 on desktop -> fully utilizing width!) -->
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 w-full mb-12">
+        <!-- Centered Layout for Address and Contact -->
+        <div class="flex flex-col md:flex-row justify-center items-center text-center gap-10 md:gap-24 w-full mb-12">
             
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col items-center gap-3">
                 <h4 class="text-primary-fixed font-bold uppercase tracking-widest text-xs">{texts.address_title}</h4>
                 <p class="leading-relaxed">{texts.address_body1}<br/>{texts.address_body2}</p>
-                <div class="flex flex-wrap gap-4 mt-1 text-xs font-medium text-primary-fixed">
+                <div class="flex flex-wrap justify-center gap-4 mt-1 text-xs font-medium text-primary-fixed">
                     <a href={links.waze} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors underline underline-offset-4">{texts.waze}</a>
                     <a href={links.gmaps} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors underline underline-offset-4">{texts.google_maps}</a>
                 </div>
             </div>
             
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col items-center gap-3">
                 <h4 class="text-primary-fixed font-bold uppercase tracking-widest text-xs">{texts.contact_title}</h4>
                 <a href="tel:03-6168890" class="hover:text-white transition-colors block w-fit shrink-0" dir={isHe ? 'ltr' : 'ltr'}>{texts.tel}</a>
                 <a href="#" onclick="window.location.href = 'mailto:' + ['Office', 'fractal.co.il'].join('@'); return false;" class="hover:text-white transition-colors block w-fit shrink-0">{texts.email}</a>
             </div>
             
-            <div class="flex flex-col gap-3 col-span-2 md:col-span-1 border-t border-white/10 pt-6 md:border-t-0 md:pt-0">
-                <h4 class="text-primary-fixed font-bold uppercase tracking-widest text-xs">{texts.legal_title}</h4>
-                <div class="flex flex-col gap-2">
-                    <a href={links.terms} class="hover:text-white transition-colors w-fit">{texts.terms}</a>
-                    <a href={links.privacy} class="hover:text-white transition-colors w-fit">{texts.privacy}</a>
-                    <a href={links.accessibility} class="hover:text-white transition-colors w-fit">{texts.accessibility}</a>
-                </div>
-            </div>
-
         </div>
 
-        <div class="text-center mt-auto border-t border-white/10 pt-8 text-xs font-medium opacity-60">
-            {texts.rights}
+        <div class="flex flex-col items-center gap-3 mt-auto border-t border-white/10 pt-8">
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-white/80">
+                <a href={links.terms} class="hover:text-white transition-colors">{texts.terms}</a>
+                <a href={links.privacy} class="hover:text-white transition-colors">{texts.privacy}</a>
+                <a href={links.accessibility} class="hover:text-white transition-colors">{texts.accessibility}</a>
+            </div>
+            <div class="text-xs font-medium opacity-60 text-center" dir="ltr">
+                {texts.rights}
+            </div>
         </div>
     </div>
 </footer>
