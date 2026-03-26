@@ -1,43 +1,56 @@
-# Astro Starter Kit: Minimal
+# Fractal IT - Corporate Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A modern, highly performant, and secure bilingual (English/Hebrew) B2B website built for Fractal Computers and Communications 2002 Ltd.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Tech Stack
+* **Framework:** [Astro](https://astro.build/) (v6)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/) (v3.4)
+* **Runtime:** Node.js (>=22.12.0)
+* **Hosting / Deployment:** Netlify
 
-## 🚀 Project Structure
+## 🛠️ Getting Started
 
-Inside of your Astro project, you'll see the following folders and files:
+To run this project locally, ensure you have Node.js 22+ installed.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+1. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Start the Development Server:**
+   ```bash
+   npm run dev
+   ```
+3. **Open in Browser:**
+   Navigate to `http://localhost:4321`
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🏗️ Architecture & Bilingual Routing (i18n)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+This project strictly adheres to a modular, dual-language architecture. **Any structural changes must be applied to both languages.**
 
-Any static assets, like images, can be placed in the `public/` directory.
+* **English (LTR):** Located at the project root (`src/pages/index.astro`, `services.astro`, etc.).
+  * **Layout Wrapper:** Must use `<Layout>` from `src/layouts/Layout.astro`.
+* **Hebrew (RTL):** Located inside the `/he/` subdirectory (`src/pages/he/index.astro`).
+  * **Layout Wrapper:** Must use `<Layout>` from `src/layouts/LayoutHe.astro`. This layout forces `dir="rtl"` and includes specific right-to-left cascading logic.
 
-## 🧞 Commands
+## 🎨 Design System & Styling Rules
 
-All commands are run from the root of the project, from a terminal:
+The project does **not** use standard Tailwind colors (e.g., `bg-blue-500`). It strictly uses a highly customized Material-Design inspired theme configured in `tailwind.config.mjs`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+When developing, you must use the semantic tokens:
+* Backgrounds: `bg-surface`, `bg-surface-container`, `bg-surface-container-lowest`
+* Texts: `text-on-surface`, `text-on-surface-variant`
+* Accents: `bg-primary`, `text-primary`, `bg-primary-fixed`
+* Fonts: `font-sans` (Inter/Heebo), `font-headline` (Space Grotesk)
 
-## 👀 Want to learn more?
+## 🔒 Security & Forms
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+* **Netlify Forms:** The `ContactSection.astro` form uses Netlify's native form handling. It includes a native honeypot field (`bot-field`) to prevent spam. Do not remove the `name` attributes from inputs, as they are required for data mapping.
+* **Security Headers:** HSTS, XSS protections, and strict `Content-Security-Policy` (CSP) are enforced in production via `netlify.toml`.
+* **Zero-Trust Vectors:** To avoid GDPR and IP leakage conflicts, we do not fetch third-party tracking APIs (e.g., Google Favicons) for imagery. Use local material vectors.
+
+## 📦 Deployment
+
+The project is configured for seamless deployment on **Netlify**.
+Pushing to the `main` branch will automatically trigger a build (`npm run build`) and deploy the `dist/` directory.
+
+*Note: NPM overrides are utilized in `package.json` to safely bypass peer dependency conflicts with `@astrojs/tailwind` without ignoring critical security checks.*
