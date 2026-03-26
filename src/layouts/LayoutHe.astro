@@ -3,22 +3,32 @@ import { ClientRouter } from 'astro:transitions';
 import Footer from '../components/Footer.astro';
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = "פרקטל מתמחה במתן פתרונות מחשוב מלאים, שירות ותמיכה טכנית מתקדמת ללקוחות עסקיים ותעשייתיים השואפים למצוינות." } = Astro.props;
 const pathname = Astro.url.pathname;
 const enPath = pathname.replace(/^\/he\/?/, '/') || '/';
+const ogImageUrl = new URL('/logo-icon.png', Astro.url).href;
 ---
 
 <!doctype html>
 <html lang="he" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Fractal - IT Systems" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={Astro.url.href} />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | פרקטל - מחשוב בגישה עסקית</title>
+    <meta property="og:title" content={`${title} | פרקטל - מחשוב בגישה עסקית`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
     <ClientRouter />
 
     <!-- Heebo for high-quality Hebrew typography -->
