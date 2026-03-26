@@ -155,7 +155,43 @@ const enPath = pathname.replace(/^\/he\/?/, '/') || '/';
 
     <Footer lang="he" />
 
+    <!-- Open Source Accessibility Widget -->
+    <script src="https://cdn.jsdelivr.net/npm/accessibility/dist/accessibility.min.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            new Accessibility({
+                labels: {
+                    menuTitle: 'אפשרויות נגישות',
+                    increaseText: 'הגדל טקסט',
+                    decreaseText: 'הקטן טקסט',
+                    increaseTextSpacing: 'הגדל מרווח טקסט',
+                    decreaseTextSpacing: 'הקטן מרווח טקסט',
+                    increaseLineHeight: 'הגדל מרווח שורות',
+                    decreaseLineHeight: 'הקטן מרווח שורות',
+                    invertColors: 'הפוך צבעים',
+                    grayHues: 'גווני אפור',
+                    underlineLinks: 'קו תחתון לקישורים',
+                    bigCursor: 'סמן גדול',
+                    readingGuide: 'מדריך קריאה',
+                    textToSpeech: 'הקראת טקסט',
+                    speechToText: 'הכתבה קולית',
+                    resetTitle: 'איפוס נגישות',
+                    closeTitle: 'סגור'
+                },
+                icon: {
+                    position: {
+                        bottom: { size: 30, units: 'px' },
+                        right: { size: 30, units: 'px' },
+                        type: 'fixed'
+                    }
+                }
+            });
+        }, false);
+    </script>
+
     <style>
+        /* Force RTL styling onto the accessibility widget elements */
+        .accessibility-menu { direction: rtl; text-align: right; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
