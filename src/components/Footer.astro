@@ -45,15 +45,15 @@ const links = {
                 <h4 class="text-primary-fixed font-bold uppercase tracking-widest text-xs">{texts.address_title}</h4>
                 <p class="leading-relaxed">{texts.address_body1}<br/>{texts.address_body2}</p>
                 <div class="flex flex-wrap gap-4 mt-1 text-xs font-medium text-primary-fixed">
-                    <a href={links.waze} target="_blank" class="hover:text-white transition-colors underline underline-offset-4">{texts.waze}</a>
-                    <a href={links.gmaps} target="_blank" class="hover:text-white transition-colors underline underline-offset-4">{texts.google_maps}</a>
+                    <a href={links.waze} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors underline underline-offset-4">{texts.waze}</a>
+                    <a href={links.gmaps} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors underline underline-offset-4">{texts.google_maps}</a>
                 </div>
             </div>
             
             <div class="flex flex-col gap-3">
                 <h4 class="text-primary-fixed font-bold uppercase tracking-widest text-xs">{texts.contact_title}</h4>
                 <a href="tel:03-6168890" class="hover:text-white transition-colors block w-fit shrink-0" dir={isHe ? 'ltr' : 'ltr'}>{texts.tel}</a>
-                <a href="mailto:Office@fractal.co.il" class="hover:text-white transition-colors block w-fit shrink-0">{texts.email}</a>
+                <a href="#" onclick="window.location.href = 'mailto:' + ['Office', 'fractal.co.il'].join('@'); return false;" class="hover:text-white transition-colors block w-fit shrink-0">{texts.email}</a>
             </div>
             
             <div class="flex flex-col gap-3 col-span-2 md:col-span-1 border-t border-white/10 pt-6 md:border-t-0 md:pt-0">

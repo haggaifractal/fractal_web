@@ -36,30 +36,31 @@ const texts = {
         <p class="text-on-surface-variant text-lg">{texts.subtitle}</p>
     </div>
     
-    <form class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-lowest p-10 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container">
+    <form method="POST" name={`contact-${lang}`} data-netlify="true" netlify-honeypot="bot-field" class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-lowest p-10 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container">
+        <p class="hidden"><label>Don’t fill this out if you're human: <input name="bot-field" /></label></p>
         <div class="flex flex-col gap-2">
             <label class="text-sm font-bold text-primary tracking-wide" for="firstname">{texts.firstNameLabel}</label>
-            <input type="text" id="firstname" autocomplete="given-name" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : ''}`} placeholder={texts.firstNamePlaceholder} />
+            <input type="text" name="firstname" id="firstname" autocomplete="given-name" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : ''}`} placeholder={texts.firstNamePlaceholder} />
         </div>
         
         <div class="flex flex-col gap-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="email">{texts.emailLabel}</label>
-            <input type="email" id="email" autocomplete="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all dir-ltr ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.emailPlaceholder} />
+            <input type="email" name="email" id="email" autocomplete="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all dir-ltr ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.emailPlaceholder} />
         </div>
 
         <div class="flex flex-col gap-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="phone">{texts.phoneLabel}</label>
-            <input type="tel" id="phone" autocomplete="tel" pattern="^[+0-9 \-\(\)]*$" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all dir-ltr ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.phonePlaceholder} />
+            <input type="tel" name="phone" id="phone" autocomplete="tel" pattern="^[+0-9 \-\(\)]*$" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all dir-ltr ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.phonePlaceholder} />
         </div>
         
         <div class="flex flex-col gap-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="subject">{texts.subjectLabel}</label>
-            <input type="text" id="subject" dir="auto" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.subjectPlaceholder} />
+            <input type="text" name="subject" id="subject" dir="auto" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.subjectPlaceholder} />
         </div>
 
         <div class="flex flex-col gap-2 md:col-span-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="message">{texts.messageLabel}</label>
-            <textarea id="message" rows="5" dir="auto" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.messagePlaceholder}></textarea>
+            <textarea name="message" id="message" rows="5" dir="auto" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.messagePlaceholder}></textarea>
         </div>
 
         <div class={`flex items-start gap-4 md:col-span-2 mt-2 ${isHe ? 'flex-row-reverse' : ''}`}>
