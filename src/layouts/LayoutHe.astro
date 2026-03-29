@@ -91,9 +91,18 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
             <a href="/" class="group flex items-center gap-2 md:gap-3 no-underline outline-none">
                 <img id="nav-logo-he" src="/logo-icon.png" alt="Fractal Logo Icon" width="64" height="64" class="w-16 h-16 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -mr-2 -my-2 lg:-mr-4 lg:-my-6 transition-all duration-300" />
 
-                <div class="flex flex-col justify-center">
-                    <span class="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight leading-none translate-y-[1px]" style="font-family: Arial, Helvetica, sans-serif;">FRACTAL</span>
-                    <span class="text-[0.55rem] lg:text-[0.65rem] font-bold tracking-[0.16em] text-emerald-700/90 uppercase leading-none mt-1">מחשוב בגישה עסקית</span>
+                <div class="flex flex-col justify-center items-end" dir="rtl">
+                    <!-- Top Row: פרקטל ◆ FRACTAL -->
+                    <div class="flex items-center gap-1.5 md:gap-2">
+                        <span class="text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-bold tracking-tight leading-none text-primary font-headline">פרקטל</span>
+                        <span class="text-secondary/70 text-sm md:text-base leading-none translate-y-[1px]">◆</span>
+                        <span class="text-[1.2rem] md:text-[1.35rem] lg:text-[1.55rem] font-bold tracking-tight leading-none text-primary font-headline">FRACTAL</span>
+                    </div>
+                    
+                    <!-- Subtitle -->
+                    <div class="w-full flex justify-between items-center text-[0.6rem] md:text-[0.65rem] lg:text-[0.75rem] font-bold text-slate-600/90 whitespace-nowrap leading-none tracking-[0.1em] md:tracking-[0.15em] mt-1 font-headline">
+                        מיחשוב בגישה עסקית
+                    </div>
                 </div>
             </a>
         </div>
