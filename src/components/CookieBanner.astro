@@ -18,23 +18,23 @@ const texts = {
 };
 ---
 
-<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 transform translate-y-full transition-transform duration-500 ease-in-out hidden">
-    <div class="bg-surface-container-highest border-t border-outline-variant/30 shadow-2xl p-6 md:p-8">
-        <div class={`max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 ${isHe ? 'text-right md:flex-row-reverse' : 'text-left'}`} dir={isHe ? 'rtl' : 'ltr'}>
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[100] transform translate-y-full transition-transform duration-500 ease-in-out hidden p-3 md:p-6 mb-2">
+    <div class="bg-surface-container-highest/95 backdrop-blur-md border border-outline-variant/30 shadow-2xl rounded-2xl p-4 md:p-5 mx-2 md:mx-auto max-w-6xl">
+        <div class={`flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${isHe ? 'text-right md:flex-row-reverse' : 'text-left'}`} dir={isHe ? 'rtl' : 'ltr'}>
             
             <div class="flex-1">
-                <h3 class="text-xl font-bold text-on-surface mb-2 font-headline">{texts.title}</h3>
-                <p class="text-sm text-on-surface-variant leading-relaxed">
+                <h3 class="text-base md:text-lg font-bold text-on-surface mb-1 font-headline tracking-tight">{texts.title}</h3>
+                <p class="text-xs md:text-sm text-on-surface-variant leading-snug">
                     {texts.description} 
                     <a href={texts.privacyLink} class="text-primary hover:underline font-bold mr-1 ml-1">{texts.privacyText}</a>.
                 </p>
             </div>
 
-            <div class={`flex items-center gap-4 w-full md:w-auto ${isHe ? 'flex-row-reverse' : ''}`}>
-                <button id="cookie-decline" class="flex-1 md:flex-none px-6 py-3 border border-outline-variant text-on-surface font-bold rounded-lg hover:bg-surface-variant transition-colors text-sm">
+            <div class={`flex items-center gap-3 w-full md:w-auto mt-2 md:mt-0 ${isHe ? 'flex-row-reverse' : ''}`}>
+                <button id="cookie-decline" class="flex-1 md:flex-none px-4 py-2 border border-outline-variant text-on-surface font-bold rounded-lg hover:bg-surface-variant transition-colors text-xs whitespace-nowrap">
                     {texts.declineBtn}
                 </button>
-                <button id="cookie-accept" class="flex-1 md:flex-none px-6 py-3 bg-primary text-white font-bold rounded-lg hover:bg-surface-tint shadow-lg transition-colors text-sm">
+                <button id="cookie-accept" class="flex-1 md:flex-none px-4 py-2 bg-primary text-white font-bold rounded-lg hover:bg-surface-tint shadow-md transition-colors text-xs whitespace-nowrap">
                     {texts.acceptBtn}
                 </button>
             </div>
