@@ -1,77 +1,79 @@
 ---
 import ContactSection from '../components/ContactSection.astro';
-import Layout from '../layouts/Layout.astro';
+import LayoutHe from '../layouts/LayoutHe.astro';
+
+const timeline = [
+    { year: '2002', title: 'הקמת פרקטל', desc: 'התחלנו את המסע כחברת סיסטם וייעוץ ממוקדת.' },
+    { year: '2010', title: 'התרחבות', desc: 'הקמנו מאות רשתות מעשיות עבור גופים מוסדיים.' },
+    { year: '2018', title: 'שותפויות ענק', desc: 'ספקי IT רשמיים לארגוני ענק ומערכות רפואה.' },
+    { year: 'כיום', title: 'פסגת הטכנולוגיה', desc: 'שירות ואמינות ללא פשרות לחברות המורכבות ביותר.' }
+];
+
+const testimonials = [
+    { quote: "לחברת פרקטל: תודה רבה על התמיכה והשירות המקצועי, האמין והמסור שהענקתם לנו לאורך הדרך. אנו ממליצים בחום לכל חברה לעבוד איתכם, תרגישו חופשי להשתמש בנו כממליצים רשמיים.", author: "מוקד אמון", role: "לקוח אבטחה" },
+    { quote: "צוות פרקטל היקר, תודה מקרב לב על התמיכה הרציפה והטיפול המקצועי שאתם מספקים לנו באמינות ובמסירות. אנחנו ממליצים בחום, ספק אסטרטגי מהמעלה הראשונה.", author: "T&M Protection Resources", role: "" },
+    { quote: "זכינו לשירות ללא דופי, מהיר וממוקד מחברת IT שבאמת מבינה עסקית, גם מעבר לטכנולוגיה.", author: "ל.כ. בע\"מ", role: "" }
+];
 ---
-<Layout title="About Us">
-    <!-- Hero / Intro -->
-    <section class="animate-fade-up relative pt-36 pb-24 bg-[#001a15] overflow-hidden text-center px-8 -mt-24" style="--delay: 100ms">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#001a15]/80 to-[#001a15]"></div>
-        <div class="relative z-10 max-w-4xl mx-auto mt-12">
-            <h1 class="text-5xl md:text-7xl font-bold font-headline mb-8 text-white tracking-tight">About Us</h1>
-            <p class="text-emerald-100/80 text-xl md:text-2xl font-light leading-relaxed max-w-3xl mx-auto">
-                Fractal specializes in providing computing and IT support solutions to business and industrial customers.
-            </p>
+
+<LayoutHe title="אודותינו">
+    <section class="animate-fade-up max-w-4xl mx-auto px-8 py-20 text-center mt-12 bg-surface" style="--delay: 100ms">
+        <h1 class="text-5xl md:text-7xl font-bold font-headline mb-8 text-primary tracking-tight">קצת עלינו</h1>
+        <p class="text-xl leading-relaxed text-on-surface-variant font-light mb-8 text-right bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-outline-variant/20 relative dir-rtl">
+            <span class="absolute -top-4 -right-4 material-symbols-outlined text-4xl text-primary/20">format_quote</span>
+            חברת <strong class="text-primary font-bold">פרקטל</strong> מתמחה במתן פתרונות מחשוב מקיפים ושירותי IT תומכים ללקוחות עסקיים ותעשייתיים שפועלים בקצבים גבוהים.
+            <br/><br/>
+            אנו בונים ומתחזקים מערכות ייעודיות המותאמות לדרישות ולזרימת העבודה הייחודית של כל לקוח. תחומי הפעילות שלנו כוללים מגוון עמוק של שירותים:<br/>
+            הקמה ותחזוקה שוטפת של רשתות מחשבים, פתרונות אבטחת מידע, תחזוקת תוכנות בסביבת שרת מאובטחת, טיפול בתוכנות שרטוט ותכנון (כדוגמת Auto CAD), ושירות צמוד למערכות תוכנה של מוקדי ביטחון ואבטחה.
+            <br/><br/>
+            עם למעלה מ- <strong class="text-primary font-bold text-2xl">20 שנות ניסיון</strong> בהקמת מאות סוגים שונים של רשתות מחשבים אצל חברות ענק מוסדיות, הסטנדרט המקצועי הבלתי-מתפשר שלנו – יחד עם אחיזת ידע עמוקה בטכנולוגיות התקשורת החדישות ביותר ויחס אישי – מבטיחים התקנה יציבה, שירות אמין והתאמה מושלמת של המערכת לצרכי העסק שלך.
+        </p>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="max-w-6xl mx-auto px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 dir-rtl">
+            {timeline.map((step) => (
+                <div class="flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-surface-container-highest shadow-sm hover:-translate-y-1 transition-transform">
+                    <span class="text-4xl font-headline font-black text-primary border-b-4 border-primary/20 pb-2 mb-4">{step.year}</span>
+                    <h3 class="font-bold text-lg mb-2 text-on-surface">{step.title}</h3>
+                    <p class="text-sm text-on-surface-variant font-medium">{step.desc}</p>
+                </div>
+            ))}
         </div>
     </section>
 
-    <!-- Content Transition Gradient -->
-    <div class="h-16 bg-gradient-to-b from-[#001a15] to-surface"></div>
-
-    <!-- Main Content -->
-    <section class="reveal-on-scroll max-w-6xl mx-auto px-8 py-24 text-left">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
-            
-            <!-- Technical Service Card -->
-            <div class="md:col-span-7 bg-surface-container-lowest p-10 md:p-14 rounded-[2.5rem] border border-outline-variant/30 shadow-[0_15px_40px_rgba(0,104,87,0.05)] relative overflow-hidden flex flex-col justify-center">
-                <span class="material-symbols-outlined text-primary text-5xl mb-6">memory</span>
-                <p class="text-on-surface-variant leading-loose text-lg font-medium relative z-10">
-                    We build dedicated systems tailored to the client's unique needs. The service includes a wide range of Activity: Establishment and maintenance of computer networks, information security solutions, software & Auto CAD maintenance, Handling and maintenance of security focal software, etc.
-                </p>
+    <!-- Testimonials Section -->
+    <section class="bg-surface-container-low border-y border-surface-container py-24 px-8 mt-12 mb-0">
+        <div class="max-w-6xl mx-auto dir-rtl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold font-headline text-on-surface mb-4">לקוחותינו ממליצים</h2>
+                <p class="text-xl text-on-surface-variant font-light">מה אומרות החברות והתאגידים המובילים בישראל, שעובדים איתנו כבר עשרות שנים.</p>
             </div>
             
-            <!-- 20+ Years Highlight -->
-            <div class="md:col-span-5 bg-surface-container p-10 md:p-12 rounded-[2.5rem] border border-outline-variant/30 text-center flex flex-col justify-center items-center">
-                <span class="text-7xl font-bold font-headline text-primary mb-2">20+</span>
-                <span class="text-sm tracking-[0.2em] font-bold uppercase text-outline">Years of Operations</span>
-                <p class="text-on-surface-variant leading-relaxed mt-6">
-                    We have been working for over 20 years in establishing computerized systems tailored to customer needs and in service provision And IT support.
-                </p>
-            </div>
-            
-            <!-- Experience Block -->
-            <div class="md:col-span-12 mt-4 bg-[#001a15] text-emerald-50 p-10 md:p-16 rounded-[2.5rem] shadow-2xl relative overflow-hidden border border-emerald-900/40 flex flex-col md:flex-row gap-12 items-center">
-                <div class="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-                <div class="flex-shrink-0 relative z-10 hidden md:block">
-                    <span class="material-symbols-outlined text-[100px] text-primary-fixed/80">domain</span>
-                </div>
-                <div class="relative z-10">
-                    <p class="leading-relaxed text-lg md:text-xl max-w-4xl font-light">
-                        The company's experience in establishing hundreds of different types of computer networks at Business and industrial customers, the professional care and control of the most advanced technologies In computer and computer communications, We ensure reliable and reliable installation and service and optimal fit Of the system for your needs.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="reveal-on-scroll bg-[#001712] py-32 px-8 mt-12 rounded-t-[3rem] relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-16 font-headline">Testimonials</h2>
-            <div class="bg-white/5 backdrop-blur-md p-10 md:p-16 rounded-[2rem] border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative text-center">
-                <span class="material-symbols-outlined text-primary-fixed/20 text-8xl absolute -top-10 left-1/2 -translate-x-1/2">format_quote</span>
-                <p class="text-xl md:text-2xl font-light text-emerald-50 leading-relaxed mb-12 italic relative z-10 px-4 md:px-12">
-                    "To Fractal Company<br/>Thank you very much for the support and professional service, reliable and kind.<br/>We appreciate your dedicated work and smooth transfer to the new offices."
-                </p>
-                <div class="flex flex-col items-center justify-center gap-3">
-                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-primary-container rounded-full flex items-center justify-center font-bold text-white text-xl shadow-lg">Z</div>
-                    <span class="font-bold text-primary-fixed tracking-wide">Zviran</span>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {testimonials.map((test) => (
+                    <div class="flex flex-col p-8 bg-surface-container-lowest rounded-[2rem] shadow-sm border border-outline-variant/30 hover:shadow-lg transition-shadow relative">
+                        <span class="material-symbols-outlined text-primary-fixed opacity-30 text-5xl absolute top-6 right-6">format_quote</span>
+                        <p class="text-on-surface-variant text-lg font-medium leading-relaxed my-8 relative z-10 flex-grow text-right pr-6">
+                            "{test.quote}"
+                        </p>
+                        <div class="flex items-center gap-4 mt-auto border-t border-outline-variant/20 pt-6">
+                            <div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center text-on-primary-container font-headline font-bold text-xl">
+                                {test.author.charAt(0)}
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="font-bold text-on-surface">{test.author}</span>
+                                {test.role && <span class="text-sm text-on-surface-variant font-medium">{test.role}</span>}
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     </section>
 
-    <!-- Contact section exactly matching provided text -->
-    <ContactSection lang="en" />
+    <!-- Exact Contact Us Section from user specification -->
+    <ContactSection lang="he" />
 
-</Layout>
+</LayoutHe>

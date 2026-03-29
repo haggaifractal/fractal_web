@@ -1,37 +1,38 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/LayoutHe.astro';
+import ContactSection from '../components/ContactSection.astro';
 ---
-
-<Layout title="Privacy Policy">
-    <div class="max-w-4xl mx-auto px-8 py-32 text-on-surface">
-        <h1 class="text-4xl md:text-5xl font-bold font-headline mb-8 text-primary">Privacy Policy</h1>
-        <div class="prose prose-invert max-w-none text-on-surface-variant leading-relaxed mb-12">
-            <p><strong>Last Updated:</strong> March 26, 2026</p>
-            <p>Fractal Computers and Communications 2002 Ltd ("Fractal" or "we") respects your privacy. This policy outlines how we collect, store, and use personal information in accordance with the provisions of the Israeli Privacy Protection Law (1981) and its Amendment 13.</p>
+<Layout title="מדיניות פרטיות">
+    <div class="max-w-4xl mx-auto px-8 py-32 text-on-surface text-right">
+        <h1 class="text-4xl md:text-5xl font-bold font-headline mb-8 text-primary">מדיניות פרטיות</h1>
+        <div class="prose prose-invert max-w-none text-on-surface-variant text-right leading-relaxed mb-12">
+            <p><strong>עודכן לאחרונה:</strong> 26 במרץ, 2026</p>
+            <p>חברת פרקטל מחשבים ותקשורת 2002 בע"מ ("פרקטל" או "אנחנו") מכבדת את פרטיותך. מדיניות זו מפרטת את האופן שבו אנו אוספים, שומרים ומשתמשים במידע אישי, בהתאם להוראות חוק הגנת הפרטיות, התשמ"א-1981 ותיקון מס' 13 לחוק זה.</p>
             
-            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">1. Information Collection and Purpose</h2>
-            <p>Using this website does not require registration. However, when filling out the "Contact Us" form, we will ask you to provide basic identifying details (name, email, phone, and inquiry details).</p>
-            <p>You are under no legal obligation to provide this information; it is provided entirely of your own free will and consent. The information is collected solely for the purpose of contacting you, answering your questions, evaluating the suitability of our services to your needs, and managing your inquiry.</p>
+            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">1. איסוף המידע ומטרתו</h2>
+            <p>השימוש באתר אינו כרוך ברישום. עם זאת, בעת מילוי טופס "צור קשר" נבקש ממך למסור פרטים מזהים בסיסיים (שם, דוא"ל, טלפון ותוכן הפנייה).</p>
+            <p>לא חלה עליך כל חובה חוקית למסור את המידע; מסירתו נעשית מרצונך החופשי ובהסכמתך. המידע נאסף אך ורק למטרת יצירת קשר עמך, מתן מענה לשאלותיך, בחינת התאמת השירותים שלנו לצרכיך, וניהול הפנייה.</p>
             
-            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">2. Cross-Border Data Transfer and Third Parties</h2>
-            <p>We commit not to sell, trade, or transfer your personal information to third parties for commercial purposes. However, our technical infrastructure relies on leading cloud providers (such as Cloudflare servers and Microsoft Office 365). Therefore, the information you provide may be transferred and/or stored on servers outside the borders of the State of Israel, subject to the provisions of the law and strict security measures attached to these service providers' agreements.</p>
+            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">2. העברת מידע לחו"ל ולצדדים שלישיים</h2>
+            <p>אנו מתחייבים שלא למכור, לסחור או להעביר את פרטיך האישיים לצדדים שלישיים לצרכים מסחריים. עם זאת, התשתיות שלנו נשענות על ספקי ענן מובילים (כגון שרתי Cloudflare ותיבות הדוא"ל של Microsoft Office 365). לפיכך, המידע שאתה מוסר עשוי להיות מועבר ו/או מאוחסן בשרתים מחוץ לגבולות מדינת ישראל, בכפוף להוראות הדין ואמצעי אבטחה מחמירים המצורפים להסכמי ספקי שירות אלו.</p>
             
-            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">3. Cookies & Tracking Mechanisms</h2>
-            <p>Our website is designed with a "Privacy by Design" approach. Should we decide to use third-party cookies (such as Google Analytics or Meta Pixels) to analyze browsing data, these systems are <strong>blocked by default</strong> and will not operate without your active consent (Opt-In) via the cookie consent banner. You always retain the right to decline or withdraw this consent.</p>
+            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">3. שימוש ב"עוגיות" (Cookies) וכלי מעקב</h2>
+            <p>האתר שלנו תוכנן בגישת עיצוב לפרטיות (Privacy by Design). ככל שנחליט להשתמש בקובצי עוגיות של צדדים שלישיים (כגון Google Analytics או Meta Pixels) לבדיקת נתוני גלישה, מערכות אלו <strong>חסומות כברירת מחדל</strong> ולא יופעלו ללא קבלת הסכמתך האקטיבית (Opt-In) דרך באנר ההסכמות. בכל שלב שמורה לך הזכות לסרב למעקב זה.</p>
             
-            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">4. Information Security & Data Retention (SLA)</h2>
-            <p>We implement advanced technical and organizational measures to protect your information from unauthorized access. In accordance with the data minimization principle which requires deleting information that is no longer needed, "Contact Us" inquiries from the website are routed directly to the company email. If they have not matured into active business engagements, a system rule automatically and permanently deletes them within 60 days. You may demand an immediate manual deletion ("Right to be Forgotten") earlier, and it will be processed within 30 days as required by law.</p>
+            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">4. אבטחת מידע וזמן שמירה (Data Retention & SLA)</h2>
+            <p>אנו נוקטים באמצעים טכניים וארגוניים מתקדמים להגנה על המידע מפני גישה בלתי מורשית. בהתאם לעקרון צמצום המידע המחייב מחיקת מידע שאינו נדרש עוד, פניות "צור קשר" מהאתר מנותבות ישירות לדוא"ל החברה, וככל שלא הבשילו להתקשרות עסקית פעילה, מופעל כלל מערכתי המוחק אותן לחלוטין באופן אוטומטי כעבור 60 ימים. ניתן לדרוש מחיקה כפויה מיידית (זכות להישכח) מוקדם יותר, והיא תטופל בתוך 30 ימים כקבוע בחוק.</p>
             
-            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">5. Your Rights (Review, Correction, and Deletion)</h2>
-            <p>Under the Privacy Protection Law and Amendment 13, you are entitled to:</p>
+            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">5. זכויותיך מול מאגר המידע (זכות עיון, תיקון ומחיקה)</h2>
+            <p>על פי החוק להגנת הפרטיות ותיקון 13, הנך זכאי/ת:</p>
             <ul class="list-disc pr-6 mb-4">
-                <li>Review your personal information stored with us.</li>
-                <li>Demand its correction if it is inaccurate or outdated.</li>
-                <li>Demand its deletion ("Right to be Forgotten") at any time if it is no longer required for legitimate purposes.</li>
+                <li>לעיין במידע האישי שלך השמור אצלנו.</li>
+                <li>לדרוש את תיקונו במקרה שהוא אינו מדויק או אינו מעודכן.</li>
+                <li>לדרוש את מחיקת המידע ("הזכות להישכח") בכל עת אם אינו נדרש למטרות לגיטימיות.</li>
             </ul>
             
-            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">6. Contact Us</h2>
-            <p>For any request to exercise your rights (including deletion requests), you can contact us directly by email: <a href="mailto:Office@fractal.co.il" class="text-primary hover:underline">Office@fractal.co.il</a>. We will handle your request within the timeframe stipulated by law.</p>
+            <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">6. יצירת קשר</h2>
+            <p>לכל בקשה למימוש זכויותיך (לרבות בקשות מחיקה), ניתן לפנות אלינו ישירות בדוא"ל: <a href="mailto:Office@fractal.co.il" class="text-primary hover:underline">Office@fractal.co.il</a>, ואנו נטפל בפנייתך בתוך פרק הזמן הקבוע בחוק.</p>
         </div>
     </div>
+    <ContactSection lang="he" />
 </Layout>

@@ -9,28 +9,51 @@ const isHe = lang === 'he';
 const texts = {
     title: isHe ? 'צור קשר' : 'Contact Us',
     subtitle: isHe ? 'שלח לנו הודעה ונחזור אליך בהקדם האפשרי.' : "Send us a message and we'll get back to you shortly.",
-    firstNameLabel: isHe ? 'שם פרטי' : 'First name',
+    firstNameLabel: isHe ? '* שם פרטי' : '* First name',
     firstNamePlaceholder: isHe ? 'הכנס שם פרטי...' : 'Enter your first name',
-    emailLabel: isHe ? '*דואר אלקטרוני' : 'Work Email*',
+    emailLabel: isHe ? '* דואר אלקטרוני' : '* Work Email',
     emailPlaceholder: isHe ? 'כתובת דוא״ל' : 'name@company.com',
     phoneLabel: isHe ? 'מספר טלפון / נייד (רשות)' : 'Phone / Mobile (Optional)',
     phonePlaceholder: isHe ? '+972 50-000-0000' : '+972 50-000-0000',
-    subjectLabel: isHe ? 'נושא הפנייה' : 'Inquiry Subject',
+    subjectLabel: isHe ? 'נושא הפנייה (רשות)' : 'Inquiry Subject (Optional)',
     subjectPlaceholder: isHe ? 'למשל: תמיכה, מכירות' : 'e.g., IT Support, Cloud Migration',
-    messageLabel: isHe ? 'תוכן הפנייה' : 'Message Details',
+    messageLabel: isHe ? '* תוכן הפנייה' : '* Message Details',
     messagePlaceholder: isHe ? 'הזן תוכן הודעה כאן...' : 'Describe your technical requirements...',
     privacyPrefix: isHe ? 'אני מאשר/ת את ' : 'I agree to the ',
-    termsLink: isHe ? '/he/terms' : '/terms',
+    termsLink: isHe ? '/terms' : '/en/terms',
     termsText: isHe ? 'תנאי השימוש' : 'Terms of Use',
     andText: isHe ? ' ו' : ' and ',
-    privacyLink: isHe ? '/he/privacy' : '/privacy',
+    privacyLink: isHe ? '/privacy' : '/en/privacy',
     privacyText: isHe ? 'מדיניות הפרטיות' : 'Privacy Policy',
     privacySuffix: isHe ? ', ומסכים/ה לשמירת פרטיי במאגר המידע לצורך טיפול בפנייתי (תיקון 13 לחוק הגנת הפרטיות).' : ', and successfully consent to my inquiry data being mapped securely to your system.',
     submitBtn: isHe ? 'שלח' : 'Submit Request'
 };
 ---
 
-<section id="contact" class={`reveal-on-scroll max-w-4xl mx-auto px-8 py-24 scroll-mt-24 mt-8 ${isHe ? 'text-right' : ''}`} dir={isHe ? 'rtl' : 'ltr'}>
+<section id="contact" class={`max-w-4xl mx-auto px-8 py-24 scroll-mt-24 mt-8 contact-anim-wrap ${isHe ? 'text-right' : ''}`} dir={isHe ? 'rtl' : 'ltr'}>
+    <script is:inline>
+        (function() {
+            var el = document.currentScript.parentElement;
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px)';
+            el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            
+            var check = function() {
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                    window.removeEventListener('scroll', check);
+                }
+            };
+            window.addEventListener('scroll', check);
+            setTimeout(check, 100);
+            setTimeout(function() {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 1500); // Bulletproof fallback
+        })();
+    </script>
     <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-bold text-on-surface mb-4 font-headline">{texts.title}</h2>
         <p class="text-on-surface-variant text-lg">{texts.subtitle}</p>
@@ -41,10 +64,19 @@ const texts = {
         <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
         <input type="hidden" name="subject" value="New Inquiry from Fractal Website" />
         <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
-        <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+        <input type="hidden" name="redirect" id="form-redirect" value="https://web3forms.com/success" />
+        
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                const lang = document.documentElement.dir === 'rtl' ? 'he' : 'en';
+                const successPath = lang === 'he' ? '/success' : '/en/success';
+                document.getElementById('form-redirect').value = window.location.origin + successPath;
+            });
+        </script>
+
         <div class="flex flex-col gap-2">
             <label class="text-sm font-bold text-primary tracking-wide" for="firstname">{texts.firstNameLabel}</label>
-            <input type="text" name="firstname" id="firstname" autocomplete="given-name" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : ''}`} placeholder={texts.firstNamePlaceholder} />
+            <input type="text" name="firstname" id="firstname" autocomplete="given-name" required class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : ''}`} placeholder={texts.firstNamePlaceholder} />
         </div>
         
         <div class="flex flex-col gap-2">
@@ -64,11 +96,11 @@ const texts = {
 
         <div class="flex flex-col gap-2 md:col-span-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="message">{texts.messageLabel}</label>
-            <textarea name="message" id="message" rows="5" dir="auto" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.messagePlaceholder}></textarea>
+            <textarea name="message" id="message" rows="5" required dir="auto" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.messagePlaceholder}></textarea>
         </div>
 
-        <div class={`flex items-start gap-4 md:col-span-2 mt-2 ${isHe ? 'flex-row-reverse' : ''}`}>
-            <div class={`flex items-center h-6 ${isHe ? 'mt-1' : ''}`}>
+        <div class="flex items-start gap-3 md:col-span-2 mt-2">
+            <div class="flex items-center h-5 mt-0.5">
                 <input id="privacy" type="checkbox" required class="w-5 h-5 text-primary bg-surface border-outline-variant rounded focus:ring-primary focus:ring-2 cursor-pointer transition-colors" />
             </div>
             <div class={`text-sm text-on-surface-variant leading-relaxed ${isHe ? 'text-right' : ''}`}>

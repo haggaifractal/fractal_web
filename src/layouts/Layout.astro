@@ -11,7 +11,7 @@ export interface Props {
 
 const { title, description = "Fractal specializes in providing IT consulting and support solutions to business and industrial customers who expect excellence." } = Astro.props;
 const pathname = Astro.url.pathname;
-const hePath = "/he" + (pathname === "/" ? "" : pathname);
+const hePath = pathname.replace(/^\/en/, '') || '/';
 const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 ---
 <html lang="en">
@@ -34,11 +34,18 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     <script is:inline>
         (function() {
             try {
+                if (history.scrollRestoration) {
+                    history.scrollRestoration = 'manual';
+                }
+                window.scrollTo(0, 0);
                 var override = localStorage.getItem('lang');
-                var isHe = window.location.pathname.startsWith('/he');
+                var isEn = window.location.pathname.startsWith('/en');
                 var path = window.location.pathname;
-                if (!isHe && (override === 'he' || (!override && navigator.language.startsWith('he')))) {
-                    window.location.replace('/he' + (path === '/' ? '' : path) + window.location.search + window.location.hash);
+                if (!isEn && override === 'en') {
+                    window.location.replace('/en' + path + window.location.search + window.location.hash);
+                } else if (isEn && override === 'he') {
+                    var newPath = path.replace(/^\/en/, '');
+                    window.location.replace((newPath || '/') + window.location.search + window.location.hash);
                 }
             } catch (e) {}
         })();
@@ -85,44 +92,60 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
                 </div>
             </a>
         </div>
-        <div class="hidden lg:flex flex-1 items-center justify-end xl:justify-center pt-1 transition-all overflow-hidden">
-            <div class="flex items-center justify-end px-4 xl:px-8 w-full gap-4 xl:gap-8">
-                <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/">Home</a>
-                <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/about">About Us</a>
-                <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/services">Our Services</a>
-                <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/customers">Our Customers</a>
-                
-                <!-- Language Switcher (EN -> HE) -->
-                <div class="h-4 w-px bg-outline-variant/50 mx-1 shrink-0"></div>
-                <a href={hePath} onclick="localStorage.setItem('lang', 'he');" class="text-primary font-bold hover:text-primary-fixed transition-colors text-sm tracking-wide flex items-center gap-1 font-headline" dir="rtl">עברית</a>
+        <div class="hidden lg:flex flex-1 items-center justify-center pt-1 transition-all">
+            <!-- Centered Navigation Links -->
+            <div class="flex items-center justify-center w-full gap-6 xl:gap-10">
+                <a href="/en/" class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">Home<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
+                <a href="/en/about" class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">About Us<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
+                <a href="/en/services" class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">Our Services<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
+                <a href="/en/customers" class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">Our Customers<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
             </div>
         </div>
-        <div class="flex items-center gap-2 sm:gap-4 relative z-10">
-            <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 sm:px-7 sm:py-2 bg-gradient-to-br from-primary to-primary-container text-white rounded-full text-[10px] sm:text-sm font-semibold hover:scale-95 active:scale-90 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">Tech Support</a>
+
+        <div class="flex items-center gap-2 sm:gap-4 relative z-10 shrink-0">
+            <!-- Language Switcher (Desktop) -->
+            <a href={hePath} onclick="localStorage.setItem('lang', 'he');" class="hidden lg:flex text-on-surface-variant hover:text-primary transition-colors text-sm font-bold tracking-wide items-center font-headline uppercase" dir="rtl">HE</a>
+            
+            <div class="hidden lg:block h-5 w-px bg-outline-variant/30"></div>
+
+            <!-- Contact Icons (Desktop & Tablet) -->
+            <div class="hidden md:flex items-center gap-2">
+                <a href="tel:03-6168890" class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant/80 text-on-surface-variant hover:bg-primary hover:text-white transition-all hover:scale-105 active:scale-95" aria-label="Call Us">
+                    <span class="material-symbols-outlined text-[20px]">call</span>
+                </a>
+                <a href="#" onclick="window.location.href='mailto:Office@fractal.co.il'; return false;" class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant/80 text-on-surface-variant hover:bg-primary hover:text-white transition-all hover:scale-105 active:scale-95" aria-label="Email Us">
+                    <span class="material-symbols-outlined text-[20px]">mail</span>
+                </a>
+            </div>
+
+            <div class="hidden md:block h-5 w-px bg-outline-variant/30"></div>
+
+            <!-- Tech Support Button (All Screens) -->
+            <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 sm:px-6 sm:py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full text-xs sm:text-sm font-semibold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">Tech Support</a>
             
             <!-- Mobile Menu Toggle -->
-            <button id="mobile-btn-en" class="lg:hidden flex items-center justify-center p-2 rounded-full bg-surface-variant text-on-surface hover:bg-primary hover:text-white transition-all" aria-label="Toggle Menu">
+            <button id="mobile-btn-en" class="lg:hidden flex items-center justify-center p-2 rounded-full bg-surface-variant/80 text-on-surface hover:bg-primary hover:text-white transition-all" aria-label="Toggle Menu">
                 <span class="material-symbols-outlined" id="mobile-icon-en">menu</span>
             </button>
         </div>
     </nav>
     
     <!-- Mobile Full-Screen Overlay -->
-    <div id="mobile-nav-en" class="fixed inset-0 z-[45] bg-surface/95 backdrop-blur-3xl transform translate-x-full transition-transform duration-500 lg:hidden flex flex-col pt-32 px-6 overscroll-none">
+    <div id="mobile-nav-en" class="fixed inset-0 z-[45] bg-surface/95 backdrop-blur-3xl opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden flex flex-col pt-32 px-6 overscroll-none">
         <div class="flex flex-col gap-2">
-            <a href="/" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+            <a href="/en/" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
                 Home <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
             </a>
-            <a href="/about" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+            <a href="/en/about" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
                 About Us <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
             </a>
-            <a href="/services" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+            <a href="/en/services" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
                 Our Services <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
             </a>
-            <a href="/customers" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+            <a href="/en/customers" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
                 Our Customers <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
             </a>
-            <a href="/contact" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+            <a href="/en/contact" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group" onclick="document.getElementById('mobile-btn-en').click()">
                 Contact Us <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_right</span>
             </a>
             
@@ -147,17 +170,22 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
                 const toggleMenu = () => {
                     menuOpen = !menuOpen;
                     if(menuOpen) {
-                        nav.classList.remove('translate-x-full');
+                        nav.classList.remove('opacity-0', 'pointer-events-none');
+                        nav.classList.add('opacity-100', 'pointer-events-auto');
                         icon.textContent = 'close';
                         document.body.style.overflow = 'hidden';
                     } else {
-                        nav.classList.add('translate-x-full');
+                        nav.classList.add('opacity-0', 'pointer-events-none');
+                        nav.classList.remove('opacity-100', 'pointer-events-auto');
                         icon.textContent = 'menu';
                         document.body.style.overflow = '';
                     }
                 };
 
-                btn.addEventListener('click', toggleMenu);
+                // Clear previous listeners (robustness)
+                const newBtn = btn.cloneNode(true);
+                if (btn.parentNode) btn.parentNode.replaceChild(newBtn, btn);
+                newBtn.addEventListener('click', toggleMenu);
                 
                 links.forEach(link => {
                     link.addEventListener('click', () => {
@@ -182,7 +210,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
             });
 
             // Phase 2: Scroll Reveal Animations
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.05 };
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -193,7 +221,14 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
             }, observerOptions);
             
             document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-            
+
+            // Safety fallback: if anything remained hidden, just show it after 2 seconds
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-on-scroll:not(.is-visible)').forEach(el => {
+                    el.classList.add('is-visible');
+                    observer.unobserve(el);
+                });
+            }, 2000);
         });
     </script>
 
@@ -205,7 +240,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     <CookieBanner lang="en" />
 
     <!-- Future Analytics Placeholder (Amendment 13 Privacy by Design) -->
-    <script>
+    <script is:inline>
         function loadAnalytics() {
             // TODO: Inject actual Google Analytics or Meta Pixel tags here
             console.log("Analytics trackers allowed (consent granted).");
@@ -219,21 +254,24 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     </script>
 
     <!-- Open Source Accessibility Widget -->
-    <script src="https://cdn.jsdelivr.net/npm/accessibility/dist/accessibility.min.js" integrity="sha384-mliRj39BAe04hpb2qxTMIO8RKvBodPhsc+KkTR94u+uqs9wO+cWpe3fKjWItHi3N" crossorigin="anonymous"></script>
-    <script>
+    <script is:inline>var exports = {};</script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/accessibility/dist/accessibility.min.js" crossorigin="anonymous"></script>
+    <script is:inline>
         window.addEventListener('load', function() {
-            new Accessibility({
-                labels: {
-                    menuTitle: 'Accessibility Options',
-                },
-                icon: {
-                    position: {
-                        bottom: { size: 30, units: 'px' },
-                        left: { size: 30, units: 'px' },
-                        type: 'fixed'
+            if (typeof Accessibility !== 'undefined') {
+                new Accessibility({
+                    labels: {
+                        menuTitle: 'Accessibility Options',
+                    },
+                    icon: {
+                        position: {
+                            bottom: { size: 30, units: 'px' },
+                            left: { size: 30, units: 'px' },
+                            type: 'fixed'
+                        }
                     }
-                }
-            });
+                });
+            }
         }, false);
     </script>
 </body>
