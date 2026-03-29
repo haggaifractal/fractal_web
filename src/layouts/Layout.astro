@@ -254,24 +254,22 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     </script>
 
     <!-- Open Source Accessibility Widget -->
-    <script is:inline>var exports = {};</script>
-    <script is:inline src="https://cdn.jsdelivr.net/npm/accessibility/dist/accessibility.min.js" crossorigin="anonymous"></script>
-    <script is:inline>
+    <script>
+        import { Accessibility } from 'accessibility';
+
         window.addEventListener('load', function() {
-            if (typeof Accessibility !== 'undefined') {
-                new Accessibility({
-                    labels: {
-                        menuTitle: 'Accessibility Options',
-                    },
-                    icon: {
-                        position: {
-                            bottom: { size: 30, units: 'px' },
-                            left: { size: 30, units: 'px' },
-                            type: 'fixed'
-                        }
+            new Accessibility({
+                labels: {
+                    menuTitle: 'Accessibility Options',
+                },
+                icon: {
+                    position: {
+                        bottom: { size: 30, units: 'px' },
+                        left: { size: 30, units: 'px' },
+                        type: 'fixed'
                     }
-                });
-            }
+                }
+            });
         }, false);
     </script>
 </body>

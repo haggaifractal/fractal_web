@@ -259,39 +259,37 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     </script>
 
     <!-- Open Source Accessibility Widget -->
-    <script is:inline>var exports = {};</script>
-    <script is:inline src="https://cdn.jsdelivr.net/npm/accessibility/dist/accessibility.min.js" crossorigin="anonymous"></script>
-    <script is:inline>
+    <script>
+        import { Accessibility } from 'accessibility';
+
         window.addEventListener('load', function() {
-            if (typeof Accessibility !== 'undefined') {
-                new Accessibility({
-                    labels: {
-                        menuTitle: 'אפשרויות נגישות',
-                        increaseText: 'הגדל טקסט',
-                        decreaseText: 'הקטן טקסט',
-                        increaseTextSpacing: 'הגדל מרווח טקסט',
-                        decreaseTextSpacing: 'הקטן מרווח טקסט',
-                        increaseLineHeight: 'הגדל מרווח שורות',
-                        decreaseLineHeight: 'הקטן מרווח שורות',
-                        invertColors: 'הפוך צבעים',
-                        grayHues: 'גווני אפור',
-                        underlineLinks: 'קו תחתון לקישורים',
-                        bigCursor: 'סמן גדול',
-                        readingGuide: 'מדריך קריאה',
-                        textToSpeech: 'הקראת טקסט',
-                        speechToText: 'הכתבה קולית',
-                        resetTitle: 'איפוס נגישות',
-                        closeTitle: 'סגור'
-                    },
-                    icon: {
-                        position: {
-                            bottom: { size: 30, units: 'px' },
-                            right: { size: 30, units: 'px' },
-                            type: 'fixed'
-                        }
+            new Accessibility({
+                labels: {
+                    menuTitle: 'אפשרויות נגישות',
+                    increaseText: 'הגדל טקסט',
+                    decreaseText: 'הקטן טקסט',
+                    increaseTextSpacing: 'הגדל מרווח טקסט',
+                    decreaseTextSpacing: 'הקטן מרווח טקסט',
+                    increaseLineHeight: 'הגדל מרווח שורות',
+                    decreaseLineHeight: 'הקטן מרווח שורות',
+                    invertColors: 'הפוך צבעים',
+                    grayHues: 'גווני אפור',
+                    underlineLinks: 'קו תחתון לקישורים',
+                    bigCursor: 'סמן גדול',
+                    readingGuide: 'מדריך קריאה',
+                    textToSpeech: 'הקראת טקסט',
+                    speechToText: 'הכתבה קולית',
+                    resetTitle: 'איפוס נגישות',
+                    closeTitle: 'סגור'
+                },
+                icon: {
+                    position: {
+                        bottom: { size: 30, units: 'px' },
+                        right: { size: 30, units: 'px' },
+                        type: 'fixed'
                     }
-                });
-            }
+                }
+            });
         }, false);
     </script>
 
