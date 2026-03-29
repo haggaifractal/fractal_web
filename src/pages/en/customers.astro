@@ -32,11 +32,10 @@ const clients = [
                 <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="bg-white h-36 rounded-2xl border border-surface-container shadow-[0_10px_20px_rgba(0,104,87,0.03)] flex flex-col items-center justify-center p-4 text-center hover:scale-105 active:scale-95 hover:border-primary/50 hover:shadow-xl transition-all group relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     
-                    <!-- Refactored back to Google Favicons API per User UX constraints. Added no-referrer policy to slightly mitigate data leakage. -->
+                    <!-- Fully privacy-compliant: Serving logos locally from public/images/clients -->
                     <img 
-                        src={`https://s2.googleusercontent.com/s2/favicons?domain=${client.domain}&sz=128`} 
+                        src={`/images/clients/${client.domain}.png`} 
                         alt={`${client.name} logo`}
-                        referrerpolicy="no-referrer"
                         class="w-12 h-12 object-contain relative z-10 transition-transform group-hover:scale-110 mb-3 rounded shadow-sm opacity-90 group-hover:opacity-100"
                         onerror="this.style.display='none';"
                     />
