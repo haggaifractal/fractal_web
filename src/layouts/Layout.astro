@@ -17,8 +17,8 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 ---
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href="/logo-icon.png" />
     <link rel="canonical" href={Astro.url.href} />
@@ -82,7 +82,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 <body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
     <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 transition-all duration-300 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
         <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
-            <a href="/" class="group flex items-center gap-1.5 sm:gap-2 md:gap-3 no-underline outline-none">
+            <a href="/en/" class="group flex items-center gap-1.5 sm:gap-2 md:gap-3 no-underline outline-none">
                 <!-- User's Custom Uploaded Logo Mark -->
                 <img id="nav-logo" src="/logo-icon.png" alt="Fractal Logo Icon" width="64" height="64" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -ml-2 -my-2 md:-my-3 lg:-ml-4 lg:-my-6 transition-all duration-300" />
 

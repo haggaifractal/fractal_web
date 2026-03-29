@@ -20,13 +20,13 @@ import ClientsMarquee from '../../components/ClientsMarquee.astro';
                 Fractal specializes in providing IT consulting and support solutions to business and industrial customers who expect excellence.
             </p>
             <div class="flex flex-wrap gap-4 pt-2">
-                <a href="/en/services" class="px-8 py-3.5 bg-primary hover:bg-primary-fixed hover:text-on-primary-fixed text-white font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-xl shadow-primary/20 text-center font-headline">View Our Services</a>
-                <a href="#contact" class="px-8 py-3.5 bg-white text-primary border border-primary/20 hover:border-primary font-bold rounded-full transition-all hover:scale-105 active:scale-95 hover:shadow-lg text-center font-headline">Contact Us</a>
+                <a href="/en/services" class="w-full sm:w-auto px-6 py-2.5 md:px-8 md:py-3.5 bg-primary hover:bg-primary-fixed hover:text-on-primary-fixed text-white font-bold text-sm md:text-base rounded-full transition-all hover:scale-105 active:scale-95 shadow-xl shadow-primary/20 text-center font-headline">View Services</a>
+                <a href="/en/about" class="w-full sm:w-auto px-6 py-2.5 md:px-8 md:py-3.5 bg-white text-primary border border-primary/20 hover:border-primary font-bold text-sm md:text-base rounded-full transition-all hover:scale-105 active:scale-95 hover:shadow-lg text-center font-headline">Learn More About Us</a>
             </div>
         </div>
         
         <!-- MOBILE MARQUEE: Above the image -->
-        <div class="block md:hidden w-[100vw] relative left-1/2 -translate-x-1/2 z-20 my-4">
+        <div class="block md:hidden pb-4 pt-2 -mx-4 w-[calc(100%+2rem)] flex justify-center">
             <ClientsMarquee lang="en" isMobile={true} />
         </div>
 
