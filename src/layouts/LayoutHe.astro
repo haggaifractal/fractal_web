@@ -124,8 +124,8 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 
             <div class="hidden md:block h-5 w-px bg-outline-variant/30"></div>
 
-            <!-- Tech Support Button (All Screens) -->
-            <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 sm:px-6 sm:py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full text-xs sm:text-sm font-semibold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">תמיכה טכנית</a>
+            <!-- Tech Support Button (Desktop Only) -->
+            <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex px-4 py-2 sm:px-6 sm:py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full text-xs sm:text-sm font-semibold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">תמיכה טכנית</a>
             
             <!-- Mobile Menu Toggle -->
             <button id="mobile-btn-he" class="lg:hidden flex items-center justify-center p-2 rounded-full bg-surface-variant/80 text-on-surface hover:bg-primary hover:text-white transition-all" aria-label="Toggle Menu">
@@ -137,6 +137,11 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     <!-- Mobile Full-Screen Overlay (RTL) -->
     <div id="mobile-nav-he" class="fixed inset-0 z-[45] bg-surface/95 backdrop-blur-3xl opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden flex flex-col pt-32 px-6 overscroll-none">
         <div class="flex flex-col gap-2">
+            <!-- Language Switcher (Mobile) - Top Left (justify-end in RTL) -->
+            <div class="flex justify-end px-6 mb-2">
+                <a href={enPath} onclick="localStorage.setItem('lang', 'en');" class="text-on-surface-variant hover:text-primary transition-colors text-lg font-bold tracking-wide font-headline uppercase" dir="ltr">EN</a>
+            </div>
+
             <a href="/" class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
                 ראשי <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">chevron_left</span>
             </a>
@@ -154,9 +159,10 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
             </a>
             
             <div class="mt-8 px-6">
-                <a href={enPath} onclick="localStorage.setItem('lang', 'en');" dir="ltr" class="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
-                    <span class="material-symbols-outlined text-lg">language</span> 
-                    English
+                <!-- Tech Support Button (Mobile Menu) -->
+                <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-xl">support_agent</span> 
+                    תמיכה טכנית
                 </a>
             </div>
         </div>

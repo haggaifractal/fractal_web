@@ -26,55 +26,130 @@ const clients = [
   { name: "Resner Software", domain: "rasner.co.il" },
   { name: "AVA Medical", domain: "share.google" }
 ];
+
+const col1 = clients.slice(0, 8);
+const col2 = clients.slice(8);
 ---
 
 <section class={`animate-fade-up w-full overflow-hidden py-4 md:py-5 border-y border-outline-variant/10 relative z-20 shadow-sm ${isMobile ? 'bg-surface/70 backdrop-blur-xl mt-4 mb-4' : 'bg-surface mt-10 md:mt-16'}`} style="--delay: 1100ms" dir="ltr">
-    <div class="max-w-7xl mx-auto px-4 mb-4 md:mb-5 text-center" dir={isHe ? 'rtl' : 'ltr'}>
-        <p class="text-sm md:text-base font-bold tracking-widest text-on-surface-variant/50 uppercase">
+    <div class="max-w-7xl mx-auto px-4 text-center" dir={isHe ? 'rtl' : 'ltr'}>
+        <p class={`text-sm md:text-base font-bold tracking-widest text-on-surface-variant/50 uppercase ${isMobile ? 'mb-2' : 'mb-4 md:mb-5'}`}>
             {isHe ? 'חברות מובילות שסומכות עלינו' : 'Trusted by Innovative Companies'}
         </p>
     </div>
     
-    <div class="relative flex overflow-hidden w-full group">
-        <!-- Edge Blur Gradients -->
-        <div class="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
-        
-        <div class="flex animate-marquee group-hover:[animation-play-state:paused] whitespace-nowrap">
-            <!-- First Loop Set -->
-            <div class="flex items-center gap-12 sm:gap-20 px-6 sm:px-10">
-                {clients.map((client) => (
-                    <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 select-none cursor-default">
+    {isMobile ? (
+        <div class="relative overflow-hidden w-full h-[45vh] max-h-[400px] min-h-[300px] mt-2">
+            <!-- Top and Bottom Fade Gradients -->
+            <div class="absolute left-0 right-0 top-0 h-16 bg-gradient-to-b from-surface to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute left-0 right-0 bottom-0 h-16 bg-gradient-to-t from-surface to-transparent z-10 pointer-events-none"></div>
+            
+            <div class="absolute inset-0 flex justify-center gap-4 px-4 w-full max-w-[360px] mx-auto" dir={isHe ? 'rtl' : 'ltr'}>
+                <!-- Column 1 (Right in RTL): Scrolling Down -->
+                <div class="flex flex-col animate-marquee-down gap-4 w-1/2 max-w-[160px]">
+                {col1.map((client) => (
+                    <div class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 select-none w-full">
                         <img 
                             src={`/images/clients/${client.domain}.png`} 
                             alt={client.name}
-                            width="36"
-                            height="36"
-                            class="w-7 h-7 md:w-9 md:h-9 object-contain drop-shadow-sm"
+                            width="40"
+                            height="40"
+                            class="w-8 h-8 object-contain opacity-90"
                             onerror="this.style.display='none';"
                         />
-                        <span class="text-lg md:text-xl font-bold font-headline text-on-surface-variant">{client.name}</span>
+                        <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
+                    </div>
+                ))}
+                <!-- Duplicate for loop -->
+                {col1.map((client) => (
+                    <div class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 select-none w-full">
+                        <img 
+                            src={`/images/clients/${client.domain}.png`} 
+                            alt={client.name}
+                            width="40"
+                            height="40"
+                            class="w-8 h-8 object-contain opacity-90"
+                            onerror="this.style.display='none';"
+                        />
+                        <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
                     </div>
                 ))}
             </div>
-            <!-- Second Loop Set (Duplicate for seamless infinite scroll) -->
-            <div class="flex items-center gap-12 sm:gap-20 px-6 sm:px-10">
-                {clients.map((client) => (
-                    <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 select-none cursor-default">
+
+            <!-- Column 2 (Left in RTL): Scrolling Up -->
+            <div class="flex flex-col animate-marquee-up gap-4 w-1/2 max-w-[160px]">
+                {col2.map((client) => (
+                    <div class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 select-none w-full">
                         <img 
                             src={`/images/clients/${client.domain}.png`} 
                             alt={client.name}
-                            width="36"
-                            height="36"
-                            class="w-7 h-7 md:w-9 md:h-9 object-contain drop-shadow-sm"
+                            width="40"
+                            height="40"
+                            class="w-8 h-8 object-contain opacity-90"
                             onerror="this.style.display='none';"
                         />
-                        <span class="text-lg md:text-xl font-bold font-headline text-on-surface-variant">{client.name}</span>
+                        <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
+                    </div>
+                ))}
+                <!-- Duplicate for loop -->
+                {col2.map((client) => (
+                    <div class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 select-none w-full">
+                        <img 
+                            src={`/images/clients/${client.domain}.png`} 
+                            alt={client.name}
+                            width="40"
+                            height="40"
+                            class="w-8 h-8 object-contain opacity-90"
+                            onerror="this.style.display='none';"
+                        />
+                        <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
                     </div>
                 ))}
             </div>
         </div>
-    </div>
+        </div>
+    ) : (
+        <div class="relative flex overflow-hidden w-full group mt-2">
+            <!-- Edge Blur Gradients -->
+            <div class="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
+            
+            <div class="flex animate-marquee group-hover:[animation-play-state:paused] whitespace-nowrap">
+                <!-- First Loop Set -->
+                <div class="flex items-center gap-12 sm:gap-20 px-6 sm:px-10">
+                    {clients.map((client) => (
+                        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 select-none cursor-default">
+                            <img 
+                                src={`/images/clients/${client.domain}.png`} 
+                                alt={client.name}
+                                width="36"
+                                height="36"
+                                class="w-7 h-7 md:w-9 md:h-9 object-contain drop-shadow-sm"
+                                onerror="this.style.display='none';"
+                            />
+                            <span class="text-lg md:text-xl font-bold font-headline text-on-surface-variant">{client.name}</span>
+                        </div>
+                    ))}
+                </div>
+                <!-- Second Loop Set (Duplicate for seamless infinite scroll) -->
+                <div class="flex items-center gap-12 sm:gap-20 px-6 sm:px-10">
+                    {clients.map((client) => (
+                        <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 select-none cursor-default">
+                            <img 
+                                src={`/images/clients/${client.domain}.png`} 
+                                alt={client.name}
+                                width="36"
+                                height="36"
+                                class="w-7 h-7 md:w-9 md:h-9 object-contain drop-shadow-sm"
+                                onerror="this.style.display='none';"
+                            />
+                            <span class="text-lg md:text-xl font-bold font-headline text-on-surface-variant">{client.name}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )}
 </section>
 
 <style>
@@ -82,12 +157,32 @@ const clients = [
         0% { transform: translateX(0); }
         100% { transform: translateX(-50%); }
     }
+    @keyframes marquee-up {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); }
+    }
+    @keyframes marquee-down {
+        0% { transform: translateY(-50%); }
+        100% { transform: translateY(0); }
+    }
+    
     .animate-marquee {
         animation: marquee 35s linear infinite;
         width: max-content;
     }
+    .animate-marquee-up {
+        animation: marquee-up 25s linear infinite;
+        height: max-content;
+    }
+    .animate-marquee-down {
+        animation: marquee-down 25s linear infinite;
+        height: max-content;
+    }
+    
     /* Hardware acceleration for ultra-smooth scrolling */
-    .animate-marquee > div {
+    .animate-marquee > div,
+    .animate-marquee-up > div,
+    .animate-marquee-down > div {
         transform: translateZ(0);
         will-change: transform;
     }
