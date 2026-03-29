@@ -37,7 +37,6 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
                 if (history.scrollRestoration) {
                     history.scrollRestoration = 'manual';
                 }
-                window.scrollTo(0, 0);
                 var override = localStorage.getItem('lang');
                 var isEn = window.location.pathname.startsWith('/en');
                 var path = window.location.pathname;
@@ -84,7 +83,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
         <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
             <a href="/" class="group flex items-center gap-2 md:gap-3 no-underline outline-none">
                 <!-- User's Custom Uploaded Logo Mark -->
-                <img id="nav-logo" src="/logo-icon.png" alt="Fractal Logo Icon" class="w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -ml-2 -my-2 md:-my-3 lg:-ml-4 lg:-my-6 transition-all duration-300" />
+                <img id="nav-logo" src="/logo-icon.png" alt="Fractal Logo Icon" width="112" height="112" class="w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -ml-2 -my-2 md:-my-3 lg:-ml-4 lg:-my-6 transition-all duration-300" />
 
                 <div class="flex flex-col justify-center">
                     <span class="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight leading-none translate-y-[1px]" style="font-family: Arial, Helvetica, sans-serif;">FRACTAL</span>
