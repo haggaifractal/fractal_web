@@ -1,0 +1,43 @@
+---
+// ScrollToTop.astro
+---
+<button
+    id="btn-back-to-top"
+    aria-label="Back to top"
+    class="fixed bottom-6 end-6 z-50 p-3 rounded-2xl bg-surface/90 backdrop-blur-md border border-outline-variant/20 text-on-surface-variant shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-primary hover:text-white hover:border-primary/50 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,104,87,0.2)] transition-all duration-500 opacity-0 translate-y-10 pointer-events-none flex items-center justify-center group"
+>
+    <!-- We use the material-symbols-outlined icon for up arrow -->
+    <span class="material-symbols-outlined text-[24px] font-bold group-active:scale-90 transition-transform">keyboard_arrow_up</span>
+</button>
+
+<script is:inline>
+    // Safe initialization with Astro ViewTransitions
+    document.addEventListener('astro:page-load', () => {
+        const btn = document.getElementById('btn-back-to-top');
+        if (!btn) return;
+
+        // Show/hide based on scroll position - encapsulated for memory safety
+        const toggleVisibility = () => {
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                btn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            } else {
+                btn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                btn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            }
+        };
+
+        // Ensure we don't attach duplicate scroll listeners between client navigations
+        window.removeEventListener('scroll', window._toggleBackToTop);
+        window._toggleBackToTop = toggleVisibility;
+        window.addEventListener('scroll', window._toggleBackToTop, { passive: true });
+        
+        // Scroll to top smoothly when clicked (using onclick to cleanly override)
+        btn.onclick = () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        
+        // Initial state load
+        toggleVisibility();
+    });
+</script>

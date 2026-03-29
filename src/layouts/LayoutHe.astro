@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import Footer from '../components/Footer.astro';
 import CookieBanner from '../components/CookieBanner.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
 interface Props {
 	title: string;
 	description?: string;
@@ -250,6 +251,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 
     <Footer lang="he" />
     <CookieBanner lang="he" />
+    <ScrollToTop />
 
     <!-- Future Analytics Placeholder (Amendment 13 Privacy by Design) -->
     <script is:inline>
