@@ -12,7 +12,7 @@ const texts = {
         ? 'אנו משתמשים בעוגיות לשפר את חוויית הגלישה, לנתח תנועה ולהתאים תוכן. לחץ/י "אישור" להסכמה למעקב על פי החוק.'
         : 'We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. Click "Accept All" to consent.',
     acceptBtn: isHe ? 'אישור וקבלת הכל' : 'Accept All',
-    declineBtn: isHe ? 'סרב למעקב' : 'Decline',
+    declineBtn: isHe ? 'אפשר הכרחיות בלבד' : 'Essential Only',
     privacyLink: isHe ? '/he/privacy' : '/privacy',
     privacyText: isHe ? 'מדיניות הפרטיות' : 'Privacy Policy',
 };
@@ -30,7 +30,7 @@ const texts = {
         </div>
 
         <div class={`flex items-center justify-center gap-3 w-full xl:w-auto shrink-0 ${isHe ? 'flex-row-reverse' : ''}`}>
-            <button id="cookie-decline" class="flex-1 xl:flex-none px-4 py-2 md:px-5 border border-outline-variant text-on-surface font-bold rounded hover:bg-surface-variant transition-colors text-[13px] md:text-sm whitespace-nowrap">
+            <button id="cookie-decline" class="flex-1 xl:flex-none px-2 py-2 text-on-surface-variant hover:text-on-surface underline decoration-outline-variant hover:decoration-on-surface font-medium transition-colors text-[13px] md:text-sm whitespace-nowrap">
                 {texts.declineBtn}
             </button>
             <button id="cookie-accept" class="flex-1 xl:flex-none px-4 py-2 md:px-5 bg-primary text-white font-bold rounded hover:bg-surface-tint shadow transition-colors text-[13px] md:text-sm whitespace-nowrap">
