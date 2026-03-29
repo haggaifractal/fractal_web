@@ -63,7 +63,7 @@ const texts = {
         <!-- Web3Forms Config -->
         <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
         <input type="hidden" name="subject" value="New Inquiry from Fractal Website" />
-        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" aria-label="Bot check" />
         <input type="hidden" name="redirect" id="form-redirect" value="https://web3forms.com/success" />
         
         <script is:inline>
@@ -103,9 +103,9 @@ const texts = {
             <div class="flex items-center h-5 mt-0.5">
                 <input id="privacy" type="checkbox" required class="w-5 h-5 text-primary bg-surface border-outline-variant rounded focus:ring-primary focus:ring-2 cursor-pointer transition-colors" />
             </div>
-            <div class={`text-sm text-on-surface-variant leading-relaxed ${isHe ? 'text-right' : ''}`}>
+            <label for="privacy" class={`text-sm text-on-surface leading-relaxed block cursor-pointer ${isHe ? 'text-right' : ''}`}>
                 {texts.privacyPrefix} <a href={texts.termsLink} class="text-primary hover:underline font-bold">{texts.termsText}</a>{texts.andText}<a href={texts.privacyLink} class="text-primary hover:underline font-bold">{texts.privacyText}</a>{texts.privacySuffix}
-            </div>
+            </label>
         </div>
         
         <div class="md:col-span-2 flex justify-start mt-4">

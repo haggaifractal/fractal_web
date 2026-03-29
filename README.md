@@ -48,6 +48,16 @@ When developing, you must use the semantic tokens:
 * **Security Headers:** HSTS, XSS protections, and strict `Content-Security-Policy` (CSP) are enforced in production via `public/_headers` (configured for Cloudflare Pages).
 * **Zero-Trust Vectors:** To avoid GDPR and IP leakage conflicts, we do not fetch third-party tracking APIs (e.g., Google Favicons) for imagery. Use local material vectors.
 
+## 🖼️ Managing Client Logos (Privacy by Design)
+
+To strictly comply with privacy laws (GDPR / Amendment 13) and prevent User IP leakage, client logos are **not** loaded dynamically from external servers (e.g., Google's Favicon API) in production. They are hosted locally as static assets within the project.
+
+**How to update or add new client logos:**
+1. Open `scripts/download-logos.cjs`.
+2. Add or modify the client's domain in the `domains` array.
+3. Run `node scripts/download-logos.cjs` in your terminal. This will fetch the latest high-res favicons and save them locally to `public/images/clients/`.
+4. Commit and push the newly downloaded images to Cloudflare to deploy them.
+
 ## 🛡️ Privacy Law (Amendment 13) Compliance & SLA
 
 The site implements "Privacy by Design" to comply with Israel's Privacy Law (Amendment 13):
