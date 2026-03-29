@@ -88,7 +88,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     <nav id="main-nav-he" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 transition-all duration-300 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
         <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
             <a href="/" class="group flex items-center gap-2 md:gap-3 no-underline outline-none">
-                <img id="nav-logo-he" src="/logo-icon.png" alt="Fractal Logo Icon" width="112" height="112" class="w-16 h-16 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -mr-2 -my-2 lg:-mr-4 lg:-my-6 transition-all duration-300" />
+                <img id="nav-logo-he" src="/logo-icon.png" alt="Fractal Logo Icon" width="64" height="64" class="w-16 h-16 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -mr-2 -my-2 lg:-mr-4 lg:-my-6 transition-all duration-300" />
 
                 <div class="flex flex-col justify-center">
                     <span class="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight leading-none translate-y-[1px]" style="font-family: Arial, Helvetica, sans-serif;">FRACTAL</span>
@@ -201,7 +201,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
             // Phase 3: Dynamic Header
             const mainNav = document.getElementById('main-nav-he');
             const navLogo = document.getElementById('nav-logo-he');
-            window.addEventListener('scroll', () => {
+            const checkScroll = () => {
                 if (window.scrollY > 50) {
                     mainNav?.classList.add('bg-white/90', 'shadow-md', 'py-1');
                     mainNav?.classList.remove('bg-white/70', 'py-2', 'md:py-3', 'shadow-[0_20px_40px_rgba(0,104,87,0.06)]');
@@ -211,7 +211,9 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
                     mainNav?.classList.remove('bg-white/90', 'shadow-md', 'py-1');
                     navLogo?.classList.remove('scale-75');
                 }
-            });
+            };
+            window.addEventListener('scroll', checkScroll);
+            checkScroll();
 
             // Phase 2: Scroll Reveal Animations
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.05 };
