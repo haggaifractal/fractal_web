@@ -36,8 +36,12 @@ const texts = {
         <p class="text-on-surface-variant text-lg">{texts.subtitle}</p>
     </div>
     
-    <form method="POST" name={`contact-${lang}`} data-netlify="true" netlify-honeypot="bot-field" class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-lowest p-10 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container">
-        <p class="hidden"><label>Don’t fill this out if you're human: <input name="bot-field" /></label></p>
+    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-lowest p-10 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container relative">
+        <!-- Web3Forms Config -->
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+        <input type="hidden" name="subject" value="New Inquiry from Fractal Website" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+        <input type="hidden" name="redirect" value="https://web3forms.com/success" />
         <div class="flex flex-col gap-2">
             <label class="text-sm font-bold text-primary tracking-wide" for="firstname">{texts.firstNameLabel}</label>
             <input type="text" name="firstname" id="firstname" autocomplete="given-name" class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : ''}`} placeholder={texts.firstNamePlaceholder} />

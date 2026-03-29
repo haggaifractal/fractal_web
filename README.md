@@ -6,7 +6,7 @@ A modern, highly performant, and secure bilingual (English/Hebrew) B2B website b
 * **Framework:** [Astro](https://astro.build/) (v6)
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/) (v3.4)
 * **Runtime:** Node.js (>=22.12.0)
-* **Hosting / Deployment:** Netlify
+* **Hosting / Deployment:** Cloudflare Pages
 
 ## 🛠️ Getting Started
 
@@ -44,13 +44,21 @@ When developing, you must use the semantic tokens:
 
 ## 🔒 Security & Forms
 
-* **Netlify Forms:** The `ContactSection.astro` form uses Netlify's native form handling. It includes a native honeypot field (`bot-field`) to prevent spam. Do not remove the `name` attributes from inputs, as they are required for data mapping.
-* **Security Headers:** HSTS, XSS protections, and strict `Content-Security-Policy` (CSP) are enforced in production via `netlify.toml`.
+* **Web3Forms:** The `ContactSection.astro` form uses Web3Forms to directly email inquiries to `Office@fractal.co.il` without storing data in an intermediate cloud database. Make sure the valid Access Key is implemented.
+* **Security Headers:** HSTS, XSS protections, and strict `Content-Security-Policy` (CSP) are enforced in production via `public/_headers` (configured for Cloudflare Pages).
 * **Zero-Trust Vectors:** To avoid GDPR and IP leakage conflicts, we do not fetch third-party tracking APIs (e.g., Google Favicons) for imagery. Use local material vectors.
+
+## 🛡️ Privacy Law (Amendment 13) Compliance & SLA
+
+The site implements "Privacy by Design" to comply with Israel's Privacy Law (Amendment 13):
+1. **Active Cookie Consent:** A UI banner (`CookieBanner.astro`) ensures that tracking scripts (e.g., Google Analytics, Meta Pixels) are forcefully blocked and injected **only** if the user explicitly clicks "Accept All", which sets `cookie-consent: granted` in `localStorage`.
+2. **Right to be Forgotten (30-Day SLA):** 
+   * **SOP for IT Administrator:** Since form submissions are emailed directly to `Office@fractal.co.il`, the administrator must configure a **Microsoft Outlook Rule** that automatically hard-deletes any incoming emails with the subject "New Inquiry from Fractal Website" after **30 to 60 days**.
+   * This guarantees auto-compliance with data retention rules strictly within the SLA without requiring a custom backend deletion job.
 
 ## 📦 Deployment
 
-The project is configured for seamless deployment on **Netlify**.
+The project is configured for seamless deployment on **Cloudflare Pages**.
 Pushing to the `main` branch will automatically trigger a build (`npm run build`) and deploy the `dist/` directory.
 
 *Note: NPM overrides are utilized in `package.json` to safely bypass peer dependency conflicts with `@astrojs/tailwind` without ignoring critical security checks.*

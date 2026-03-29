@@ -2,6 +2,7 @@
 // src/layouts/Layout.astro
 import { ClientRouter } from 'astro:transitions';
 import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 
 export interface Props {
 	title: string;
@@ -145,6 +146,21 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     </main>
 
     <Footer lang="en" />
+    <CookieBanner lang="en" />
+
+    <!-- Future Analytics Placeholder (Amendment 13 Privacy by Design) -->
+    <script>
+        function loadAnalytics() {
+            // TODO: Inject actual Google Analytics or Meta Pixel tags here
+            console.log("Analytics trackers allowed (consent granted).");
+        }
+        
+        if (localStorage.getItem('cookie-consent') === 'granted') {
+            loadAnalytics();
+        } else {
+            window.addEventListener('cookie-consent-granted', loadAnalytics);
+        }
+    </script>
 
     <!-- Open Source Accessibility Widget -->
     <script src="https://cdn.jsdelivr.net/npm/accessibility/dist/accessibility.min.js" integrity="sha384-mliRj39BAe04hpb2qxTMIO8RKvBodPhsc+KkTR94u+uqs9wO+cWpe3fKjWItHi3N" crossorigin="anonymous"></script>
