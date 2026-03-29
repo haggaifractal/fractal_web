@@ -30,30 +30,7 @@ const texts = {
 };
 ---
 
-<section id="contact" class={`max-w-4xl mx-auto px-8 py-24 scroll-mt-24 mt-8 contact-anim-wrap ${isHe ? 'text-right' : ''}`} dir={isHe ? 'rtl' : 'ltr'}>
-    <script is:inline>
-        (function() {
-            var el = document.currentScript.parentElement;
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(40px)';
-            el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-            
-            var check = function() {
-                var rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 50) {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                    window.removeEventListener('scroll', check);
-                }
-            };
-            window.addEventListener('scroll', check);
-            setTimeout(check, 100);
-            setTimeout(function() {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, 1500); // Bulletproof fallback
-        })();
-    </script>
+<section id="contact" class={`reveal-on-scroll max-w-4xl mx-auto px-8 py-24 scroll-mt-24 mt-8 contact-anim-wrap ${isHe ? 'text-right' : ''}`} dir={isHe ? 'rtl' : 'ltr'}>
     <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-bold text-on-surface mb-4 font-headline">{texts.title}</h2>
         <p class="text-on-surface-variant text-lg">{texts.subtitle}</p>
@@ -63,7 +40,7 @@ const texts = {
         <!-- Web3Forms Config -->
         <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
         <input type="hidden" name="subject" value="New Inquiry from Fractal Website" />
-        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" aria-label="Bot check" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
         <input type="hidden" name="redirect" id="form-redirect" value="https://web3forms.com/success" />
         
         <script is:inline>
@@ -103,9 +80,9 @@ const texts = {
             <div class="flex items-center h-5 mt-0.5">
                 <input id="privacy" type="checkbox" required class="w-5 h-5 text-primary bg-surface border-outline-variant rounded focus:ring-primary focus:ring-2 cursor-pointer transition-colors" />
             </div>
-            <label for="privacy" class={`text-sm text-on-surface leading-relaxed block cursor-pointer ${isHe ? 'text-right' : ''}`}>
+            <div class={`text-sm text-on-surface-variant leading-relaxed ${isHe ? 'text-right' : ''}`}>
                 {texts.privacyPrefix} <a href={texts.termsLink} class="text-primary hover:underline font-bold">{texts.termsText}</a>{texts.andText}<a href={texts.privacyLink} class="text-primary hover:underline font-bold">{texts.privacyText}</a>{texts.privacySuffix}
-            </label>
+            </div>
         </div>
         
         <div class="md:col-span-2 flex justify-start mt-4">
