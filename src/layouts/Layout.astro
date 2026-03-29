@@ -30,6 +30,19 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImageUrl} />
     <ClientRouter />
+
+    <script is:inline>
+        (function() {
+            try {
+                var override = localStorage.getItem('lang');
+                var isHe = window.location.pathname.startsWith('/he');
+                var path = window.location.pathname;
+                if (!isHe && (override === 'he' || (!override && navigator.language.startsWith('he')))) {
+                    window.location.replace('/he' + (path === '/' ? '' : path) + window.location.search + window.location.hash);
+                }
+            } catch (e) {}
+        })();
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <style is:global>
@@ -38,19 +51,33 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
             100% { opacity: 1; transform: translateY(0); }
         }
         .animate-in { animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: var(--delay, 0ms);
+        }
         
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
         .bento-card { background-color: #ffffff; border-radius: 1.5rem; transition: all 0.3s ease; }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
-    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 transition-all duration-300 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
         <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
             <a href="/" class="group flex items-center gap-2 md:gap-3 no-underline outline-none">
                 <!-- User's Custom Uploaded Logo Mark -->
-                <img src="/logo-icon.png" alt="Fractal Logo Icon" class="w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -ml-2 -my-2 md:-my-3 lg:-ml-4 lg:-my-6 transition-all duration-300" />
+                <img id="nav-logo" src="/logo-icon.png" alt="Fractal Logo Icon" class="w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -ml-2 -my-2 md:-my-3 lg:-ml-4 lg:-my-6 transition-all duration-300" />
 
                 <div class="flex flex-col justify-center">
                     <span class="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight leading-none translate-y-[1px]" style="font-family: Arial, Helvetica, sans-serif;">FRACTAL</span>
@@ -65,9 +92,9 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
                 <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/services">Our Services</a>
                 <a class="whitespace-nowrap shrink-0 text-emerald-900/60 hover:text-emerald-900 transition-all duration-300" href="/customers">Our Customers</a>
                 
-                <!-- Language Toggle -->
-                <div class="h-4 w-px bg-emerald-900/20 mx-1 shrink-0"></div>
-                <a class="text-emerald-900 font-bold hover:text-emerald-700 transition-all duration-300 text-sm tracking-wide flex items-center pr-1 pl-4" href={hePath} dir="rtl">עברית</a>
+                <!-- Language Switcher (EN -> HE) -->
+                <div class="h-4 w-px bg-outline-variant/50 mx-1 shrink-0"></div>
+                <a href={hePath} onclick="localStorage.setItem('lang', 'he');" class="text-primary font-bold hover:text-primary-fixed transition-colors text-sm tracking-wide flex items-center gap-1 font-headline" dir="rtl">עברית</a>
             </div>
         </div>
         <div class="flex items-center gap-2 sm:gap-4 relative z-10">
@@ -100,7 +127,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
             </a>
             
             <div class="mt-8 px-6">
-                <a href={hePath} dir="rtl" class="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                <a href={hePath} onclick="localStorage.setItem('lang', 'he');" dir="rtl" class="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
                     <span class="material-symbols-outlined text-lg">language</span> 
                     עברית
                 </a>
@@ -138,10 +165,39 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
                     });
                 });
             }
+
+            // Phase 3: Dynamic Header
+            const mainNav = document.getElementById('main-nav');
+            const navLogo = document.getElementById('nav-logo');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    mainNav?.classList.add('bg-white/90', 'shadow-md', 'py-1');
+                    mainNav?.classList.remove('bg-white/70', 'py-2', 'md:py-3', 'shadow-[0_20px_40px_rgba(0,104,87,0.06)]');
+                    navLogo?.classList.add('scale-75'); 
+                } else {
+                    mainNav?.classList.add('bg-white/70', 'py-2', 'md:py-3', 'shadow-[0_20px_40px_rgba(0,104,87,0.06)]');
+                    mainNav?.classList.remove('bg-white/90', 'shadow-md', 'py-1');
+                    navLogo?.classList.remove('scale-75');
+                }
+            });
+
+            // Phase 2: Scroll Reveal Animations
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+            
         });
     </script>
 
-    <main class="flex-grow pt-24 animate-in relative z-0">
+    <main class="flex-grow pt-24 relative z-0">
         <slot />
     </main>
 

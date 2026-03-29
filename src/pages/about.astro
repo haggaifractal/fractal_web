@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="About Us">
     <!-- Hero / Intro -->
-    <section class="relative pt-36 pb-24 bg-[#001a15] overflow-hidden text-center px-8 -mt-24">
+    <section class="animate-fade-up relative pt-36 pb-24 bg-[#001a15] overflow-hidden text-center px-8 -mt-24" style="--delay: 100ms">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#001a15]/80 to-[#001a15]"></div>
         <div class="relative z-10 max-w-4xl mx-auto mt-12">
             <h1 class="text-5xl md:text-7xl font-bold font-headline mb-8 text-white tracking-tight">About Us</h1>
@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="h-16 bg-gradient-to-b from-[#001a15] to-surface"></div>
 
     <!-- Main Content -->
-    <section class="max-w-6xl mx-auto px-8 py-24 text-left">
+    <section class="reveal-on-scroll max-w-6xl mx-auto px-8 py-24 text-left">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
             
             <!-- Technical Service Card -->
@@ -54,7 +54,7 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- Testimonials -->
-    <section class="bg-[#001712] py-32 px-8 mt-12 rounded-t-[3rem] relative overflow-hidden">
+    <section class="reveal-on-scroll bg-[#001712] py-32 px-8 mt-12 rounded-t-[3rem] relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('https://transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <h2 class="text-4xl md:text-5xl font-bold text-white mb-16 font-headline">Testimonials</h2>
