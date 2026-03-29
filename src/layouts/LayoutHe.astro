@@ -88,19 +88,19 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 <body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
     <nav id="main-nav-he" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 transition-all duration-300 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
         <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
-            <a href="/" class="group flex items-center gap-2 md:gap-3 no-underline outline-none">
-                <img id="nav-logo-he" src="/logo-icon.png" alt="Fractal Logo Icon" width="64" height="64" class="w-16 h-16 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -mr-2 -my-2 lg:-mr-4 lg:-my-6 transition-all duration-300" />
+            <a href="/" class="group flex items-center gap-1.5 sm:gap-2 md:gap-3 no-underline outline-none">
+                <img id="nav-logo-he" src="/logo-icon.png" alt="Fractal Logo Icon" width="64" height="64" class="w-12 h-12 sm:w-16 sm:h-16 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -mr-2 -my-2 lg:-mr-4 lg:-my-6 transition-all duration-300" />
 
-                <div class="flex flex-col justify-center items-end" dir="rtl">
+                <div class="flex flex-col justify-center items-end shrink-0" dir="rtl">
                     <!-- Top Row: פרקטל ◆ FRACTAL -->
-                    <div class="flex items-center gap-1.5 md:gap-2">
-                        <span class="text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-bold tracking-tight leading-none text-primary font-headline">פרקטל</span>
-                        <span class="text-secondary/70 text-sm md:text-base leading-none translate-y-[1px]">◆</span>
-                        <span class="text-[1.2rem] md:text-[1.35rem] lg:text-[1.55rem] font-bold tracking-tight leading-none text-primary font-headline">FRACTAL</span>
+                    <div class="flex items-center gap-1 sm:gap-1.5 md:gap-2">
+                        <span class="text-[1.15rem] sm:text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-bold tracking-tight leading-none text-primary font-headline">פרקטל</span>
+                        <span class="text-secondary/70 text-[0.6rem] sm:text-sm md:text-base leading-none translate-y-[1px]">◆</span>
+                        <span class="text-[0.95rem] sm:text-[1.2rem] md:text-[1.35rem] lg:text-[1.55rem] font-bold tracking-tight leading-none text-primary font-headline">FRACTAL</span>
                     </div>
                     
                     <!-- Subtitle -->
-                    <div class="w-full flex justify-between items-center text-[0.6rem] md:text-[0.65rem] lg:text-[0.75rem] font-bold text-slate-600/90 whitespace-nowrap leading-none tracking-[0.1em] md:tracking-[0.15em] mt-1 font-headline">
+                    <div class="w-full flex justify-between items-center text-[0.45rem] sm:text-[0.6rem] md:text-[0.65rem] lg:text-[0.75rem] font-bold text-slate-600/90 whitespace-nowrap leading-none tracking-[0.05em] md:tracking-[0.15em] mt-1 font-headline">
                         מיחשוב בגישה עסקית
                     </div>
                 </div>
