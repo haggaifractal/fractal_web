@@ -9,44 +9,10 @@ export interface Props {
 const { lang = 'en' } = Astro.props;
 const isHe = lang === 'he';
 
-const content = {
-    he: {
-        pageTitle: "השירותים שלנו",
-        heroTitle: "סל המוצרים והמומחיות שלנו",
-        heroSubtitle: "אנו מחזיקים במומחיות-קצה בהקמת רשתות תקשורת, אבטחת מידע עסקית, ליווי ותמיכה מלאה במערכות תוכנה ואמצעים טכנולוגיים לתאגידים, חברות ביטוח ומוסדות רפואיים בישראל.",
-        s1Title: "תכנון והקמת רשתות",
-        s1Desc: "אנו נפגשים ופועלים איתך ראש בראש כדי להבין לעומק את תכנון וארכיטקטורת הרשת הנוכחית שלך ואת מהות הפעילות העסקית הרלוונטית, בכדי לתפור ולייצב פתרון תשתית שיספק את האיזון המושלם שבין ביצועים חומריים ועלויות שוטפות.",
-        s2Title: "פתרונות אבטחת מידע",
-        s2Desc: "יישום פתרונות אבטחת מידע גמישים הנתפרים עבור ארגונך שיפחיתו סיכוני IT באופן משמעותי, ישמרו על רציפות טכנולוגית, ויגדילו את רמת היציבות עבור התפעול השוטף של פעילות העסק שלך.",
-        s3Title: "תמיכת מערכות חכמות",
-        s3Desc: "מחלקת ה-IT של פרקטל מספקת שירותי חבילות ותוכניות תחזוקה תפורות אישית בעולמות ניהול ותפעול מערכות (Software Management), טיפול בשירותי תוכנה מבוססי-דרישה (Request-Based Services) ותמיכה צמודה בפתרונות ואפליקציות צד שלישי המופעלות לשירות הארגון.",
-        s4Title: "תחזוקת מערכות אבטחה",
-        s4Desc: "המומחים שלנו יעריכו את עוצמת האבטחה ברשת התקשורת הארגונית שלך וימליצו על ארכיטקטורה מותאמת אישית לפתרון איכותי שמספק אבטחת מידע גורפת ואמינה שמעניקה לעסק הגנה מערכתית מוחלטת לשמירת המידע העסקי שלך באפס סיכונים.",
-        s5Title: "פתרונות תקשורת",
-        s5Desc: "בין אם אתם צריכים שותף שירותי רשת שיודע איך לבנות פתרון רשת אמין, לבין אם מישהו שישפר את הרשת הקיימת שלכם - לפרקטל יש את המומחיות לקחת אתכם לשם.",
-        s6Title: "צוותי תמיכה וייעוץ",
-        s6Desc: "יש לנו טכנאי מחשבים מומחים בצוות המציעים שירות מהיר, אדיב ומקצועי. בעזרת מערכות השליטה מרחוק שלנו, אנו יכולים לפתור תקלות רבות ישירות מהמוקד שלנו, במהירות ויעילות ללא צורך בהמתנה להגעה פיזית לבית העסק שלכם."
-    },
-    en: {
-        pageTitle: "Our Services",
-        heroTitle: "Our Services",
-        heroSubtitle: "We build dedicated systems tailored to the client's unique needs. Our service includes a wide range of Activities: Establishment and maintenance of computer networks, information security solutions, software maintenance and maintenance CAD, handling and maintenance of security focal software, etc.",
-        s1Title: "Network Design",
-        s1Desc: "We’ll meet with you to get a full understanding of your current network design and business operations to find a solution that strikes the right mix of performance and value.",
-        s2Title: "Data Security Solutions",
-        s2Desc: "Use flexible data security solutions that will decrease IT risks and increase continuity and stability for your business operations.",
-        s3Title: "Professional Software Maintenance",
-        s3Desc: "Fractal Provides Maintenance Services in Software Management , Request Based Software Services, Maintenance Services For Third Party Software",
-        s4Title: "Security Company Solution Maintenance",
-        s4Desc: "Our specialists will assess your network and recommend a customized solution that delivers reliable information security and gives your business the freedom to work safely and efficiently.",
-        s5Title: "Network Solutions",
-        s5Desc: "Whether you need a network service partner that knows how to build a reliable network solution, or need someone to improve your existing network, FRACTAL has the expertise to get you there.",
-        s6Title: "Support Consulting",
-        s6Desc: "We have certified computer technicians on staff to offer fast, friendly, expert service. With our remote access tools, we can often fix your problem right from our office – no need to travel to your place of business"
-    }
-};
+import enLocales from '../locales/en.json';
+import heLocales from '../locales/he.json';
 
-const t = content[lang];
+const t = isHe ? heLocales.ServicesTemplate : enLocales.ServicesTemplate;
 ---
 <Layout title={t.pageTitle} lang={lang}>
     <section class="animate-fade-up pt-36 pb-16 px-8 max-w-7xl mx-auto -mt-24 text-center" style="--delay: 100ms">

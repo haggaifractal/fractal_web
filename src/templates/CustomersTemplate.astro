@@ -15,22 +15,10 @@ const clients = clientsData.map(c => ({
   url: lang === 'he' ? c.urlHe : c.urlEn
 }));
 
-const content = {
-    he: {
-        pageTitle: "לקוחותינו",
-        headingPre: "קצת מהלקוחות",
-        headingHighlight: "המובילים שלנו...",
-        logoAltPrefix: "לוגו"
-    },
-    en: {
-        pageTitle: "Our Customers",
-        headingPre: "A few of our",
-        headingHighlight: "clients...",
-        logoAltPrefix: "logo of"
-    }
-};
+import enLocales from '../locales/en.json';
+import heLocales from '../locales/he.json';
 
-const t = content[lang];
+const t = lang === 'he' ? heLocales.CustomersTemplate : enLocales.CustomersTemplate;
 ---
 <Layout title={t.pageTitle} lang={lang}>
     <section class="animate-fade-up pt-36 pb-16 px-8 max-w-7xl mx-auto -mt-24 text-center" style="--delay: 100ms">

@@ -9,56 +9,10 @@ export interface Props {
 const { lang = 'en' } = Astro.props;
 const isHe = lang === 'he';
 
-const content = {
-    he: {
-        pageTitle: "אודותינו",
-        heroTitle: "קצת עלינו",
-        heroSubtitle: "פרקטל מתמחה במתן פתרונות מחשוב ושירותי IT תומכים ללקוחות עסקיים ותעשייתיים שפועלים בקצבים גבוהים.",
-        card1Text: "אנו בונים ומתחזקים מערכות ייעודיות המותאמות לדרישות ולזרימת העבודה הייחודית של כל לקוח. תחומי הפעילות שלנו כוללים: הקמה ותחזוקה שוטפת של רשתות מחשבים, פתרונות אבטחת מידע, תחזוקת תוכנות בסביבת שרת מאובטחת, טיפול בתוכנות שרטוט ותכנון (כדוגמת Auto CAD), ושירות צמוד למערכות תוכנה של מוקדי ביטחון ואבטחה.",
-        yearsNum: "20+",
-        yearsLabel: "שנות ניסיון",
-        yearsText: "עם למעלה מ-20 שנות ניסיון בהקמת מאות סוגים שונים של רשתות מחשבים אצל חברות ענק מוסדיות, הסטנדרט המקצועי הבלתי-מתפשר שלנו מבטיח התקנה יציבה ושירות אמין.",
-        experienceText: "אחיזת ידע עמוקה בטכנולוגיות התקשורת החדישות ביותר ויחס אישי מבטיחים התאמה מושלמת של המערכת, התשתיות ומעטפת האבטחה לצרכי העסק שלך.",
-        timeline: [
-            { year: '2002', title: 'הקמת פרקטל', desc: 'התחלנו את המסע כחברת סיסטם וייעוץ ממוקדת.' },
-            { year: '2010', title: 'התרחבות', desc: 'הקמנו מאות רשתות מעשיות עבור גופים מוסדיים.' },
-            { year: '2018', title: 'שותפויות ענק', desc: 'ספקי IT רשמיים לארגוני ענק ומערכות רפואה.' },
-            { year: 'כיום', title: 'פסגת הטכנולוגיה', desc: 'שירות ואמינות ללא פשרות לחברות המורכבות ביותר.' }
-        ],
-        testimonialsTitle: "לקוחותינו ממליצים",
-        testimonialsSubtitle: "מה אומרות החברות והתאגידים המובילים בישראל, שעובדים איתנו כבר עשרות שנים.",
-        testimonials: [
-            { quote: "לחברת פרקטל: תודה רבה על התמיכה והשירות המקצועי, האמין והמסור שהענקתם לנו לאורך הדרך. אנו ממליצים בחום לכל חברה לעבוד איתכם, תרגישו חופשי להשתמש בנו כממליצים רשמיים.", author: "מוקד אמון", role: "לקוח אבטחה" },
-            { quote: "צוות פרקטל היקר, תודה מקרב לב על התמיכה הרציפה והטיפול המקצועי שאתם מספקים לנו באמינות ובמסירות. אנחנו ממליצים בחום, ספק אסטרטגי מהמעלה הראשונה.", author: "T&M Protection Resources", role: "" },
-            { quote: "זכינו לשירות ללא דופי, מהיר וממוקד מחברת IT שבאמת מבינה עסקית, גם מעבר לטכנולוגיה.", author: "ל.כ. בע\"מ", role: "" }
-        ]
-    },
-    en: {
-        pageTitle: "About Us",
-        heroTitle: "About Us",
-        heroSubtitle: "Fractal specializes in providing computing and IT support solutions to business and industrial customers.",
-        card1Text: "We build dedicated systems tailored to the client's unique needs. The service includes: Establishment and maintenance of computer networks, information security solutions, software & Auto CAD maintenance, Handling and maintenance of security focal software, etc.",
-        yearsNum: "20+",
-        yearsLabel: "Years of Operations",
-        yearsText: "We have been working for over 20 years in establishing computerized systems tailored to customer needs and in service provision And IT support.",
-        experienceText: "The company's experience in establishing hundreds of different types of computer networks at Business and industrial customers, the professional care and control of the most advanced technologies In computer and computer communications, We ensure reliable installation and service and optimal fit Of the system for your needs.",
-        timeline: [
-            { year: '2002', title: 'Fractal Founded', desc: 'We started our journey as a focused system and consulting firm.' },
-            { year: '2010', title: 'Expansion', desc: 'We established hundreds of practical networks for institutional bodies.' },
-            { year: '2018', title: 'Giant Partnerships', desc: 'Official IT providers for large enterprises and medical systems.' },
-            { year: 'Today', title: 'Technology Peak', desc: 'Uncompromising service and reliability for the most complex companies.' }
-        ],
-        testimonialsTitle: "Client Testimonials",
-        testimonialsSubtitle: "What Israel's leading companies and corporations, who have been working with us for decades, have to say.",
-        testimonials: [
-            { quote: "To Fractal Company: Thank you very much for the support and the professional, reliable, and dedicated service you have provided us along the way. We highly recommend any company to work with you; feel free to use us as official references.", author: "Moked Emun", role: "Security Client" },
-            { quote: "Dear Fractal team, thank you from the bottom of our hearts for the continuous support and professional care you securely and devotedly provide us. We highly recommend you, a first-class strategic supplier.", author: "T&M Protection Resources", role: "" },
-            { quote: "We received flawless, fast, and focused service from an IT company that truly understands business, even beyond technology.", author: "L.K. Ltd", role: "" }
-        ]
-    }
-};
+import enLocales from '../locales/en.json';
+import heLocales from '../locales/he.json';
 
-const t = content[lang];
+const t = isHe ? heLocales.AboutTemplate : enLocales.AboutTemplate;
 ---
 <Layout title={t.pageTitle} lang={lang}>
     <!-- Hero / Intro -->

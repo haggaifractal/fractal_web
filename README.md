@@ -25,12 +25,11 @@ To run this project locally, ensure you have Node.js 22+ installed.
 
 ## 🏗️ Architecture & Bilingual Routing (i18n)
 
-This project strictly adheres to a modular, dual-language architecture. **Any structural changes must be applied to both languages.**
+This project strictly adheres to a modular, dual-language architecture featuring **DRY (Don't Repeat Yourself)** principles.
 
-* **English (LTR):** Located at the project root (`src/pages/index.astro`, `services.astro`, etc.).
-  * **Layout Wrapper:** Must use `<Layout>` from `src/layouts/Layout.astro`.
-* **Hebrew (RTL):** Located inside the `/he/` subdirectory (`src/pages/he/index.astro`).
-  * **Layout Wrapper:** Must use `<Layout>` from `src/layouts/LayoutHe.astro`. This layout forces `dir="rtl"` and includes specific right-to-left cascading logic.
+* **Hebrew (RTL):** Located at the project root (`src/pages/index.astro`, `services.astro`, etc.).
+* **English (LTR):** Located inside the `/en/` subdirectory (`src/pages/en/index.astro`).
+* **Layout Wrapper & Templates:** Both languages share a single layout (`src/layouts/Layout.astro`) which automatically manages the document direction (`dir="rtl"` or `dir="ltr"`) based on the `lang` prop. Page structures are consolidated into `/src/templates` utilizing external locale JSON files (`/src/locales`).
 
 ## 🎨 Design System & Styling Rules
 

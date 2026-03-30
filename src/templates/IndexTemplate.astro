@@ -11,34 +11,10 @@ export interface Props {
 const { lang = 'en' } = Astro.props;
 const isHe = lang === 'he';
 
-const content = {
-    he: {
-        pageTitle: "ראשי",
-        badge: "20+ שנות מומחיות טכנולוגית",
-        title: "טכנולוגיה חכמה לעסקים",
-        desc: "פרקטל מתמחה במתן פתרונות מחשוב מלאים, שירות ותמיכה טכנית מתקדמת ללקוחות עסקיים ותעשייתיים השואפים למצוינות.",
-        cta1: "צפה בשירותים",
-        cta1Url: "/services",
-        cta2: "למידע נוסף אודותינו",
-        cta2Url: "/about",
-        mottoTitle: "המוטו שלנו",
-        mottoText: 'המוטו של פרקטל הוא <strong class="text-primary font-bold">תפיסת שירות כוללת (מקיפה)</strong> המורכבת מאפיון והגדרת הצרכים, דרך יישומם הטכנולוגי (חומרה, תוכנה) ועד לתחזוקה שוטפת במקביל לפעילות ליבת העסק.'
-    },
-    en: {
-        pageTitle: "Home",
-        badge: "20+ Years of Technology Expertise",
-        title: 'Technology <br/><span class="text-primary">Business-Wise</span>',
-        desc: "Fractal specializes in providing IT consulting and support solutions to business and industrial customers who expect excellence.",
-        cta1: "View Services",
-        cta1Url: "/en/services",
-        cta2: "Learn More About Us",
-        cta2Url: "/en/about",
-        mottoTitle: "What Is Our Motto?",
-        mottoText: "Fractal's motto is a <strong class=\"text-primary font-bold\">comprehensive customer service concept</strong> that includes defining its needs and their implementation in hardware, software, and system support alongside the core business."
-    }
-};
+import enLocales from '../locales/en.json';
+import heLocales from '../locales/he.json';
 
-const t = content[lang];
+const t = isHe ? heLocales.IndexTemplate : enLocales.IndexTemplate;
 ---
 <Layout title={t.pageTitle} lang={lang}>
     <div class="relative w-full overflow-hidden">

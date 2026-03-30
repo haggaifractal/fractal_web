@@ -1,0 +1,94 @@
+{
+  "ContactSection": {
+    "title": "Contact Us",
+    "subtitle": "Send us a message and we'll get back to you shortly.",
+    "firstNameLabel": "* First name",
+    "firstNamePlaceholder": "Enter your first name",
+    "emailLabel": "* Work Email",
+    "emailPlaceholder": "name@company.com",
+    "phoneLabel": "Phone / Mobile (Optional)",
+    "phonePlaceholder": "+972 50-000-0000",
+    "subjectLabel": "Inquiry Subject (Optional)",
+    "subjectPlaceholder": "e.g., IT Support, Cloud Migration",
+    "messageLabel": "* Message Details",
+    "messagePlaceholder": "Describe your technical requirements...",
+    "privacyPrefix": "I agree to the ",
+    "termsLink": "/en/terms",
+    "termsText": "Terms of Use",
+    "andText": " and ",
+    "privacyLink": "/en/privacy",
+    "privacyText": "Privacy Policy",
+    "privacySuffix": ", and successfully consent to my inquiry data being mapped securely to your system.",
+    "submitBtn": "Submit Request"
+  },
+  "IndexTemplate": {
+    "pageTitle": "Home",
+    "badge": "20+ Years of Technology Expertise",
+    "title": "Technology <br/><span class=\"text-primary\">Business-Wise</span>",
+    "desc": "Fractal specializes in providing IT consulting and support solutions to business and industrial customers who expect excellence.",
+    "cta1": "View Services",
+    "cta1Url": "/en/services",
+    "cta2": "Learn More About Us",
+    "cta2Url": "/en/about",
+    "mottoTitle": "What Is Our Motto?",
+    "mottoText": "Fractal's motto is a <strong class=\"text-primary font-bold\">comprehensive customer service concept</strong> that includes defining its needs and their implementation in hardware, software, and system support alongside the core business."
+  },
+  "AboutTemplate": {
+    "pageTitle": "About Us",
+    "heroTitle": "About Us",
+    "heroSubtitle": "Fractal specializes in providing computing and IT support solutions to business and industrial customers.",
+    "card1Text": "We build dedicated systems tailored to the client's unique needs. The service includes: Establishment and maintenance of computer networks, information security solutions, software & Auto CAD maintenance, Handling and maintenance of security focal software, etc.",
+    "yearsNum": "20+",
+    "yearsLabel": "Years of Operations",
+    "yearsText": "We have been working for over 20 years in establishing computerized systems tailored to customer needs and in service provision And IT support.",
+    "experienceText": "The company's experience in establishing hundreds of different types of computer networks at Business and industrial customers, the professional care and control of the most advanced technologies In computer and computer communications, We ensure reliable installation and service and optimal fit Of the system for your needs.",
+    "timeline": [
+      { "year": "2002", "title": "Fractal Founded", "desc": "We started our journey as a focused system and consulting firm." },
+      { "year": "2010", "title": "Expansion", "desc": "We established hundreds of practical networks for institutional bodies." },
+      { "year": "2018", "title": "Giant Partnerships", "desc": "Official IT providers for large enterprises and medical systems." },
+      { "year": "Today", "title": "Technology Peak", "desc": "Uncompromising service and reliability for the most complex companies." }
+    ],
+    "testimonialsTitle": "Client Testimonials",
+    "testimonialsSubtitle": "What Israel's leading companies and corporations, who have been working with us for decades, have to say.",
+    "testimonials": [
+      { "quote": "To Fractal Company: Thank you very much for the support and the professional, reliable, and dedicated service you have provided us along the way. We highly recommend any company to work with you; feel free to use us as official references.", "author": "Moked Emun", "role": "Security Client" },
+      { "quote": "Dear Fractal team, thank you from the bottom of our hearts for the continuous support and professional care you securely and devotedly provide us. We highly recommend you, a first-class strategic supplier.", "author": "T&M Protection Resources", "role": "" },
+      { "quote": "We received flawless, fast, and focused service from an IT company that truly understands business, even beyond technology.", "author": "L.K. Ltd", "role": "" }
+    ]
+  },
+  "ServicesTemplate": {
+    "pageTitle": "Our Services",
+    "heroTitle": "Our Services",
+    "heroSubtitle": "We build dedicated systems tailored to the client's unique needs. Our service includes a wide range of Activities: Establishment and maintenance of computer networks, information security solutions, software maintenance and maintenance CAD, handling and maintenance of security focal software, etc.",
+    "s1Title": "Network Design",
+    "s1Desc": "We’ll meet with you to get a full understanding of your current network design and business operations to find a solution that strikes the right mix of performance and value.",
+    "s2Title": "Data Security Solutions",
+    "s2Desc": "Use flexible data security solutions that will decrease IT risks and increase continuity and stability for your business operations.",
+    "s3Title": "Professional Software Maintenance",
+    "s3Desc": "Fractal Provides Maintenance Services in Software Management , Request Based Software Services, Maintenance Services For Third Party Software",
+    "s4Title": "Security Company Solution Maintenance",
+    "s4Desc": "Our specialists will assess your network and recommend a customized solution that delivers reliable information security and gives your business the freedom to work safely and efficiently.",
+    "s5Title": "Network Solutions",
+    "s5Desc": "Whether you need a network service partner that knows how to build a reliable network solution, or need someone to improve your existing network, FRACTAL has the expertise to get you there.",
+    "s6Title": "Support Consulting",
+    "s6Desc": "We have certified computer technicians on staff to offer fast, friendly, expert service. With our remote access tools, we can often fix your problem right from our office – no need to travel to your place of business"
+  },
+  "CustomersTemplate": {
+    "pageTitle": "Our Customers",
+    "headingPre": "A few of our",
+    "headingHighlight": "clients...",
+    "logoAltPrefix": "logo of"
+  },
+  "SuccessTemplate": {
+    "pageTitle": "Message Sent Successfully",
+    "title": "Thank You for Reaching Out!",
+    "msg1": "Your message has been successfully delivered.",
+    "msg2": "The <strong class=\"text-primary\">Fractal</strong> team has received your inquiry and will get back to you shortly.",
+    "backBtn": "Back to Home",
+    "backUrl": "/en/",
+    "iconArrow": "arrow_back"
+  },
+  "ClientsMarquee": {
+    "trustedBy": "Trusted by Innovative Companies"
+  }
+}

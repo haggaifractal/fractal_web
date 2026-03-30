@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactSection from '../components/ContactSection.astro';
+
+export interface Props {
+    lang?: 'en' | 'he';
+}
+
+const { lang = 'en' } = Astro.props;
+const isHe = lang === 'he';
+---
+<Layout title={isHe ? "תנאי שימוש" : "Terms of Use"} lang={lang}>
+    <div class={`max-w-4xl mx-auto px-8 py-32 text-on-surface ${isHe ? 'text-right' : 'text-left'}`}>
+        <h1 class="text-4xl md:text-5xl font-bold font-headline mb-8 text-primary">
+            {isHe ? "תנאי שימוש באתר" : "Terms of Use"}
+        </h1>
+        
+        {isHe ? (
+            <div class="prose prose-invert max-w-none text-on-surface-variant text-right leading-relaxed mb-12" dir="rtl">
+                <p>ברוכים הבאים לאתר האינטרנט של חברת פרקטל מחשבים ותקשורת 2002 בע"מ ("האתר" ו-"פרקטל", בהתאמה). הגלישה והשימוש באתר כפופים לתנאים המפורטים להלן. עצם הגלישה באתר מהווה הסכמה לתנאים אלו.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">1. כללי והגבלת אחריות</h2>
+                <p>המידע והתכנים המופיעים באתר מסופקים "כמות שהם" (As-Is). פרקטל עושה מאמצים סבירים כדי להבטיח את תקינות ודיוק המידע, אך אינה מתחייבת כי האתר יהיה חסין מפני תקלות, שגיאות, ניתוקים או גישה בלתי מורשית.</p>
+                <p>פרקטל לא תישא בכל אחריות, ישירה או עקיפה, לכל נזק, הפסד או פגיעה שייגרמו למשתמש כתוצאה מהסתמכות על התכנים המופיעים באתר או משימוש בו.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">2. שירותים מסחריים ואמנת שירות (SLA)</h2>
+                <p>מובהר בזאת כי המידע באתר הוא שיווקי ואינפורמטיבי בלבד. התחייבויותיה המקצועיות של פרקטל (לרבות שירותי IT, אבטחת מידע, זמינות מערכות ואמנות שירות - SLA) חלות אך ורק בהתאם להסכמים משפטיים וחוזי שירות (SLA) מוסדרים וחתומים בנפרד מול לקוחות החברה, ואינן נגזרות משימוש באתר זה.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">3. קניין רוחני</h2>
+                <p>כל זכויות הקניין הרוחני באתר, לרבות עיצוב האתר, קוד המקור, התמונות, הטקסטים, והלוגו של פרקטל, הינם רכושה הבלעדי של פרקטל מחשבים ותקשורת 2002 בע"מ. אין להעתיק, לשכפל, להפיץ או לעשות כל שימוש מסחרי בתוכן כלשהו מהאתר ללא קבלת אישור מראש ובכתב.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">4. קישורים חיצוניים</h2>
+                <p>האתר עשוי להכיל קישורים לאתרים או לשירותים של צדדים שלישיים (כגון Waze, Google Maps ואתרי לקוחות). פרקטל אינה שולטת בתכנים אלו ואינה אחראית למדיניות הפרטיות או לתנאי השימוש שלהם.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">5. סמכות שיפוט ודין חל</h2>
+                <p>על תנאי שימוש אלו ועל כל נושא הקשור לשימוש באתר יחולו דיני מדינת ישראל בלבד. סמכות השיפוט הבלעדית בכל סכסוך משפטי הנובע משימוש באתר זה נתונה לבתי המשפט המוסמכים במחוז תל אביב-יפו.</p>
+            </div>
+        ) : (
+            <div class="prose prose-invert max-w-none text-on-surface-variant leading-relaxed mb-12" dir="ltr">
+                <p>Welcome to the website of Fractal Computers and Communications 2002 Ltd ("The Site" and "Fractal", respectively). Browsing and using the Site implies your agreement to the terms detailed below.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">1. General and Limitation of Liability</h2>
+                <p>The information and content provided on the website are supplied "As-Is". Fractal makes reasonable efforts to ensure the accuracy and integrity of the information, but does not guarantee that the site will be immune from malfunctions, errors, disconnections, or unauthorized access.</p>
+                <p>Fractal shall not bear any liability, direct or indirect, for any damage, loss, or harm caused to the user as a result of relying on the contents appearing on the website or using it.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">2. Commercial Services and Service Level Agreements (SLA)</h2>
+                <p>It is hereby clarified that the information on the website is for marketing and informational purposes only. Fractal's professional commitments (including IT services, information security, system availability, and SLA) apply strictly subject to formalized service contracts signed separately with the company's clients, and are not derived from the use of this website.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">3. Intellectual Property</h2>
+                <p>All intellectual property rights associated with the website, including the design, source code, images, texts, and the Fractal logo, are the exclusive property of Fractal Computers and Communications 2002 Ltd. Copying, duplicating, distributing, or making any commercial use of any content from the site without prior written approval is strictly prohibited.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">4. External Links</h2>
+                <p>The website may contain links to websites or services of third parties (such as Waze, Google Maps, and client sites). Fractal does not control these contents and is not responsible for their privacy policies or terms of use.</p>
+                
+                <h2 class="text-2xl font-bold mt-10 mb-4 text-on-surface">5. Jurisdiction and Governing Law</h2>
+                <p>These terms of use and any matter related to the use of the website shall be governed exclusively by the laws of the State of Israel. Exclusive jurisdiction regarding any legal dispute arising from the use of this site is granted to the competent courts in the Tel Aviv-Jaffa district.</p>
+            </div>
+        )}
+    </div>
+    <ContactSection lang={lang} />
+</Layout>

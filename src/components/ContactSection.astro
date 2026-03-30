@@ -6,28 +6,10 @@ export interface Props {
 const { lang = 'en' } = Astro.props;
 const isHe = lang === 'he';
 
-const texts = {
-    title: isHe ? 'צור קשר' : 'Contact Us',
-    subtitle: isHe ? 'שלח לנו הודעה ונחזור אליך בהקדם האפשרי.' : "Send us a message and we'll get back to you shortly.",
-    firstNameLabel: isHe ? '* שם פרטי' : '* First name',
-    firstNamePlaceholder: isHe ? 'הכנס שם פרטי...' : 'Enter your first name',
-    emailLabel: isHe ? '* דואר אלקטרוני' : '* Work Email',
-    emailPlaceholder: isHe ? 'כתובת דוא״ל' : 'name@company.com',
-    phoneLabel: isHe ? 'מספר טלפון / נייד (רשות)' : 'Phone / Mobile (Optional)',
-    phonePlaceholder: isHe ? '+972 50-000-0000' : '+972 50-000-0000',
-    subjectLabel: isHe ? 'נושא הפנייה (רשות)' : 'Inquiry Subject (Optional)',
-    subjectPlaceholder: isHe ? 'למשל: תמיכה, מכירות' : 'e.g., IT Support, Cloud Migration',
-    messageLabel: isHe ? '* תוכן הפנייה' : '* Message Details',
-    messagePlaceholder: isHe ? 'הזן תוכן הודעה כאן...' : 'Describe your technical requirements...',
-    privacyPrefix: isHe ? 'אני מאשר/ת את ' : 'I agree to the ',
-    termsLink: isHe ? '/terms' : '/en/terms',
-    termsText: isHe ? 'תנאי השימוש' : 'Terms of Use',
-    andText: isHe ? ' ו' : ' and ',
-    privacyLink: isHe ? '/privacy' : '/en/privacy',
-    privacyText: isHe ? 'מדיניות הפרטיות' : 'Privacy Policy',
-    privacySuffix: isHe ? ', ומסכים/ה לשמירת פרטיי במאגר המידע לצורך טיפול בפנייתי.' : ', and successfully consent to my inquiry data being mapped securely to your system.',
-    submitBtn: isHe ? 'שלח' : 'Submit Request'
-};
+import enLocales from '../locales/en.json';
+import heLocales from '../locales/he.json';
+
+const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
 ---
 
 <section id="contact" class={`reveal-on-scroll max-w-4xl mx-auto px-8 py-24 scroll-mt-24 mt-8 contact-anim-wrap ${isHe ? 'text-right' : ''}`} dir={isHe ? 'rtl' : 'ltr'}>

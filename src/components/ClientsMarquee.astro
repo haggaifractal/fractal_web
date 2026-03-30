@@ -10,6 +10,10 @@ const isHe = lang === 'he';
 
 import clientsData from '../data/clients.json';
 
+import enLocales from '../locales/en.json';
+import heLocales from '../locales/he.json';
+
+const t = isHe ? heLocales.ClientsMarquee : enLocales.ClientsMarquee;
 // Reusing the robust client list from shared data
 const clients = clientsData.map(c => ({
   name: isHe ? c.nameHe : c.nameEn,
@@ -23,7 +27,7 @@ const col2 = clients.slice(8);
 <section class={`animate-fade-up w-full overflow-hidden py-4 md:py-5 border-y border-outline-variant/10 relative z-20 shadow-sm ${isMobile ? 'bg-surface/70 backdrop-blur-xl mt-4 mb-4' : 'bg-surface mt-10 md:mt-16'}`} style="--delay: 1100ms" dir="ltr">
     <div class="max-w-7xl mx-auto px-4 text-center" dir={isHe ? 'rtl' : 'ltr'}>
         <p class={`text-sm md:text-base font-bold tracking-widest text-on-surface-variant/50 uppercase ${isMobile ? 'mb-2' : 'mb-4 md:mb-5'}`}>
-            {isHe ? 'חברות מובילות שסומכות עלינו' : 'Trusted by Innovative Companies'}
+            {t.trustedBy}
         </p>
     </div>
     
