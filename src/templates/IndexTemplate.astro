@@ -1,0 +1,97 @@
+---
+import ContactSection from '../components/ContactSection.astro';
+import Layout from '../layouts/Layout.astro';
+import NetworkBackground from '../components/NetworkBackground.astro';
+import ClientsMarquee from '../components/ClientsMarquee.astro';
+
+export interface Props {
+    lang?: 'en' | 'he';
+}
+
+const { lang = 'en' } = Astro.props;
+const isHe = lang === 'he';
+
+const content = {
+    he: {
+        pageTitle: "ראשי",
+        badge: "20+ שנות מומחיות טכנולוגית",
+        title: "טכנולוגיה חכמה לעסקים",
+        desc: "פרקטל מתמחה במתן פתרונות מחשוב מלאים, שירות ותמיכה טכנית מתקדמת ללקוחות עסקיים ותעשייתיים השואפים למצוינות.",
+        cta1: "צפה בשירותים",
+        cta1Url: "/services",
+        cta2: "למידע נוסף אודותינו",
+        cta2Url: "/about",
+        mottoTitle: "המוטו שלנו",
+        mottoText: 'המוטו של פרקטל הוא <strong class="text-primary font-bold">תפיסת שירות כוללת (מקיפה)</strong> המורכבת מאפיון והגדרת הצרכים, דרך יישומם הטכנולוגי (חומרה, תוכנה) ועד לתחזוקה שוטפת במקביל לפעילות ליבת העסק.'
+    },
+    en: {
+        pageTitle: "Home",
+        badge: "20+ Years of Technology Expertise",
+        title: 'Technology <br/><span class="text-primary">Business-Wise</span>',
+        desc: "Fractal specializes in providing IT consulting and support solutions to business and industrial customers who expect excellence.",
+        cta1: "View Services",
+        cta1Url: "/en/services",
+        cta2: "Learn More About Us",
+        cta2Url: "/en/about",
+        mottoTitle: "What Is Our Motto?",
+        mottoText: "Fractal's motto is a <strong class=\"text-primary font-bold\">comprehensive customer service concept</strong> that includes defining its needs and their implementation in hardware, software, and system support alongside the core business."
+    }
+};
+
+const t = content[lang];
+---
+<Layout title={t.pageTitle} lang={lang}>
+    <div class="relative w-full overflow-hidden">
+        <NetworkBackground />
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 md:px-8 pt-8 md:pt-12 pb-8 md:pb-12 flex flex-col md:flex-row items-center gap-12 relative z-10" dir={isHe ? 'rtl' : 'ltr'}>
+            <div class={`flex-1 flex flex-col gap-6 ${isHe ? 'text-right' : 'text-left'}`}>
+                <div class="animate-fade-up inline-block px-4 py-1.5 rounded-full bg-primary-container text-on-primary-container font-semibold text-sm w-fit border border-primary/10 shadow-sm font-headline" style="opacity: 0; --delay: 100ms">
+                    {t.badge}
+                </div>
+                <h1 class="animate-fade-up text-4xl md:text-7xl font-bold font-headline leading-tight text-on-surface tracking-tight mt-4" style="opacity: 0; --delay: 300ms">
+                    <Fragment set:html={t.title} />
+                </h1>
+                <p class="animate-fade-up text-on-surface-variant text-lg md:text-2xl font-light leading-relaxed max-w-xl" style="opacity: 0; --delay: 500ms">
+                    {t.desc}
+                </p>
+                <div class={`flex flex-wrap gap-4 pt-2 ${isHe ? 'justify-start md:justify-end' : 'justify-start'}`}>
+                    <a href={t.cta1Url} class="w-full sm:w-auto px-6 py-2.5 md:px-8 md:py-3.5 bg-primary hover:bg-primary-fixed hover:text-on-primary-fixed text-white font-bold text-sm md:text-base rounded-full transition-all hover:scale-105 active:scale-95 shadow-xl shadow-primary/20 text-center font-headline">{t.cta1}</a>
+                    <a href={t.cta2Url} class="w-full sm:w-auto px-6 py-2.5 md:px-8 md:py-3.5 bg-white text-primary border border-primary/20 hover:border-primary font-bold text-sm md:text-base rounded-full transition-all hover:scale-105 active:scale-95 hover:shadow-lg text-center font-headline">{t.cta2}</a>
+                </div>
+            </div>
+            
+            <!-- MOBILE MARQUEE: Above the image -->
+            <div class="block md:hidden pb-4 pt-2 -mx-4 w-[calc(100%+2rem)] flex justify-center">
+                <ClientsMarquee lang={lang} isMobile={true} />
+            </div>
+
+            <div class="flex-1 relative w-full">
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-tertiary/20 blur-3xl opacity-50 rounded-[4rem]"></div>
+                <div class="animate-fade-up relative w-full bg-surface border border-outline-variant/30 rounded-[2.5rem] shadow-2xl overflow-hidden aspect-[4/3] lg:aspect-[1.15/1] group mt-10 md:mt-0" style="opacity: 0; --delay: 900ms">
+                     <img src="/hero_server_room_1774520634037.png" alt="Fractal IT Infrastructure" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                     <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/60 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+        
+    <!-- Trusted By / Clients Marquee (DESKTOP) -->
+    <div class="hidden md:block -mt-12 relative z-20">
+        <ClientsMarquee lang={lang} />
+    </div>
+
+    <!-- Motto / Value Proposition Area -->
+    <section class="bg-surface-container-low border-y border-surface-container mt-20 py-24 px-8" dir={isHe ? 'rtl' : 'ltr'}>
+        <div class={`max-w-4xl mx-auto text-center ${isHe ? 'md:text-right' : 'md:text-left'}`}>
+            <h2 class="text-3xl md:text-5xl font-bold text-primary mb-8 font-headline">{t.mottoTitle}</h2>
+            <p class="text-xl md:text-3xl text-on-surface leading-snug font-light">
+                <Fragment set:html={t.mottoText} />
+            </p>
+        </div>
+    </section>
+
+    <!-- Exact Contact Us Section from user specification -->
+    <ContactSection lang={lang} />
+
+</Layout>

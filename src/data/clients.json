@@ -1,0 +1,17 @@
+[
+  { "id": "amdocs", "nameEn": "Amdocs", "nameHe": "אמדוקס", "domain": "amdocs.com", "urlHe": "https://amdocs.com", "urlEn": "https://amdocs.com" },
+  { "id": "assia", "nameEn": "Assia Medical", "nameHe": "אסיה מדיקל", "domain": "assia.co.il", "urlHe": "https://www.assia.co.il/he/", "urlEn": "https://www.assia.co.il/en/" },
+  { "id": "tmprotection", "nameEn": "T&M Protection Resources", "nameHe": "T&M אבטחה ומשאבים", "domain": "tmprotection.co.il", "urlHe": "https://tmprotection.co.il/", "urlEn": "https://tmprotection.co.il/" },
+  { "id": "krausz", "nameEn": "Krausz", "nameHe": "תעשיות קראוס", "domain": "krausz.com", "urlHe": "https://krausz.com", "urlEn": "https://krausz.com" },
+  { "id": "natali", "nameEn": "Natali Healthcare", "nameHe": "נטלי שירותי רפואה", "domain": "natali.co.il", "urlHe": "https://natali.co.il", "urlEn": "https://natali.co.il" },
+  { "id": "emun", "nameEn": "Moked Emon", "nameHe": "מוקד אמון", "domain": "emun.co.il", "urlHe": "https://www.emun.co.il/", "urlEn": "https://www.emun.co.il/" },
+  { "id": "sitonai", "nameEn": "Hashmal Sitonai", "nameHe": "חשמל סיטונאי", "domain": "sitonai.co.il", "urlHe": "https://sitonai.co.il/", "urlEn": "https://sitonai.co.il/" },
+  { "id": "tmu-na", "nameEn": "Tmuna Theater", "nameHe": "תיאטרון תמונע", "domain": "tmu-na.org.il", "urlHe": "https://tmu-na.org.il", "urlEn": "https://tmu-na.org.il" },
+  { "id": "leitersdorf", "nameEn": "Leitersdorf Architects", "nameHe": "לייטרסדורף אדריכלים", "domain": "leitersdorf.com", "urlHe": "https://leitersdorf.com", "urlEn": "https://leitersdorf.com" },
+  { "id": "bri", "nameEn": "Health Center For Women", "nameHe": "בריאות האשה - רמת אביב", "domain": "bri.co.il", "urlHe": "https://bri.co.il/", "urlEn": "https://bri.co.il/" },
+  { "id": "ganeytikva", "nameEn": "Ganei Tikva", "nameHe": "מועצת גני תקווה", "domain": "ganeytikva.org.il", "urlHe": "https://www.ganeytikva.org.il/", "urlEn": "https://www.ganeytikva.org.il/" },
+  { "id": "lkltd", "nameEn": "L.K. Ltd", "nameHe": "ל.כ. ציוד וטכנולוגיה", "domain": "lkltd.co.il", "urlHe": "https://lkltd.co.il", "urlEn": "https://lkltd.co.il" },
+  { "id": "producers", "nameEn": "Maagalot Productions", "nameHe": "מעגלות הפקות ציוד", "domain": "producers.org.il", "urlHe": "https://producers.org.il/%D7%9E%D7%A2%D7%92%D7%9C%D7%95%D7%AA-%D7%94%D7%A4%D7%A7%D7%95%D7%AA-%D7%91%D7%A2%D7%9E/", "urlEn": "https://producers.org.il/%D7%9E%D7%A2%D7%92%D7%9C%D7%95%D7%AA-%D7%94%D7%A4%D7%A7%D7%95%D7%AA-%D7%91%D7%A2%D7%9E/" },
+  { "id": "rasner", "nameEn": "Resner Software", "nameHe": "רסנר תוכנות לוגיסטיות", "domain": "rasner.co.il", "urlHe": "https://rasner.co.il/", "urlEn": "https://rasner.co.il/" },
+  { "id": "aya", "nameEn": "AVA Medical", "nameHe": "איה מדיקל", "domain": "share.google", "urlHe": "https://share.google/86dyonSVRPDLruQVv", "urlEn": "https://share.google/86dyonSVRPDLruQVv" }
+]

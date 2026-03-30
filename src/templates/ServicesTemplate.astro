@@ -1,0 +1,149 @@
+---
+import ContactSection from '../components/ContactSection.astro';
+import Layout from '../layouts/Layout.astro';
+
+export interface Props {
+    lang?: 'en' | 'he';
+}
+
+const { lang = 'en' } = Astro.props;
+const isHe = lang === 'he';
+
+const content = {
+    he: {
+        pageTitle: "השירותים שלנו",
+        heroTitle: "סל המוצרים והמומחיות שלנו",
+        heroSubtitle: "אנו מחזיקים במומחיות-קצה בהקמת רשתות תקשורת, אבטחת מידע עסקית, ליווי ותמיכה מלאה במערכות תוכנה ואמצעים טכנולוגיים לתאגידים, חברות ביטוח ומוסדות רפואיים בישראל.",
+        s1Title: "תכנון והקמת רשתות",
+        s1Desc: "אנו נפגשים ופועלים איתך ראש בראש כדי להבין לעומק את תכנון וארכיטקטורת הרשת הנוכחית שלך ואת מהות הפעילות העסקית הרלוונטית, בכדי לתפור ולייצב פתרון תשתית שיספק את האיזון המושלם שבין ביצועים חומריים ועלויות שוטפות.",
+        s2Title: "פתרונות אבטחת מידע",
+        s2Desc: "יישום פתרונות אבטחת מידע גמישים הנתפרים עבור ארגונך שיפחיתו סיכוני IT באופן משמעותי, ישמרו על רציפות טכנולוגית, ויגדילו את רמת היציבות עבור התפעול השוטף של פעילות העסק שלך.",
+        s3Title: "תמיכת מערכות חכמות",
+        s3Desc: "מחלקת ה-IT של פרקטל מספקת שירותי חבילות ותוכניות תחזוקה תפורות אישית בעולמות ניהול ותפעול מערכות (Software Management), טיפול בשירותי תוכנה מבוססי-דרישה (Request-Based Services) ותמיכה צמודה בפתרונות ואפליקציות צד שלישי המופעלות לשירות הארגון.",
+        s4Title: "תחזוקת מערכות אבטחה",
+        s4Desc: "המומחים שלנו יעריכו את עוצמת האבטחה ברשת התקשורת הארגונית שלך וימליצו על ארכיטקטורה מותאמת אישית לפתרון איכותי שמספק אבטחת מידע גורפת ואמינה שמעניקה לעסק הגנה מערכתית מוחלטת לשמירת המידע העסקי שלך באפס סיכונים.",
+        s5Title: "פתרונות תקשורת",
+        s5Desc: "בין אם אתם צריכים שותף שירותי רשת שיודע איך לבנות פתרון רשת אמין, לבין אם מישהו שישפר את הרשת הקיימת שלכם - לפרקטל יש את המומחיות לקחת אתכם לשם.",
+        s6Title: "צוותי תמיכה וייעוץ",
+        s6Desc: "יש לנו טכנאי מחשבים מומחים בצוות המציעים שירות מהיר, אדיב ומקצועי. בעזרת מערכות השליטה מרחוק שלנו, אנו יכולים לפתור תקלות רבות ישירות מהמוקד שלנו, במהירות ויעילות ללא צורך בהמתנה להגעה פיזית לבית העסק שלכם."
+    },
+    en: {
+        pageTitle: "Our Services",
+        heroTitle: "Our Services",
+        heroSubtitle: "We build dedicated systems tailored to the client's unique needs. Our service includes a wide range of Activities: Establishment and maintenance of computer networks, information security solutions, software maintenance and maintenance CAD, handling and maintenance of security focal software, etc.",
+        s1Title: "Network Design",
+        s1Desc: "We’ll meet with you to get a full understanding of your current network design and business operations to find a solution that strikes the right mix of performance and value.",
+        s2Title: "Data Security Solutions",
+        s2Desc: "Use flexible data security solutions that will decrease IT risks and increase continuity and stability for your business operations.",
+        s3Title: "Professional Software Maintenance",
+        s3Desc: "Fractal Provides Maintenance Services in Software Management , Request Based Software Services, Maintenance Services For Third Party Software",
+        s4Title: "Security Company Solution Maintenance",
+        s4Desc: "Our specialists will assess your network and recommend a customized solution that delivers reliable information security and gives your business the freedom to work safely and efficiently.",
+        s5Title: "Network Solutions",
+        s5Desc: "Whether you need a network service partner that knows how to build a reliable network solution, or need someone to improve your existing network, FRACTAL has the expertise to get you there.",
+        s6Title: "Support Consulting",
+        s6Desc: "We have certified computer technicians on staff to offer fast, friendly, expert service. With our remote access tools, we can often fix your problem right from our office – no need to travel to your place of business"
+    }
+};
+
+const t = content[lang];
+---
+<Layout title={t.pageTitle} lang={lang}>
+    <section class="animate-fade-up pt-36 pb-16 px-8 max-w-7xl mx-auto -mt-24 text-center" style="--delay: 100ms">
+        <div class="mb-16">
+            <h1 class="text-5xl md:text-7xl font-bold font-headline mb-8 text-on-surface tracking-tight">{t.heroTitle}</h1>
+            <p class="text-on-surface-variant text-lg md:text-xl font-light leading-relaxed max-w-4xl mx-auto">
+                {t.heroSubtitle}
+            </p>
+        </div>
+        
+        <div class={`grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-auto md:auto-rows-[300px] ${isHe ? 'text-right' : 'text-left'}`} dir={isHe ? 'rtl' : 'ltr'}>
+            
+            <!-- Service 1: Network Design -->
+            <div class="md:col-span-8 md:row-span-2 shadow-[0_20px_40px_rgba(0,104,87,0.06)] flex flex-col p-10 bg-surface-container-lowest overflow-hidden border border-outline-variant/30 rounded-[2.5rem] relative group">
+                <div class="flex justify-between items-center mb-8 relative z-10">
+                    <div>
+                        <h2 class="text-3xl font-bold font-headline text-on-surface mb-4">{t.s1Title}</h2>
+                        <p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed font-medium">{t.s1Desc}</p>
+                    </div>
+                </div>
+                <div class="flex-grow grid grid-cols-3 gap-6 opacity-80 mt-8 relative z-0">
+                    <div class="flex flex-col justify-end">
+                        <div class="h-40 bg-surface-container rounded-t-xl relative overflow-hidden transition-all duration-500 group-hover:h-48 group-hover:bg-primary/5">
+                            <div class="absolute bottom-0 left-0 right-0 bg-primary/20 h-4/5"></div>
+                            <div class="absolute bottom-0 left-0 right-0 bg-primary h-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-end">
+                        <div class="h-56 bg-surface-container rounded-t-xl relative overflow-hidden transition-all duration-500 group-hover:h-64 group-hover:bg-primary/5">
+                            <div class="absolute bottom-0 left-0 right-0 bg-primary/20 h-full"></div>
+                            <div class="absolute bottom-0 left-0 right-0 bg-primary h-3/4"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-end">
+                        <div class="h-32 bg-surface-container rounded-t-xl relative overflow-hidden transition-all duration-500 group-hover:h-40 group-hover:bg-primary/5">
+                            <div class="absolute bottom-0 left-0 right-0 bg-primary/20 h-2/3"></div>
+                            <div class="absolute bottom-0 left-0 right-0 bg-primary h-1/3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: Data Security Solutions -->
+            <div class="md:col-span-4 md:row-span-1 bg-primary text-white p-10 relative overflow-hidden shadow-xl shadow-primary/20 flex flex-col justify-between rounded-[2.5rem] group">
+                <span class="material-symbols-outlined text-5xl mb-4 transition-transform duration-500 group-hover:scale-110" style="font-variation-settings: 'FILL' 1;">security</span>
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold font-headline mb-3">{t.s2Title}</h2>
+                    <p class="text-primary-fixed/90 text-md leading-relaxed">{t.s2Desc}</p>
+                </div>
+                <!-- bg decors -->
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors"></div>
+            </div>
+
+            <!-- Service 3: Professional Software Maintenance -->
+            <div class="md:col-span-4 md:row-span-1 relative overflow-hidden group bg-gradient-to-br from-[#001712] to-primary/20 border border-primary/10 rounded-[2.5rem]">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#001712] via-[#001712]/80 to-transparent p-10 flex flex-col justify-end z-10 transition-colors group-hover:bg-black/20">
+                    <h2 class="text-white font-bold font-headline text-2xl mb-3">{t.s3Title}</h2>
+                    <p class="text-emerald-100/90 text-[15px] leading-relaxed font-light mt-1">
+                        {t.s3Desc}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Service 4: Security Company Solution Maintenance -->
+            <div class="md:col-span-4 md:row-span-1 bg-surface-container-lowest p-8 flex flex-col justify-between hover:bg-emerald-50 transition-colors duration-300 border border-outline-variant/30 rounded-[2.5rem] group">
+                <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:rotate-12">
+                    <span class="material-symbols-outlined text-3xl">policy</span>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold font-headline text-on-surface mb-3">{t.s4Title}</h2>
+                    <p class="text-on-surface-variant text-[15px] leading-relaxed">{t.s4Desc}</p>
+                </div>
+            </div>
+
+            <!-- Service 5: Network Solutions -->
+            <div class="md:col-span-4 md:row-span-1 bg-surface-container-lowest p-8 flex flex-col justify-between hover:bg-emerald-50 transition-colors duration-300 border border-outline-variant/30 rounded-[2.5rem] group">
+                <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110">
+                    <span class="material-symbols-outlined text-3xl">hub</span>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold font-headline text-on-surface mb-3">{t.s5Title}</h2>
+                    <p class="text-on-surface-variant text-[15px] leading-relaxed">{t.s5Desc}</p>
+                </div>
+            </div>
+
+            <!-- Service 6: Support Consulting -->
+            <div class="md:col-span-4 md:row-span-1 bg-primary-fixed/20 p-8 flex flex-col justify-center text-center border border-primary-fixed/30 hover:bg-primary-fixed/30 transition-colors duration-300 rounded-[2.5rem] group">
+                <div class="w-16 h-16 mx-auto bg-primary text-white rounded-full flex items-center justify-center mb-6 shadow-xl shadow-primary/30 transition-shadow group-hover:shadow-primary/50">
+                    <span class="material-symbols-outlined text-3xl">support_agent</span>
+                </div>
+                <h2 class="text-2xl font-bold font-headline text-primary mb-3">{t.s6Title}</h2>
+                <p class="text-[15px] text-on-surface-variant leading-relaxed">{t.s6Desc}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exact Contact Us Section from user specification -->
+    <ContactSection lang={lang} />
+
+</Layout>

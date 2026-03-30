@@ -8,24 +8,13 @@ export interface Props {
 const { lang = 'en', isMobile = false } = Astro.props;
 const isHe = lang === 'he';
 
-// Reusing the robust client list
-const clients = [
-  { name: "Amdocs", domain: "amdocs.com" },
-  { name: "Assia Medical", domain: "assia.co.il" },
-  { name: "T&M Protection Resources", domain: "tmprotection.co.il" },
-  { name: "Krausz", domain: "krausz.com" },
-  { name: "Natali Healthcare", domain: "natali.co.il" },
-  { name: "Moked Emon", domain: "emun.co.il" },
-  { name: "Hashmal", domain: "sitonai.co.il" },
-  { name: "Tmuna Theater", domain: "tmu-na.org.il" },
-  { name: "Leitersdorf Architects", domain: "leitersdorf.com" },
-  { name: "Health Center For Women", domain: "bri.co.il" },
-  { name: "Ganei Tikva", domain: "ganeytikva.org.il" },
-  { name: "L.K. Ltd", domain: "lkltd.co.il" },
-  { name: "Maagalot", domain: "producers.org.il" },
-  { name: "Resner Software", domain: "rasner.co.il" },
-  { name: "AVA Medical", domain: "share.google" }
-];
+import clientsData from '../data/clients.json';
+
+// Reusing the robust client list from shared data
+const clients = clientsData.map(c => ({
+  name: isHe ? c.nameHe : c.nameEn,
+  domain: c.domain
+}));
 
 const col1 = clients.slice(0, 8);
 const col2 = clients.slice(8);
@@ -114,7 +103,7 @@ const col2 = clients.slice(8);
             <div class="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
             <div class="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
             
-            <div class="flex animate-marquee group-hover:[animation-play-state:paused] whitespace-nowrap">
+            <div class={`flex ${isHe ? 'animate-marquee-rtl' : 'animate-marquee'} group-hover:[animation-play-state:paused] whitespace-nowrap`}>
                 <!-- First Loop Set -->
                 <div class="flex items-center gap-12 sm:gap-20 px-6 sm:px-10">
                     {clients.map((client) => (
@@ -157,6 +146,10 @@ const col2 = clients.slice(8);
         0% { transform: translateX(0); }
         100% { transform: translateX(-50%); }
     }
+    @keyframes marquee-rtl {
+        0% { transform: translateX(-50%); }
+        100% { transform: translateX(0); }
+    }
     @keyframes marquee-up {
         0% { transform: translateY(0); }
         100% { transform: translateY(-50%); }
@@ -170,6 +163,10 @@ const col2 = clients.slice(8);
         animation: marquee 35s linear infinite;
         width: max-content;
     }
+    .animate-marquee-rtl {
+        animation: marquee-rtl 35s linear infinite;
+        width: max-content;
+    }
     .animate-marquee-up {
         animation: marquee-up 25s linear infinite;
         height: max-content;
@@ -181,6 +178,7 @@ const col2 = clients.slice(8);
     
     /* Hardware acceleration for ultra-smooth scrolling */
     .animate-marquee > div,
+    .animate-marquee-rtl > div,
     .animate-marquee-up > div,
     .animate-marquee-down > div {
         transform: translateZ(0);
