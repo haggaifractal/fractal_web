@@ -1,0 +1,232 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/fractal_web # TODO: Change this to your actual repository
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+# --------------------------------------------------------
+# YAML ANCHOR: DRY Schema for JSON Locales
+# This defines the complete structure of the JSON files ONCE.
+# --------------------------------------------------------
+.json_schema: &JSON_SCHEMA
+  - name: "Layout"
+    label: "הגדרות תפריט (Layout)"
+    widget: "object"
+    fields:
+      - { name: "siteTitle", label: "שם האתר", widget: "string" }
+      - { name: "subTitle", label: "תת-כותרת (מילים מופרדות)", widget: "list", field: { name: "word", widget: "string" } }
+      - name: "nav"
+        label: "תפריט הניווט (Nav)"
+        widget: "object"
+        fields:
+          - { name: "home", label: "ראשי", widget: "string" }
+          - { name: "about", label: "אודות", widget: "string" }
+          - { name: "services", label: "שירותים", widget: "string" }
+          - { name: "customers", label: "לקוחות", widget: "string" }
+          - { name: "contact", label: "צור קשר", widget: "string" }
+      - { name: "techSupport", label: "כפתור תמיכה", widget: "string" }
+      - { name: "a11yMenu", label: "תפריט נגישות", widget: "string" }
+      - { name: "langSwitcher", label: "כפתור החלפת שפה", widget: "string" }
+      - { name: "langSwitcherUrl", label: "נתיב החלפת שפה", widget: "string" }
+
+  - name: "ContactSection"
+    label: "אזור יצירת קשר"
+    widget: "object"
+    fields:
+      - { name: "title", label: "כותרת", widget: "string" }
+      - { name: "subtitle", label: "תת-כותרת", widget: "string" }
+      - { name: "firstNameLabel", label: "תווית שם", widget: "string" }
+      - { name: "firstNamePlaceholder", label: "פלאסהולדר שם", widget: "string" }
+      - { name: "emailLabel", label: "תווית דואל", widget: "string" }
+      - { name: "emailPlaceholder", label: "פלאסהולדר דואל", widget: "string" }
+      - { name: "phoneLabel", label: "תווית טלפון", widget: "string" }
+      - { name: "phonePlaceholder", label: "פלאסהולדר טלפון", widget: "string" }
+      - { name: "subjectLabel", label: "תווית נושא", widget: "string" }
+      - { name: "subjectPlaceholder", label: "פלאסהולדר נושא", widget: "string" }
+      - { name: "messageLabel", label: "תווית הודעה", widget: "string" }
+      - { name: "messagePlaceholder", label: "פלאסהולדר הודעה", widget: "string" }
+      - { name: "privacyPrefix", label: "פרטיות - התחלה", widget: "string" }
+      - { name: "termsLink", label: "קישור תנאי שימוש", widget: "string" }
+      - { name: "termsText", label: "טקסט תנאי שימוש", widget: "string" }
+      - { name: "andText", label: "מילת קישור", widget: "string" }
+      - { name: "privacyLink", label: "קישור פרטיות", widget: "string" }
+      - { name: "privacyText", label: "טקסט פרטיות", widget: "string" }
+      - { name: "privacySuffix", label: "פרטיות - סיום", widget: "text" }
+      - { name: "submitBtn", label: "כפתור שליחה", widget: "string" }
+
+  - name: "IndexTemplate"
+    label: "עמוד הבית (Index)"
+    widget: "object"
+    fields:
+      - { name: "pageTitle", label: "כותרת דפדפן", widget: "string" }
+      - { name: "badge", label: "תג עליון", widget: "string" }
+      - { name: "titlePrefix", label: "כותרת - התחלה", widget: "string" }
+      - { name: "titleHighlight", label: "כותרת - מודגש", widget: "string" }
+      - { name: "desc", label: "תיאור ראשי", widget: "text" }
+      - { name: "cta1", label: "כפתור 1", widget: "string" }
+      - { name: "cta1Url", label: "קישור 1", widget: "string" }
+      - { name: "cta2", label: "כפתור 2", widget: "string" }
+      - { name: "cta2Url", label: "קישור 2", widget: "string" }
+      - { name: "mottoTitle", label: "כותרת מוטו", widget: "string" }
+      - { name: "mottoTextPrefix", label: "מוטו - התחלה", widget: "string" }
+      - { name: "mottoTextHighlight", label: "מוטו - מודגש", widget: "string" }
+      - { name: "mottoTextSuffix", label: "מוטו - סיום", widget: "text" }
+
+  - name: "AboutTemplate"
+    label: "עמוד אודות (About)"
+    widget: "object"
+    fields:
+      - { name: "pageTitle", label: "כותרת דפדפן", widget: "string" }
+      - { name: "heroTitle", label: "כותרת ראשית", widget: "string" }
+      - { name: "heroSubtitle", label: "תת-כותרת", widget: "text" }
+      - { name: "card1Text", label: "טקסט כרטיסייה 1", widget: "text" }
+      - { name: "yearsNum", label: "מספר שנות ניסיון", widget: "string" }
+      - { name: "yearsLabel", label: "תווית שנות ניסיון", widget: "string" }
+      - { name: "yearsText", label: "טקסט ניסיון", widget: "text" }
+      - { name: "experienceText", label: "טקסט מומחיות", widget: "text" }
+      - name: "timeline"
+        label: "ציר זמן (Timeline)"
+        widget: "list"
+        fields:
+          - { name: "year", label: "שנה", widget: "string" }
+          - { name: "title", label: "כותרת", widget: "string" }
+          - { name: "desc", label: "תיאור", widget: "text" }
+      - { name: "testimonialsTitle", label: "כותרת המלצות", widget: "string" }
+      - { name: "testimonialsSubtitle", label: "תת-כותרת המלצות", widget: "string" }
+      - name: "testimonials"
+        label: "המלצות לקוחות (Testimonials)"
+        widget: "list"
+        fields:
+          - { name: "quote", label: "ציטוט", widget: "text" }
+          - { name: "author", label: "שם הממליץ", widget: "string" }
+          - { name: "role", label: "תפקיד", widget: "string", required: false }
+
+  - name: "ServicesTemplate"
+    label: "עמוד שירותים (Services)"
+    widget: "object"
+    fields:
+      - { name: "pageTitle", label: "כותרת דפדפן", widget: "string" }
+      - { name: "heroTitle", label: "כותרת ראשית", widget: "string" }
+      - { name: "heroSubtitle", label: "תת כותרת", widget: "text" }
+      - { name: "s1Title", label: "שירות 1 - כותרת", widget: "string" }
+      - { name: "s1Desc", label: "שירות 1 - תיאור", widget: "text" }
+      - { name: "s2Title", label: "שירות 2 - כותרת", widget: "string" }
+      - { name: "s2Desc", label: "שירות 2 - תיאור", widget: "text" }
+      - { name: "s3Title", label: "שירות 3 - כותרת", widget: "string" }
+      - { name: "s3Desc", label: "שירות 3 - תיאור", widget: "text" }
+      - { name: "s4Title", label: "שירות 4 - כותרת", widget: "string" }
+      - { name: "s4Desc", label: "שירות 4 - תיאור", widget: "text" }
+      - { name: "s5Title", label: "שירות 5 - כותרת", widget: "string" }
+      - { name: "s5Desc", label: "שירות 5 - תיאור", widget: "text" }
+      - { name: "s6Title", label: "שירות 6 - כותרת", widget: "string" }
+      - { name: "s6Desc", label: "שירות 6 - תיאור", widget: "text" }
+
+  - name: "CustomersTemplate"
+    label: "עמוד לקוחות (Customers)"
+    widget: "object"
+    fields:
+      - { name: "pageTitle", label: "כותרת דפדפן", widget: "string" }
+      - { name: "headingPre", label: "כותרת - התחלה", widget: "string" }
+      - { name: "headingHighlight", label: "כותרת - מודגש", widget: "string" }
+      - { name: "logoAltPrefix", label: "טקסט Alt ללוגו", widget: "string" }
+
+  - name: "SuccessTemplate"
+    label: "עמוד הודעה נשלחה (Success)"
+    widget: "object"
+    fields:
+      - { name: "pageTitle", label: "כותרת דפדפן", widget: "string" }
+      - { name: "title", label: "כותרת ראשית", widget: "string" }
+      - { name: "msg1", label: "הודעה שורה 1", widget: "string" }
+      - { name: "msg2Prefix", label: "הודעה שורה 2 - התחלה", widget: "string" }
+      - { name: "msg2Highlight", label: "הודעה שורה 2 - מודגש", widget: "string" }
+      - { name: "msg2Suffix", label: "הודעה שורה 2 - סיום", widget: "string" }
+      - { name: "backBtn", label: "כפתור חזרה", widget: "string" }
+      - { name: "backUrl", label: "קישור חזרה", widget: "string" }
+      - { name: "iconArrow", label: "אייקון (למשל arrow_forward)", widget: "string" }
+
+  - name: "ClientsMarquee"
+    label: "רצועת לוגואים נגללת"
+    widget: "object"
+    fields:
+      - { name: "trustedBy", label: "טקסט מעל הרצועה", widget: "string" }
+
+
+# --------------------------------------------------------
+# COLLECTIONS CONFIGURATION
+# --------------------------------------------------------
+collections:
+  # 1. דפים משפטיים (Markdown)
+  - name: "legal_pages"
+    label: "דפים משפטיים (Markdown)"
+    files:
+      - label: "מדיניות פרטיות (עברית)"
+        name: "privacy_he"
+        file: "src/pages/privacy.md"
+        fields:
+          - { label: "כותרת", name: "title", widget: "string" }
+          - { label: "שפה", name: "lang", widget: "hidden", default: "he" }
+          - { label: "תבנית (אל תשנה)", name: "layout", widget: "hidden", default: "../layouts/LegalLayout.astro" }
+          - { label: "תוכן (עורך טקסט)", name: "body", widget: "markdown" }
+      
+      - label: "תנאי שימוש (עברית)"
+        name: "terms_he"
+        file: "src/pages/terms.md"
+        fields:
+          - { label: "כותרת", name: "title", widget: "string" }
+          - { label: "שפה", name: "lang", widget: "hidden", default: "he" }
+          - { label: "תבנית", name: "layout", widget: "hidden", default: "../layouts/LegalLayout.astro" }
+          - { label: "תוכן (עורך טקסט)", name: "body", widget: "markdown" }
+
+      - label: "הצהרת נגישות (עברית)"
+        name: "accessibility_he"
+        file: "src/pages/accessibility.md"
+        fields:
+          - { label: "כותרת", name: "title", widget: "string" }
+          - { label: "שפה", name: "lang", widget: "hidden", default: "he" }
+          - { label: "תבנית", name: "layout", widget: "hidden", default: "../layouts/LegalLayout.astro" }
+          - { label: "תוכן (עורך טקסט)", name: "body", widget: "markdown" }
+
+      - label: "Privacy Policy (English)"
+        name: "privacy_en"
+        file: "src/pages/en/privacy.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Language", name: "lang", widget: "hidden", default: "en" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/LegalLayout.astro" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Terms of Use (English)"
+        name: "terms_en"
+        file: "src/pages/en/terms.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Language", name: "lang", widget: "hidden", default: "en" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/LegalLayout.astro" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Accessibility (English)"
+        name: "accessibility_en"
+        file: "src/pages/en/accessibility.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Language", name: "lang", widget: "hidden", default: "en" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/LegalLayout.astro" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  # 2. קבצי הטקסט (JSON) של שאר האתר
+  - name: "locales"
+    label: "ניהול טקסטים ועמודים ראשיים (JSON)"
+    extension: "json"
+    format: "json"
+    files:
+      - label: "עברית (Hebrew - he.json)"
+        name: "he_json"
+        file: "src/locales/he.json"
+        fields: *JSON_SCHEMA # <--- שימוש בעוגן שמדביק את כל הסכימה לעיל
+
+      - label: "אנגלית (English - en.json)"
+        name: "en_json"
+        file: "src/locales/en.json"
+        fields: *JSON_SCHEMA # <--- שימוש ב-DRY, אותה סכימה בדיוק
