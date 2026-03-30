@@ -28,7 +28,8 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 import enLocales from '../locales/en.json';
 import heLocales from '../locales/he.json';
 
-const t = (isHe ? heLocales.Layout : enLocales.Layout) as any;
+type LocaleType = typeof enLocales;
+const t: LocaleType['Layout'] = isHe ? (heLocales as LocaleType).Layout : enLocales.Layout;
 ---
 <!doctype html>
 <html lang={lang} dir={isHe ? "rtl" : "ltr"} class="scroll-smooth">
