@@ -14,14 +14,15 @@ import enLocales from '../locales/en.json';
 import heLocales from '../locales/he.json';
 
 const t = isHe ? heLocales.ClientsMarquee : enLocales.ClientsMarquee;
+const tc = isHe ? heLocales.CustomersTemplate : enLocales.CustomersTemplate;
 // Reusing the robust client list from shared data
 const clients = clientsData.map(c => ({
   name: isHe ? c.nameHe : c.nameEn,
   domain: c.domain
 }));
 
-const col1 = clients.slice(0, 8);
-const col2 = clients.slice(8);
+const col1 = clients.slice(0, Math.ceil(clients.length / 2));
+const col2 = clients.slice(Math.ceil(clients.length / 2));
 ---
 
 <section class={`animate-fade-up w-full overflow-hidden py-4 md:py-5 border-y border-outline-variant/10 relative z-20 shadow-sm ${isMobile ? 'bg-surface/70 backdrop-blur-xl mt-4 mb-4' : 'bg-surface mt-10 md:mt-16'}`} style="--delay: 1100ms" dir="ltr">
@@ -40,35 +41,45 @@ const col2 = clients.slice(8);
             <div class="absolute inset-0 flex justify-center gap-4 px-4 w-full max-w-[360px] mx-auto" dir={isHe ? 'rtl' : 'ltr'}>
                 <!-- Column 1 (Right in RTL): Scrolling Down -->
                 <div class="flex flex-col animate-marquee-down gap-4 w-1/2 max-w-[160px]">
-                {[1, 2].map(() => col1.map((client) => (
-                    <div class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 select-none w-full">
-                        <img 
-                            src={`/images/clients/${client.domain}.png`} 
-                            alt={client.name}
-                            width="40"
-                            height="40"
-                            class="w-8 h-8 object-contain opacity-90"
-                            onerror="this.style.display='none';"
-                        />
-                        <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
-                    </div>
+                {[1, 2].map(() => col1.map((client, i) => (
+                    <>
+                        {(i === 0 || i === Math.floor(col1.length / 2)) && (
+                            <a href={tc.ctaBoxLink} class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container/30 hover:bg-surface-container/80 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border-2 border-dashed border-primary/40 hover:border-primary group active:scale-95 transition-all w-full shrink-0">
+                                <div class="w-8 h-8 rounded mb-1 flex items-center justify-center bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-[1.2rem]">person_add</span>
+                                </div>
+                                <span class="text-[0.7rem] font-bold font-headline text-primary group-hover:text-primary-dark text-center leading-tight">{tc.ctaBoxText}</span>
+                            </a>
+                        )}
+                        <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 w-full shrink-0 active:scale-95 transition-transform">
+                            <img 
+                                src={`/images/clients/${client.domain}.png`} 
+                                alt={`${tc.logoAltPrefix} ${client.name}`}
+                                width="40"
+                                height="40"
+                                class="w-8 h-8 object-contain opacity-90"
+                                onerror="this.style.display='none';"
+                            />
+                            <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
+                        </a>
+                    </>
                 )))}
                 </div>
 
             <!-- Column 2 (Left in RTL): Scrolling Up -->
             <div class="flex flex-col animate-marquee-up gap-4 w-1/2 max-w-[160px]">
                 {[1, 2].map(() => col2.map((client) => (
-                    <div class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 select-none w-full">
+                    <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 w-full shrink-0 active:scale-95 transition-transform">
                         <img 
                             src={`/images/clients/${client.domain}.png`} 
-                            alt={client.name}
+                            alt={`${tc.logoAltPrefix} ${client.name}`}
                             width="40"
                             height="40"
                             class="w-8 h-8 object-contain opacity-90"
                             onerror="this.style.display='none';"
                         />
                         <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
-                    </div>
+                    </a>
                 )))}
             </div>
         </div>
@@ -79,21 +90,31 @@ const col2 = clients.slice(8);
             <div class="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
             <div class="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
             
-            <div class={`flex ${isHe ? 'animate-marquee-rtl' : 'animate-marquee'} group-hover:[animation-play-state:paused] whitespace-nowrap`}>
+            <div class={`flex w-max ${isHe ? 'animate-marquee-rtl' : 'animate-marquee'} group-hover:[animation-play-state:paused] whitespace-nowrap`}>
                 {[1, 2].map(() => (
-                    <div class="flex items-center gap-12 sm:gap-20 px-6 sm:px-10">
-                        {clients.map((client) => (
-                            <div class="flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 select-none cursor-default">
-                                <img 
-                                    src={`/images/clients/${client.domain}.png`} 
-                                    alt={client.name}
-                                    width="36"
-                                    height="36"
-                                    class="w-7 h-7 md:w-9 md:h-9 object-contain drop-shadow-sm"
-                                    onerror="this.style.display='none';"
-                                />
-                                <span class="text-lg md:text-xl font-bold font-headline text-on-surface-variant">{client.name}</span>
-                            </div>
+                    <div class="flex flex-nowrap items-center gap-12 sm:gap-20 px-6 sm:px-10 shrink-0 w-max">
+                        {clients.map((client, i) => (
+                            <>
+                                {(i === 0 || i === Math.floor(clients.length / 2)) && (
+                                    <a href={tc.ctaBoxLink} class="w-max flex items-center justify-center gap-3 px-5 lg:px-6 py-2 rounded-full border-2 border-dashed border-primary/40 hover:border-primary group grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 shrink-0" dir={isHe ? 'rtl' : 'ltr'}>
+                                        <div class="shrink-0 flex items-center justify-center bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white rounded-full p-1.5 transition-all duration-300">
+                                            <span class="material-symbols-outlined text-[1.1rem]">person_add</span>
+                                        </div>
+                                        <span class="text-sm md:text-base font-bold font-headline text-primary tracking-wide whitespace-nowrap shrink-0">{tc.ctaBoxText}</span>
+                                    </a>
+                                )}
+                                <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="w-max flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 shrink-0" dir={isHe ? 'rtl' : 'ltr'}>
+                                    <img 
+                                        src={`/images/clients/${client.domain}.png`} 
+                                        alt={`${tc.logoAltPrefix} ${client.name}`}
+                                        width="36"
+                                        height="36"
+                                        class="w-7 h-7 md:w-9 md:h-9 object-contain drop-shadow-sm shrink-0"
+                                        onerror="this.style.display='none';"
+                                    />
+                                    <span class="text-lg md:text-xl font-bold font-headline text-on-surface-variant whitespace-nowrap shrink-0">{client.name}</span>
+                                </a>
+                            </>
                         ))}
                     </div>
                 ))}
@@ -101,48 +122,3 @@ const col2 = clients.slice(8);
         </div>
     )}
 </section>
-
-<style>
-    @keyframes marquee {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-    @keyframes marquee-rtl {
-        0% { transform: translateX(-50%); }
-        100% { transform: translateX(0); }
-    }
-    @keyframes marquee-up {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-50%); }
-    }
-    @keyframes marquee-down {
-        0% { transform: translateY(-50%); }
-        100% { transform: translateY(0); }
-    }
-    
-    .animate-marquee {
-        animation: marquee 35s linear infinite;
-        width: max-content;
-    }
-    .animate-marquee-rtl {
-        animation: marquee-rtl 35s linear infinite;
-        width: max-content;
-    }
-    .animate-marquee-up {
-        animation: marquee-up 25s linear infinite;
-        height: max-content;
-    }
-    .animate-marquee-down {
-        animation: marquee-down 25s linear infinite;
-        height: max-content;
-    }
-    
-    /* Hardware acceleration for ultra-smooth scrolling */
-    .animate-marquee > div,
-    .animate-marquee-rtl > div,
-    .animate-marquee-up > div,
-    .animate-marquee-down > div {
-        transform: translateZ(0);
-        will-change: transform;
-    }
-</style>

@@ -89,7 +89,9 @@
     "pageTitle": "Our Customers",
     "headingPre": "A few of our",
     "headingHighlight": "clients...",
-    "logoAltPrefix": "logo of"
+    "logoAltPrefix": "logo of",
+    "ctaBoxText": "Your place is here! Let's talk.",
+    "ctaBoxLink": "#contact"
   },
   "SuccessTemplate": {
     "pageTitle": "Message Sent Successfully",

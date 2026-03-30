@@ -89,7 +89,9 @@
     "pageTitle": "לקוחותינו",
     "headingPre": "קצת מהלקוחות",
     "headingHighlight": "המובילים שלנו...",
-    "logoAltPrefix": "לוגו"
+    "logoAltPrefix": "לוגו",
+    "ctaBoxText": "המקום שלך כאן! נשמח לדבר.",
+    "ctaBoxLink": "#contact"
   },
   "SuccessTemplate": {
     "pageTitle": "הודעה נשלחה בהצלחה",

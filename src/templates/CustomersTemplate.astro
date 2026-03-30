@@ -15,6 +15,10 @@ const clients = clientsData.map(c => ({
   url: lang === 'he' ? c.urlHe : c.urlEn
 }));
 
+const half = Math.ceil(clients.length / 2);
+const col1 = clients.slice(0, half);
+const col2 = clients.slice(half);
+
 import enLocales from '../locales/en.json';
 import heLocales from '../locales/he.json';
 
@@ -26,12 +30,12 @@ const t = lang === 'he' ? heLocales.CustomersTemplate : enLocales.CustomersTempl
             {t.headingPre} <span class="text-primary">{t.headingHighlight}</span>
         </h1>
         
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+        <!-- Desktop Grid (Hidden on Mobile) -->
+        <div class="hidden md:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" dir={lang === 'he' ? 'rtl' : 'ltr'}>
             {clients.map((client) => (
                 <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="bg-white h-36 rounded-2xl border border-surface-container shadow-[0_10px_20px_rgba(0,104,87,0.03)] flex flex-col items-center justify-center p-4 text-center hover:scale-105 active:scale-95 hover:border-primary/50 hover:shadow-xl transition-all group relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     
-                    <!-- Fully privacy-compliant: Serving logos locally from public/images/clients -->
                     <img 
                         src={`/images/clients/${client.domain}.png`} 
                         alt={`${t.logoAltPrefix} ${client.name}`}
@@ -46,6 +50,71 @@ const t = lang === 'he' ? heLocales.CustomersTemplate : enLocales.CustomersTempl
                     </span>
                 </a>
             ))}
+        </div>
+
+        <!-- Mobile Dual-Scroll Marquee (Hidden on Desktop) -->
+        <div class="md:hidden relative overflow-hidden w-full h-[60vh] max-h-[500px] min-h-[400px] mt-8">
+            <!-- Fade Gradients -->
+            <div class="absolute left-0 right-0 top-0 h-16 bg-gradient-to-b from-surface to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute left-0 right-0 bottom-0 h-16 bg-gradient-to-t from-surface to-transparent z-10 pointer-events-none"></div>
+            
+            <div class="absolute inset-0 flex justify-center gap-4 px-4 w-full max-w-[360px] mx-auto" dir={lang === 'he' ? 'rtl' : 'ltr'}>
+                <!-- Column 1 (Right in RTL): Scrolling Down -->
+                <div class="flex flex-col animate-marquee-down gap-4 w-1/2 max-w-[170px]">
+                    {[1, 2].map((loopIndex) => (
+                        <div class="flex flex-col gap-4">
+                            {col1.map((client, i) => (
+                                <>
+                                    {(i === 0 || i === Math.floor(col1.length / 2)) && (
+                                        <a href={t.ctaBoxLink} class="bg-surface-container/30 hover:bg-surface-container/80 h-36 rounded-2xl flex flex-col items-center justify-center p-4 text-center active:scale-95 transition-all group relative overflow-hidden border-2 border-dashed border-primary/40 hover:border-primary shrink-0">
+                                            <div class="w-10 h-10 rounded mb-3 flex items-center justify-center bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                                <span class="material-symbols-outlined text-[1.5rem]">person_add</span>
+                                            </div>
+                                            <span class="font-bold text-primary group-hover:text-primary-dark text-sm tracking-wide leading-snug transition-colors">{t.ctaBoxText}</span>
+                                        </a>
+                                    )}
+                                    <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="bg-white/90 backdrop-blur-sm h-36 rounded-2xl border border-surface-container shadow-[0_4px_12px_rgba(0,104,87,0.04)] flex flex-col items-center justify-center p-4 text-center active:scale-95 transition-transform group relative overflow-hidden shrink-0">
+                                        <img 
+                                            src={`/images/clients/${client.domain}.png`} 
+                                            alt={`${t.logoAltPrefix} ${client.name}`}
+                                            width="40"
+                                            height="40"
+                                            class="w-10 h-10 object-contain relative z-10 mb-3 rounded opacity-90"
+                                            onerror="this.style.display='none';"
+                                        />
+                                        <span class="font-bold text-on-surface-variant text-[0.8rem] tracking-wide relative z-10 leading-snug line-clamp-2">
+                                            {client.name}
+                                        </span>
+                                    </a>
+                                </>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Column 2 (Left in RTL): Scrolling Up -->
+                <div class="flex flex-col animate-marquee-up gap-4 w-1/2 max-w-[170px]">
+                    {[1, 2].map(() => (
+                        <div class="flex flex-col gap-4">
+                            {col2.map((client) => (
+                                <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="bg-white/90 backdrop-blur-sm h-36 rounded-2xl border border-surface-container shadow-[0_4px_12px_rgba(0,104,87,0.04)] flex flex-col items-center justify-center p-4 text-center active:scale-95 transition-transform group relative overflow-hidden shrink-0">
+                                    <img 
+                                        src={`/images/clients/${client.domain}.png`} 
+                                        alt={`${t.logoAltPrefix} ${client.name}`}
+                                        width="40"
+                                        height="40"
+                                        class="w-10 h-10 object-contain relative z-10 mb-3 rounded opacity-90"
+                                        onerror="this.style.display='none';"
+                                    />
+                                    <span class="font-bold text-on-surface-variant text-[0.8rem] tracking-wide relative z-10 leading-snug line-clamp-2">
+                                        {client.name}
+                                    </span>
+                                </a>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     </section>
 

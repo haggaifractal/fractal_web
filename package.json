@@ -25,6 +25,7 @@
   "overrides": {
     "@astrojs/tailwind": {
       "astro": "$astro"
-    }
+    },
+    "yaml": "^2.8.3"
   }
 }
