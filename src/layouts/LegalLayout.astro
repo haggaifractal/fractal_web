@@ -19,10 +19,15 @@ const isHe = lang === 'he';
 <Layout title={frontmatter.title} lang={lang}>
     <section class={`max-w-4xl mx-auto px-6 py-24 mb-12 animate-fade-up ${isHe ? 'dir-rtl' : ''}`}>
         <h1 class="text-4xl md:text-5xl font-bold font-headline mb-10 text-primary">{frontmatter.title}</h1>
-        <div class={`prose prose-lg max-w-none text-on-surface-variant leading-relaxed
-            prose-headings:font-headline prose-headings:text-on-surface prose-headings:font-bold prose-headings:scroll-mt-24
-            prose-a:text-primary hover:prose-a:text-primary-fixed prose-a:transition-colors
-            ${isHe ? 'prose-headings:text-right text-right marker:mr-0 marker:ml-2' : 'text-left prose-headings:text-left'}
+        <div class={`text-lg max-w-none text-on-surface-variant leading-relaxed
+            [&_h2]:font-headline [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:text-on-surface [&_h2]:mt-12 [&_h2]:mb-6
+            [&_h3]:font-headline [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:text-on-surface [&_h3]:mt-8 [&_h3]:mb-4
+            [&_p]:mb-6
+            [&_ul]:list-disc [&_ul]:mb-8 ${isHe ? '[&_ul]:pr-6' : '[&_ul]:pl-6'} [&_ul]:space-y-3
+            [&_li]:marker:text-primary [&_li]:font-medium
+            [&_a]:text-primary [&_a]:font-semibold [&_a]:underline hover:[&_a]:text-primary-fixed [&_a]:transition-colors
+            [&_strong]:font-bold [&_strong]:text-on-surface
+            ${isHe ? 'text-right [&_h2]:text-right [&_h3]:text-right' : 'text-left [&_h2]:text-left [&_h3]:text-left'}
         `}>
             <slot />
         </div>

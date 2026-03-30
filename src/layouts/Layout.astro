@@ -83,6 +83,11 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
         @tailwind components;
         @tailwind utilities;
 
+        /* Prevent the accessibility widget from altering the base font size on load */
+        html:not(._access-font-size) {
+            font-size: 16px !important;
+        }
+
         /* Define core variables if not already defined entirely by Tailwind */
         :root {
             --color-primary: 0, 104, 116;
