@@ -21,7 +21,7 @@ const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
     <fractal-contact-form class="block w-full">
     <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-lowest p-10 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container relative">
         <!-- Web3Forms Config -->
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+        <input type="hidden" name="access_key" value={import.meta.env.WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE"} />
         <input type="hidden" name="subject" value="New Inquiry from Fractal Website" />
         <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
         <input type="hidden" name="redirect" id="form-redirect" value="https://web3forms.com/success" />
@@ -72,8 +72,8 @@ const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
 <script>
     class FractalContactForm extends HTMLElement {
         connectedCallback() {
-            const redirectInput = this.querySelector('#form-redirect') as HTMLInputElement;
-            if (redirectInput) {
+            const redirectInput = this.querySelector('#form-redirect');
+            if (redirectInput instanceof HTMLInputElement) {
                 const lang = document.documentElement.dir === 'rtl' ? 'he' : 'en';
                 const successPath = lang === 'he' ? '/success' : '/en/success';
                 redirectInput.value = window.location.origin + successPath;

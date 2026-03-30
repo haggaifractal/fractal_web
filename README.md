@@ -44,7 +44,7 @@ When developing, you must use the semantic tokens:
 
 ## 🔒 Security & Forms
 
-* **Web3Forms:** The `ContactSection.astro` form is technically prepared to use Web3Forms to directly email inquiries to `Office@fractal.co.il` without storing data in an intermediate cloud database. **Note:** It is currently *not yet connected*; you must implement a valid Access Key in the form configuration to activate this functionality.
+* **Web3Forms:** The `ContactSection.astro` form is technically prepared to use Web3Forms to directly email inquiries to `Office@fractal.co.il` without storing data in an intermediate cloud database. **Note:** You must configure a valid Access Key to activate this functionality. Create a `.env` file (see `.env.example`) and set `WEB3FORMS_ACCESS_KEY=your_key`, or configure the environment variable in your production host (e.g. Cloudflare Pages).
 * **Security Headers:** HSTS, XSS protections, and strict `Content-Security-Policy` (CSP) are enforced in production via `public/_headers` (configured for Cloudflare Pages).
 * **Zero-Trust Vectors:** To avoid GDPR and IP leakage conflicts, we do not fetch third-party tracking APIs (e.g., Google Favicons) for imagery. Use local material vectors.
 

@@ -28,8 +28,7 @@ const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 import enLocales from '../locales/en.json';
 import heLocales from '../locales/he.json';
 
-type LocaleType = typeof enLocales;
-const t: LocaleType['Layout'] = isHe ? (heLocales as LocaleType).Layout : enLocales.Layout;
+const t = isHe ? heLocales.Layout : enLocales.Layout;
 ---
 <!doctype html>
 <html lang={lang} dir={isHe ? "rtl" : "ltr"} class="scroll-smooth">
@@ -218,7 +217,7 @@ const t: LocaleType['Layout'] = isHe ? (heLocales as LocaleType).Layout : enLoca
             <a href={isHe ? "/customers" : "/en/customers"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
                 {t.nav.customers} <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">{isHe ? 'chevron_left' : 'chevron_right'}</span>
             </a>
-            <a href={isHe ? "/#contact" : "/en/contact"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group" onclick="document.getElementById('mobile-btn').click()">
+            <a href={isHe ? "/#contact" : "/en/contact"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
                 {t.nav.contact} <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">{isHe ? 'chevron_left' : 'chevron_right'}</span>
             </a>
             
@@ -248,11 +247,11 @@ const t: LocaleType['Layout'] = isHe ? (heLocales as LocaleType).Layout : enLoca
 
             constructor() {
                 super();
-                this.btn = this.querySelector('#mobile-btn');
-                this.nav = this.querySelector('#mobile-nav');
-                this.icon = this.querySelector('#mobile-icon');
-                this.mainNav = this.querySelector('#main-nav');
-                this.navLogo = this.querySelector('#nav-logo');
+                this.btn = this.querySelector('button#mobile-btn');
+                this.nav = this.querySelector('div#mobile-nav');
+                this.icon = this.querySelector('div#mobile-icon');
+                this.mainNav = this.querySelector('nav#main-nav');
+                this.navLogo = this.querySelector('img#nav-logo');
                 this.links = this.querySelectorAll('a');
 
                 this.boundToggleMenu = this.toggleMenu.bind(this);
@@ -379,9 +378,12 @@ const t: LocaleType['Layout'] = isHe ? (heLocales as LocaleType).Layout : enLoca
                     textToSpeech: isHe ? 'הקראת טקסט' : 'Text to Speech',
                     speechToText: isHe ? 'הכתבה קולית' : 'Speech to Text',
                     resetTitle: isHe ? 'איפוס נגישות' : 'Reset Accessibility',
-                    closeTitle: isHe ? 'סגור' : 'Close'
+                    closeTitle: isHe ? 'סגור' : 'Close',
+                    disableAnimations: isHe ? 'בטל אנימציות' : 'Disable Animations',
+                    hotkeyPrefix: isHe ? 'קיצור דרך:' : 'Hotkey:'
                 },
                 icon: {
+                    // @ts-ignore - The module's typescript definitions are missing the 'position' interface which is valid in JS
                     position: {
                         bottom: { size: 30, units: 'px' },
                         [isHe ? 'right' : 'left']: { size: 30, units: 'px' },

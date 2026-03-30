@@ -2,6 +2,15 @@
 import Layout from './Layout.astro';
 import ContactSection from '../components/ContactSection.astro';
 
+export interface Props {
+    frontmatter: {
+        title: string;
+        updateHe: string;
+        updateEn: string;
+        lang?: 'he' | 'en';
+    };
+}
+
 const { frontmatter } = Astro.props;
 const lang = frontmatter?.lang || 'en';
 const isHe = lang === 'he';
