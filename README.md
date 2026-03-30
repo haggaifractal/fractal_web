@@ -71,6 +71,14 @@ The site implements "Privacy by Design" to comply with Israel's Privacy Law (Ame
    * **SOP for IT Administrator:** Since form submissions are emailed directly to `Office@fractal.co.il`, the administrator must configure a **Microsoft Outlook Rule** that automatically hard-deletes any incoming emails with the subject "New Inquiry from Fractal Website" after **30 to 60 days**.
    * This guarantees auto-compliance with data retention rules strictly within the SLA without requiring a custom backend deletion job.
 
+## 📝 Content Management System (Sveltia CMS)
+
+The project includes an integrated, Git-based headless CMS (Sveltia CMS) mapped directly to our GitHub repository. This allows content and legal editors to quickly edit translation files (`.json`) and legal pages (`.md`) without writing code.
+
+* **Security & Zero-Trust:** Standard CMS setups depend on external CDNs (like `unpkg.com`) to fetch their core scripts, which introduces a supply-chain vulnerability. We have mitigated this by downloading and serving `sveltia-cms.js` entirely locally. This ensures our `_headers` CSP (Content-Security-Policy) remains hermetically sealed against external third-party scripts.
+* **Authentication:** On Cloudflare Pages, authentication is handled natively using GitHub Personal Access Tokens (Fine-grained tokens with `Contents: Read & Write` and `Administration: Read-only` permissions), allowing a serverless, database-free architecture.
+* **DRY Configuration:** The CMS configuration (`public/admin/config.yml`) extensively utilizes **YAML Anchors** (`&` and `*`) to map the exact same UI schema fields dynamically to both `he.json` and `en.json`. This prevents schema duplication and maintenance overhead when scaling the translation files.
+
 ## 📦 Deployment
 
 The project is configured for seamless deployment on **Cloudflare Pages**.

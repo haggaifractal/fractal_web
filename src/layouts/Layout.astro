@@ -110,6 +110,24 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
             animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-delay: var(--delay, 0ms);
         }
+
+        @keyframes shimmerText {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .animate-shimmer-text {
+            background: linear-gradient(
+                90deg, 
+                rgb(var(--color-primary)) 20%, 
+                rgb(180, 255, 255) 50%, 
+                rgb(var(--color-primary)) 80%
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmerText 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
         
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         
