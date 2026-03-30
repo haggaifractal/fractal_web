@@ -18,6 +18,7 @@ const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
         <p class="text-on-surface-variant text-lg">{texts.subtitle}</p>
     </div>
     
+    <fractal-contact-form class="block w-full">
     <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-lowest p-10 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container relative">
         <!-- Web3Forms Config -->
         <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
@@ -25,13 +26,7 @@ const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
         <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
         <input type="hidden" name="redirect" id="form-redirect" value="https://web3forms.com/success" />
         
-        <script is:inline>
-            document.addEventListener('DOMContentLoaded', () => {
-                const lang = document.documentElement.dir === 'rtl' ? 'he' : 'en';
-                const successPath = lang === 'he' ? '/success' : '/en/success';
-                document.getElementById('form-redirect').value = window.location.origin + successPath;
-            });
-        </script>
+
 
         <div class="flex flex-col gap-2">
             <label class="text-sm font-bold text-primary tracking-wide" for="firstname">{texts.firstNameLabel}</label>
@@ -71,4 +66,21 @@ const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
             <button type="submit" class="w-full md:w-auto px-12 py-4 bg-primary text-white font-bold rounded-full hover:bg-surface-tint transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 text-lg">{texts.submitBtn}</button>
         </div>
     </form>
+    </fractal-contact-form>
 </section>
+
+<script>
+    class FractalContactForm extends HTMLElement {
+        connectedCallback() {
+            const redirectInput = this.querySelector('#form-redirect') as HTMLInputElement;
+            if (redirectInput) {
+                const lang = document.documentElement.dir === 'rtl' ? 'he' : 'en';
+                const successPath = lang === 'he' ? '/success' : '/en/success';
+                redirectInput.value = window.location.origin + successPath;
+            }
+        }
+    }
+    if (!customElements.get('fractal-contact-form')) {
+        customElements.define('fractal-contact-form', FractalContactForm);
+    }
+</script>

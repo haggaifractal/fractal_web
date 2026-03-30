@@ -30,7 +30,7 @@ This project strictly adheres to a modular, dual-language architecture featuring
 * **Hebrew (RTL):** Located at the project root (`src/pages/index.astro`, `services.astro`, etc.).
 * **English (LTR):** Located inside the `/en/` subdirectory (`src/pages/en/index.astro`).
 * **Layout Wrapper & Templates:** Both languages share a single layout (`src/layouts/Layout.astro`) which automatically manages the document direction (`dir="rtl"` or `dir="ltr"`) based on the `lang` prop. Page structures are consolidated into reusable unified templates inside `/src/templates`.
-* **Centralized i18n Dictionaries:** To maintain a clean codebase ("Enterprise-ready"), all standard UI texts are extracted into central JSON files (`/src/locales/en.json` & `/src/locales/he.json`). Massive legal texts (like Terms and Privacy) are intentionally kept directly inside their respective template components to facilitate easier future editing by legal teams.
+* **Centralized i18n Dictionaries:** To maintain a clean codebase ("Enterprise-ready"), all standard UI texts are extracted into central JSON files (`/src/locales/en.json` & `/src/locales/he.json`). Massive legal texts (like Terms, Privacy, and Accessibility) are managed as pure **Markdown (`.md`) files** inside `src/pages/` (and `src/pages/en/`), wrapped dynamically by `LegalLayout.astro`. This allows legal and content teams to edit them safely without touching Astro or JSX code.
 
 ## 🎨 Design System & Styling Rules
 
