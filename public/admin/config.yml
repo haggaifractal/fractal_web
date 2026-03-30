@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: haggaifractal/fractal-web
+  repo: haggaifractal/fractal_web
   branch: main
 
 media_folder: "public/images"
