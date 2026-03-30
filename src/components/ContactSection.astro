@@ -19,7 +19,7 @@ const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
     </div>
     
     <fractal-contact-form class="block w-full">
-    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container-lowest p-10 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container relative">
+    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 bg-surface-container-lowest p-6 sm:p-8 md:p-12 rounded-[2rem] shadow-[0_15px_40px_rgba(0,104,87,0.06)] border border-surface-container relative">
         <!-- Web3Forms Config -->
         <input type="hidden" name="access_key" value={import.meta.env.WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE"} />
         <input type="hidden" name="subject" value="New Inquiry from Fractal Website" />
@@ -28,29 +28,29 @@ const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
         
 
 
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-1.5 md:gap-2">
             <label class="text-sm font-bold text-primary tracking-wide" for="firstname">{texts.firstNameLabel}</label>
-            <input type="text" name="firstname" id="firstname" autocomplete="given-name" required class={`border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : ''}`} placeholder={texts.firstNamePlaceholder} />
+            <input type="text" name="firstname" id="firstname" autocomplete="given-name" required class={`border border-outline-variant/40 p-3 md:p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : ''}`} placeholder={texts.firstNamePlaceholder} />
         </div>
         
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-1.5 md:gap-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="email">{texts.emailLabel}</label>
-            <input type="email" name="email" id="email" autocomplete="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class={`text-base border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all dir-ltr ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.emailPlaceholder} />
+            <input type="email" name="email" id="email" autocomplete="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" dir="ltr" class={`text-base border border-outline-variant/40 p-3 md:p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.emailPlaceholder} />
         </div>
 
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-1.5 md:gap-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="phone">{texts.phoneLabel}</label>
-            <input type="tel" name="phone" id="phone" autocomplete="tel" pattern="^[+0-9 \-\(\)]*$" class={`text-base border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all dir-ltr ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.phonePlaceholder} />
+            <input type="tel" name="phone" id="phone" autocomplete="tel" pattern="^[+0-9 \-\(\)]*$" dir="ltr" class={`text-base border border-outline-variant/40 p-3 md:p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.phonePlaceholder} />
         </div>
         
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-1.5 md:gap-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="subject">{texts.subjectLabel}</label>
-            <input type="text" name="subject" id="subject" dir="auto" class={`text-base border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.subjectPlaceholder} />
+            <input type="text" name="subject" id="subject" dir="auto" class={`text-base border border-outline-variant/40 p-3 md:p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.subjectPlaceholder} />
         </div>
 
-        <div class="flex flex-col gap-2 md:col-span-2">
+        <div class="flex flex-col gap-1.5 md:gap-2 md:col-span-2">
             <label class={`text-sm font-bold text-primary tracking-wide ${isHe ? 'text-right' : 'text-left'}`} for="message">{texts.messageLabel}</label>
-            <textarea name="message" id="message" rows="5" required dir="auto" class={`text-base border border-outline-variant/40 p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.messagePlaceholder}></textarea>
+            <textarea name="message" id="message" rows="5" required dir="auto" class={`text-base border border-outline-variant/40 p-3 md:p-4 rounded-xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none ${isHe ? 'text-right' : 'text-left'}`} placeholder={texts.messagePlaceholder}></textarea>
         </div>
 
         <div class="flex items-start gap-3 md:col-span-2 mt-2">
@@ -63,7 +63,7 @@ const texts = isHe ? heLocales.ContactSection : enLocales.ContactSection;
         </div>
         
         <div class="md:col-span-2 flex justify-start mt-4">
-            <button type="submit" class="w-full md:w-auto px-12 py-4 bg-primary text-white font-bold rounded-full hover:bg-surface-tint transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 text-lg">{texts.submitBtn}</button>
+            <button type="submit" class="w-full md:w-auto px-8 md:px-12 py-3.5 md:py-4 bg-primary text-white font-bold rounded-full hover:bg-surface-tint transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 text-base md:text-lg">{texts.submitBtn}</button>
         </div>
     </form>
     </fractal-contact-form>
