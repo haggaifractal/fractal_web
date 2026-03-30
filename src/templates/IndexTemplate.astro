@@ -26,7 +26,7 @@ const t = isHe ? heLocales.IndexTemplate : enLocales.IndexTemplate;
                     {t.badge}
                 </div>
                 <h1 class="animate-fade-up text-4xl md:text-7xl font-bold font-headline leading-tight text-on-surface tracking-tight mt-4" style="opacity: 0; --delay: 300ms">
-                    <Fragment set:html={t.title} />
+                    {t.titlePrefix}<br/><span class="text-primary">{t.titleHighlight}</span>
                 </h1>
                 <p class="animate-fade-up text-on-surface-variant text-lg md:text-2xl font-light leading-relaxed max-w-xl" style="opacity: 0; --delay: 500ms">
                     {t.desc}
@@ -62,7 +62,7 @@ const t = isHe ? heLocales.IndexTemplate : enLocales.IndexTemplate;
         <div class={`max-w-4xl mx-auto text-center ${isHe ? 'md:text-right' : 'md:text-left'}`}>
             <h2 class="text-3xl md:text-5xl font-bold text-primary mb-8 font-headline">{t.mottoTitle}</h2>
             <p class="text-xl md:text-3xl text-on-surface leading-snug font-light">
-                <Fragment set:html={t.mottoText} />
+                {t.mottoTextPrefix}<strong class="text-primary font-bold">{t.mottoTextHighlight}</strong>{t.mottoTextSuffix}
             </p>
         </div>
     </section>

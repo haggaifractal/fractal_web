@@ -25,24 +25,10 @@ const altPath = isHe
     : pathname.replace(/^\/en/, '') || '/';
 const ogImageUrl = new URL('/og-image.jpg', Astro.url).href;
 
-const translations = {
-    he: {
-        siteTitle: "פרקטל - מחשוב בגישה עסקית",
-        subTitle: ["מיחשוב", "בגישה", "עסקית"],
-        nav: { home: "ראשי", about: "אודותינו", services: "השירותים שלנו", customers: "לקוחות", contact: "צור קשר" },
-        techSupport: "תמיכה טכנית",
-        a11yMenu: "אפשרויות נגישות"
-    },
-    en: {
-        siteTitle: "Fractal IT",
-        subTitle: ["BUSINESS-DRIVEN", "IT", ""],
-        nav: { home: "Home", about: "About Us", services: "Our Services", customers: "Our Customers", contact: "Contact Us" },
-        techSupport: "Tech Support",
-        a11yMenu: "Accessibility Options"
-    }
-};
+import enLocales from '../locales/en.json';
+import heLocales from '../locales/he.json';
 
-const t = translations[lang];
+const t = (isHe ? heLocales.Layout : enLocales.Layout) as any;
 ---
 <!doctype html>
 <html lang={lang} dir={isHe ? "rtl" : "ltr"} class="scroll-smooth">

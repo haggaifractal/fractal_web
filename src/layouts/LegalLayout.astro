@@ -1,0 +1,23 @@
+---
+import Layout from './Layout.astro';
+import ContactSection from '../components/ContactSection.astro';
+
+const { frontmatter } = Astro.props;
+const lang = frontmatter?.lang || 'en';
+const isHe = lang === 'he';
+---
+
+<Layout title={frontmatter.title} lang={lang}>
+    <section class={`max-w-4xl mx-auto px-6 py-24 mb-12 animate-fade-up ${isHe ? 'dir-rtl' : ''}`}>
+        <h1 class="text-4xl md:text-5xl font-bold font-headline mb-10 text-primary">{frontmatter.title}</h1>
+        <div class={`prose prose-lg max-w-none text-on-surface-variant leading-relaxed
+            prose-headings:font-headline prose-headings:text-on-surface prose-headings:font-bold prose-headings:scroll-mt-24
+            prose-a:text-primary hover:prose-a:text-primary-fixed prose-a:transition-colors
+            ${isHe ? 'prose-headings:text-right text-right marker:mr-0 marker:ml-2' : 'text-left prose-headings:text-left'}
+        `}>
+            <slot />
+        </div>
+    </section>
+    
+    <ContactSection lang={lang} />
+</Layout>

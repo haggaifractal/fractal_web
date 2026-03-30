@@ -1,4 +1,13 @@
 {
+  "Layout": {
+    "siteTitle": "Fractal IT",
+    "subTitle": ["BUSINESS-DRIVEN", "IT", ""],
+    "nav": { "home": "Home", "about": "About Us", "services": "Our Services", "customers": "Our Customers", "contact": "Contact Us" },
+    "techSupport": "Tech Support",
+    "a11yMenu": "Accessibility Options",
+    "langSwitcher": "HE",
+    "langSwitcherUrl": "he"
+  },
   "ContactSection": {
     "title": "Contact Us",
     "subtitle": "Send us a message and we'll get back to you shortly.",
@@ -24,14 +33,17 @@
   "IndexTemplate": {
     "pageTitle": "Home",
     "badge": "20+ Years of Technology Expertise",
-    "title": "Technology <br/><span class=\"text-primary\">Business-Wise</span>",
+    "titlePrefix": "Technology \n",
+    "titleHighlight": "Business-Wise",
     "desc": "Fractal specializes in providing IT consulting and support solutions to business and industrial customers who expect excellence.",
     "cta1": "View Services",
     "cta1Url": "/en/services",
     "cta2": "Learn More About Us",
     "cta2Url": "/en/about",
     "mottoTitle": "What Is Our Motto?",
-    "mottoText": "Fractal's motto is a <strong class=\"text-primary font-bold\">comprehensive customer service concept</strong> that includes defining its needs and their implementation in hardware, software, and system support alongside the core business."
+    "mottoTextPrefix": "Fractal's motto is a ",
+    "mottoTextHighlight": "comprehensive customer service concept",
+    "mottoTextSuffix": " that includes defining its needs and their implementation in hardware, software, and system support alongside the core business."
   },
   "AboutTemplate": {
     "pageTitle": "About Us",
@@ -83,7 +95,9 @@
     "pageTitle": "Message Sent Successfully",
     "title": "Thank You for Reaching Out!",
     "msg1": "Your message has been successfully delivered.",
-    "msg2": "The <strong class=\"text-primary\">Fractal</strong> team has received your inquiry and will get back to you shortly.",
+    "msg2Prefix": "The ",
+    "msg2Highlight": "Fractal",
+    "msg2Suffix": " team has received your inquiry and will get back to you shortly.",
     "backBtn": "Back to Home",
     "backUrl": "/en/",
     "iconArrow": "arrow_back"

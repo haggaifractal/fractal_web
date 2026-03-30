@@ -25,7 +25,7 @@ const t = isHe ? heLocales.SuccessTemplate : enLocales.SuccessTemplate;
         
         <p class="text-xl leading-relaxed text-on-surface-variant font-medium mb-10 max-w-xl text-center">
             {t.msg1}<br/>
-            <Fragment set:html={t.msg2} />
+            {t.msg2Prefix}<strong class="text-primary">{t.msg2Highlight}</strong>{t.msg2Suffix}
         </p>
         
         <a href={t.backUrl} class="mt-10 px-12 py-4 bg-primary text-white rounded-full font-bold shadow-lg shadow-primary/20 hover:bg-surface-tint hover:scale-105 active:scale-95 transition-all text-lg flex items-center justify-center gap-3">

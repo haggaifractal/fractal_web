@@ -29,7 +29,8 @@ This project strictly adheres to a modular, dual-language architecture featuring
 
 * **Hebrew (RTL):** Located at the project root (`src/pages/index.astro`, `services.astro`, etc.).
 * **English (LTR):** Located inside the `/en/` subdirectory (`src/pages/en/index.astro`).
-* **Layout Wrapper & Templates:** Both languages share a single layout (`src/layouts/Layout.astro`) which automatically manages the document direction (`dir="rtl"` or `dir="ltr"`) based on the `lang` prop. Page structures are consolidated into `/src/templates` utilizing external locale JSON files (`/src/locales`).
+* **Layout Wrapper & Templates:** Both languages share a single layout (`src/layouts/Layout.astro`) which automatically manages the document direction (`dir="rtl"` or `dir="ltr"`) based on the `lang` prop. Page structures are consolidated into reusable unified templates inside `/src/templates`.
+* **Centralized i18n Dictionaries:** To maintain a clean codebase ("Enterprise-ready"), all standard UI texts are extracted into central JSON files (`/src/locales/en.json` & `/src/locales/he.json`). Massive legal texts (like Terms and Privacy) are intentionally kept directly inside their respective template components to facilitate easier future editing by legal teams.
 
 ## 🎨 Design System & Styling Rules
 
@@ -56,6 +57,11 @@ To strictly comply with privacy laws (GDPR / Amendment 13) and prevent User IP l
 2. Add or modify the client's domain in the `domains` array.
 3. Run `node scripts/download-logos.cjs` in your terminal. This will fetch the latest high-res favicons and save them locally to `public/images/clients/`.
 4. Commit and push the newly downloaded images to Cloudflare to deploy them.
+
+## ♿ Accessibility (WCAG 2.1 AA)
+
+The site includes an integrated client-side accessibility solution via the `accessibility` NPM package. It's fully strictly loaded locally to prevent privacy leakages common with third-party widgets like *UserWay* or *Nagish*.
+It is dynamically configured via `src/layouts/Layout.astro` and automatically translates its internal UI labels based on the active `lang` attribute. Features include text sizing, contrast modes, a big cursor, and text-to-speech tools.
 
 ## 🛡️ Privacy Law (Amendment 13) Compliance & SLA
 

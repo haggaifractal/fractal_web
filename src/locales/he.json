@@ -1,4 +1,13 @@
 {
+  "Layout": {
+    "siteTitle": "פרקטל - מחשוב בגישה עסקית",
+    "subTitle": ["מיחשוב", "בגישה", "עסקית"],
+    "nav": { "home": "ראשי", "about": "אודותינו", "services": "השירותים שלנו", "customers": "לקוחות", "contact": "צור קשר" },
+    "techSupport": "תמיכה טכנית",
+    "a11yMenu": "אפשרויות נגישות",
+    "langSwitcher": "EN",
+    "langSwitcherUrl": "en"
+  },
   "ContactSection": {
     "title": "צור קשר",
     "subtitle": "שלח לנו הודעה ונחזור אליך בהקדם האפשרי.",
@@ -24,14 +33,17 @@
   "IndexTemplate": {
     "pageTitle": "ראשי",
     "badge": "20+ שנות מומחיות טכנולוגית",
-    "title": "טכנולוגיה חכמה לעסקים",
+    "titlePrefix": "טכנולוגיה ",
+    "titleHighlight": "חכמה לעסקים",
     "desc": "פרקטל מתמחה במתן פתרונות מחשוב מלאים, שירות ותמיכה טכנית מתקדמת ללקוחות עסקיים ותעשייתיים השואפים למצוינות.",
     "cta1": "צפה בשירותים",
     "cta1Url": "/services",
     "cta2": "למידע נוסף אודותינו",
     "cta2Url": "/about",
     "mottoTitle": "המוטו שלנו",
-    "mottoText": "המוטו של פרקטל הוא <strong class=\"text-primary font-bold\">תפיסת שירות כוללת (מקיפה)</strong> המורכבת מאפיון והגדרת הצרכים, דרך יישומם הטכנולוגי (חומרה, תוכנה) ועד לתחזוקה שוטפת במקביל לפעילות ליבת העסק."
+    "mottoTextPrefix": "המוטו של פרקטל הוא ",
+    "mottoTextHighlight": "תפיסת שירות כוללת (מקיפה)",
+    "mottoTextSuffix": " המורכבת מאפיון והגדרת הצרכים, דרך יישומם הטכנולוגי (חומרה, תוכנה) ועד לתחזוקה שוטפת במקביל לפעילות ליבת העסק."
   },
   "AboutTemplate": {
     "pageTitle": "אודותינו",
@@ -83,7 +95,9 @@
     "pageTitle": "הודעה נשלחה בהצלחה",
     "title": "תודה רבה על פנייתך!",
     "msg1": "הודעתך נשלחה אלינו בהצלחה.",
-    "msg2": "צוות <strong class=\"text-primary\">Fractal</strong> יבדוק את פנייתך ויחזור אליך בהקדם האפשרי.",
+    "msg2Prefix": "צוות ",
+    "msg2Highlight": "Fractal",
+    "msg2Suffix": " יבדוק את פנייתך ויחזור אליך בהקדם האפשרי.",
     "backBtn": "חזרה לעמוד הראשי",
     "backUrl": "/",
     "iconArrow": "arrow_forward"
