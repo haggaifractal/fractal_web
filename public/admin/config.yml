@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/fractal_web # TODO: Change this to your actual repository
+  repo: haggaifractal/fractal-web
   branch: main
 
 media_folder: "public/images"
