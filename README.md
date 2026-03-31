@@ -88,3 +88,10 @@ Pushing to the `main` branch will automatically trigger a build (`npm run build`
 
 > **⚠️ CRITICAL - DOMAIN MIGRATION (robots.txt):** 
 > When migrating the website from the temporary URL (`fractal-web-4pa.pages.dev`) to the official production domain (`fractal.co.il`), you **MUST** update `public/robots.txt`. Change the `Sitemap:` directive to point to the new, absolute production URL (e.g., `Sitemap: https://www.fractal.co.il/sitemap-index.xml`) so search engines can properly index the final site.
+
+## ⚖️ Legal & Compliance Notes (READ BEFORE MODIFYING)
+
+> **⚠️ MANDATORY DATA PRIVACY WARNING:**
+> 1. **Dormant Web3Forms Integration:** The contact form infrastructure (Web3Forms) is fully built within the codebase but is currently **dormant** (inactive). It currently does NOT process or send data to third parties. **If you activate Web3Forms in the future via API Keys, you MUST immediately notify management.** The Privacy Policy will need to be legally updated to explicitly disclose this third-party data processing.
+> 2. **Strict Opt-In Analytics & Personalized Ads (Amendment 13 / GDPR):** Google Analytics (GA4) / Google Ads integration is implemented with a **STRICT Opt-In** consent mechanism constraint to ensure privacy compliance. Tracking scripts MUST NEVER load before `cookie-consent === 'granted'` is verified in `localStorage`. You are expressly forbidden from bypassing or removing this mechanism during future development, including injecting tracking pixels into the `<head>`.
+

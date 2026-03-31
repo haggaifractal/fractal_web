@@ -1,39 +1,64 @@
-# תוכנית עבודה: SEO, אבטחה וכפיפות לתיקון 13
+# שדרוג מערכת ההסכמות לתקן גישה גרנולרית (GDPR / תיקון 13)
 
-תוכנית זו מתמקדת בשיפור נראות ברשתות החברתיות, הכנה רגולטורית להטמעת כלי אנליטיקס (לרבות עדכוני Content Security Policy ושמירה על Opt-In אקטיבי תחת תיקון 13), ויצירת מפת אתר אוטומטית למנועי חיפוש.
+היעד הוא לשדרג את מנגנון ההסכמות הבינארי הקיים ("הכל או כלום") למערכת ניהול הסכמות מתקדמת (Granular Consent Modal) המאפשרת למשתמש לבחור בנפרד את העדפות הפרטיות שלו (חיוני, סטטיסטיקה, ושיווק).
 
-## User Review Required
+## חובת אישור מלקוח (User Review Required)
+
+> [!CAUTION]
+> המעבר לגישה האירופאית מייצר ממשק מעט יותר מורכב לגולש (חלון הגדרות עם מתגים). עליך לאשר שזהו אכן כיוון ה-UX/UI שאתה מעוניין בו עבור אתר ה-B2B. כמו כן, שים לב כי נשנה את עיצוב הבאנר בהתאם לאישור שלך.
+
+## שינויים מוצעים (Proposed Changes)
+
+### `src/components/CookieBanner.astro`
+- **[MODIFY]** שדרוג הממשק: כפתור "דחה הכל" יהפוך לכפתור "הגדרות מתקדמות".
+- **[NEW]** הוספת מודל (Modal) צף שיכיל 3 מתגים (Toggles):
+  1. **עוגיות חיוניות (Essential):** מצב מופעל-קשיח (Disabled toggle, On).
+  2. **סטטיסטיקה (Analytics):** כבוי כברירת מחדל (שולט ב-GA4).
+  3. **שיווק ומעקב (Marketing):** כבוי כברירת מחדל (שולט בפיקסלים/גוגל אדס).
+- המערכת תשמור את הבחירות לשני משתני `localStorage` נפרדים:
+  - `cookie-consent-analytics`
+  - `cookie-consent-marketing`
+
+*דוגמת קוד לממשק ההגדרות שיתווסף בבאנר:*
+```html
+<div id="cookie-preferences-modal" class="hidden fixed inset-0 z-[200] bg-black/50 overflow-y-auto...">
+  <label class="flex items-center justify-between">
+    <span>סטטיסטיקה ואנליטיקה (Google Analytics 4)</span>
+    <input type="checkbox" id="toggle-analytics" class="toggle-switch" />
+  </label>
+  <label class="flex items-center justify-between">
+    <span>שיווק מותאם אישית (Google Ads, Meta)</span>
+    <input type="checkbox" id="toggle-marketing" class="toggle-switch" />
+  </label>
+</div>
+```
+
+### `src/layouts/Layout.astro`
+- **[MODIFY]** החלפת הלוגיקה הבינארית בלוגיקה מפוצלת שבודקת כל מפתח `localStorage` בנפרד.
+
+*דוגמת קוד מפוצל לצד-לקוח:*
+```javascript
+// סטטיסטיקה בלבד (GA4)
+if (localStorage.getItem('cookie-consent-analytics') === 'granted') {
+    gtag('config', 'G-989B9CSF2C');
+}
+
+// שיווק מותאם אישית (Ads)
+if (localStorage.getItem('cookie-consent-marketing') === 'granted') {
+    gtag('config', 'AW-XXXXXXX'); // תשתית מופרדת שמוכנה לקבל את הטוקן
+}
+```
+
+## שאלות פתוחות (Open Questions)
+
 > [!IMPORTANT]
-> - האם ברצונך שאכין את פונקציית הטעינה של האנליטיקס (`loadAnalytics`) כך שתזריק את GTM בצורה דינמית **רק אחרי קבלת הסכמה** (אכיפה קשיחה של תיקון 13), ושנשאיר שם מזהה placeholder (כגון `GTM-XXXXXXX`)?
-> - הטיפול במפת האתר דורש התקנת חבילה (`npx astro add sitemap` או התקנה ידנית ב-npm). אני יכול לבצע זאת ברגע שתאשר את התוכנית.
+> 1. האם תרצה שהחלון ייבנה בעיצוב המותאם לתבנית העיצובית (Material Design) של האתר, הכולל מתגים מעוצבים צבועים בצבע ה-`Primary` של האתר?
+> 2. מאחר וכעת אנו מפרידים את התשתית - האם יש לך כבר מזהה `AW-XXXXXXX` של גוגל אדס שתרצה שאטמיע מראש בחלק השיווקי ב-Layout, או שתרצה שאשאיר קוד ריק/הערה למילוי עתידי?
 
-## Proposed Changes
+## תוכנית בדיקה (Verification Plan)
 
-### SEO & Open Graph
-#### [MODIFY] Layout.astro
-- הוספת תגיות מטא `og:locale` (לדוגמה `he_IL` או `en_US`) מבוסס על שפת העמוד.
-- הוספת `og:locale:alternate` לתמיכה מלאה בשני העמודים כשהם משותפים בוואטסאפ ולינקדאין.
-- וידוא שתגית `og:image` מוגדרת היטב.
-
-### Sitemaps & robots.txt
-#### [MODIFY] astro.config.mjs
-- הוספת אינטגרציה של `@astrojs/sitemap`.
-#### [NEW] public/robots.txt
-- יצירת קובץ ברור המפנה ל-`https://www.fractal.co.il/sitemap-index.xml`.
-
-### Analytics, CSP וציות לתיקון 13 לחוק הגנת הפרטיות
-#### [MODIFY] public/_headers
-- עדכון ה- Content-Security-Policy (CSP) תחת `script-src`, `connect-src`, ו-`img-src` כדי לאפשר תעבורה מולם `https://www.googletagmanager.com` ו-`https://www.google-analytics.com`. זה קריטי כדי שהסקרפטים לא ייחסמו על ידי הדפדפן.
-#### [MODIFY] Layout.astro
-- עדכון התגית `<script is:inline>` שקוראת ל-`loadAnalytics()`. 
-- בניית לוגיקה שמזריקה את הסקריפט של גוגל רק כאשר קיים `localStorage.getItem('cookie-consent') === 'granted'`. זה מבטיח יישום Strict Opt-In לפי דרישות תיקון 13.
-
-## Open Questions
-האם תרצה להוסיף דומיינים נוספים ל-CSP (כמו פיקסלים של פייסבוק או לינקדאין) מעבר לגוגל אנליטיקס בשלב זה?
-
-## Verification Plan
-### Automated Tests
-- נריץ ביצוע בילד (`npm run build`) כדי לוודא שקובץ ה-Sitemap אכן נוצר נכון במחיצת `dist`.
-### Manual Verification
-- נבדוק בסביבת פיתוח שחסימת הסקריפט של ה-CSP פעילה (דרך כלי המפתחים בדפדפן).
-- נדמה אישור Cookie ונראה אם הסקריפט של ההזרקה מתבצע באמת רק אחרי הלחיצה (Compliance).
+### בדיקה ידנית
+1. כניסה לאתר בחלון גלישה בסתר (Incognito) להופעת הבאנר.
+2. פתיחת חלון "הגדרות עוגיות" והפעלת Analytics בלבד ללא Marketing, ושמירת ההעדפות.
+3. כניסה לנתיב "Application -> Local Storage" בדפדפן, ווידוא שאכן נרשם רק `cookie-consent-analytics = granted`.
+4. וידוא בפאנל ה-Network שהבקשה יוצאת מול התגית `G-989B9CSF2C` בלבד, וסקריפטים אחרים מנועים מריצה בהתאם לדרישת ה-GDPR.

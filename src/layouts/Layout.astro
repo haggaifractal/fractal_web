@@ -385,7 +385,11 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
             gtag('js', new Date());
             gtag('config', gtmId);
             
-            console.log("Google Analytics injected successfully.");
+            // Google Ads Integration (Marketing/Retargeting) 
+            // TODO: Replace 'AW-XXXXXXX' with your actual Google Ads ID.
+            gtag('config', 'AW-XXXXXXX');
+            
+            console.log("Google Analytics and Google Ads injected successfully.");
         }
         if (localStorage.getItem('cookie-consent') === 'granted') {
             loadAnalytics();
