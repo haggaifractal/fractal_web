@@ -45,7 +45,7 @@ When developing, you must use the semantic tokens:
 ## 🔒 Security & Forms
 
 * **Web3Forms:** The `ContactSection.astro` form is technically prepared to use Web3Forms to directly email inquiries to `Office@fractal.co.il` without storing data in an intermediate cloud database. **Note:** You must configure a valid Access Key to activate this functionality. Create a `.env` file (see `.env.example`) and set `WEB3FORMS_ACCESS_KEY=your_key`, or configure the environment variable in your production host (e.g. Cloudflare Pages).
-* **Security Headers:** HSTS, XSS protections, and strict `Content-Security-Policy` (CSP) are enforced in production via `public/_headers` (configured for Cloudflare Pages).
+* **Security Headers & CSP:** HSTS, XSS protections, and a strict `Content-Security-Policy` (CSP) are enforced in production via `public/_headers`. The CSP is aggressively tightened to only whitelist essential Google properties (`googletagmanager.com`, `google-analytics.com`) for tracking purposes, explicitly avoiding overly broad domains like Facebook or LinkedIn to minimize attack surfaces.
 * **Zero-Trust Vectors:** To avoid GDPR and IP leakage conflicts, we do not fetch third-party tracking APIs (e.g., Google Favicons) for imagery. Use local material vectors.
 
 ## 🖼️ Managing Client Logos (Privacy by Design)
@@ -66,7 +66,7 @@ It is dynamically configured via `src/layouts/Layout.astro` and automatically tr
 ## 🛡️ Privacy Law (Amendment 13) Compliance & SLA
 
 The site implements "Privacy by Design" to comply with Israel's Privacy Law (Amendment 13):
-1. **Active Cookie Consent:** A UI banner (`CookieBanner.astro`) ensures that tracking scripts (e.g., Google Analytics, Meta Pixels) are forcefully blocked and injected **only** if the user explicitly clicks "Accept All", which sets `cookie-consent: granted` in `localStorage`.
+1. **Active Cookie Consent (Strict Opt-In):** Tracking architectures are explicitly deferred. A UI banner (`CookieBanner.astro`) ensures that tracking scripts (e.g., Google Tag Manager script injection) are blocked outright. They are dynamically generated and executed **only** after the user explicitly clicks "Accept", matching the value `cookie-consent: granted` in `localStorage` without pre-emptively loading payloads.
 2. **Right to be Forgotten (30-Day SLA):** 
    * **SOP for IT Administrator:** Since form submissions are emailed directly to `Office@fractal.co.il`, the administrator must configure a **Microsoft Outlook Rule** that automatically hard-deletes any incoming emails with the subject "New Inquiry from Fractal Website" after **30 to 60 days**.
    * This guarantees auto-compliance with data retention rules strictly within the SLA without requiring a custom backend deletion job.
@@ -85,3 +85,6 @@ The project is configured for seamless deployment on **Cloudflare Pages**.
 Pushing to the `main` branch will automatically trigger a build (`npm run build`) and deploy the `dist/` directory.
 
 *Note: NPM overrides are utilized in `package.json` to safely bypass peer dependency conflicts with `@astrojs/tailwind` without ignoring critical security checks.*
+
+> **⚠️ CRITICAL - DOMAIN MIGRATION (robots.txt):** 
+> When migrating the website from the temporary URL (`fractal-web-4pa.pages.dev`) to the official production domain (`fractal.co.il`), you **MUST** update `public/robots.txt`. Change the `Sitemap:` directive to point to the new, absolute production URL (e.g., `Sitemap: https://www.fractal.co.il/sitemap-index.xml`) so search engines can properly index the final site.

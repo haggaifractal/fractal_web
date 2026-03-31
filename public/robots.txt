@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
 
-Sitemap: https://www.fractal.co.il/sitemap-index.xml
+# TODO: בעת מעבר לדומיין הרשמי יש לעדכן את הקישור כאן ל- https://www.fractal.co.il/sitemap-index.xml
+Sitemap: https://fractal-web-4pa.pages.dev/sitemap-index.xml
