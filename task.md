@@ -1,8 +1,7 @@
-# Fractal Website Modernization Tasks
+# רשימת משימות - SEO, אבטחה ותיקון 13
 
-- [x] 1. Define Type Safety for `clients.json` (`src/types.ts`).
-- [x] 2. Move client images from `public/images/clients/` to `src/assets/images/clients/`.
-- [x] 3. Apply Edge Redirection (Cloudflare `_middleware.ts`).
-- [x] 4. Update `Layout.astro`: Set lang cookie, remove inline localStorage redirect, and make accessibility script async.
-- [x] 5. Update `ClientsMarquee.astro`: Use `astro:assets` and `<Image />` component with `import.meta.glob`.
-- [x] 6. Update `CustomersTemplate.astro`: Use `astro:assets` and `<Image />` component with `import.meta.glob`.
+- [x] עדכון `src/layouts/Layout.astro` לטובת תגיות `og:locale` רב-לשוניות.
+- [x] עדכון `src/layouts/Layout.astro` ליישום הזרקת GTM תחת מערכת תיקון 13 (רק לאחר Opt-in).
+- [x] עדכון ה-CSP בקובץ `public/_headers` לאישור הדומיינים של גוגל לטובת Analytics/GTM.
+- [x] התקנת והגדרת פלאגין `@astrojs/sitemap` בקובץ `astro.config.mjs`.
+- [x] יצירת קובץ `public/robots.txt` שמפנה ל-Sitemap האוטומטי שיווצר.

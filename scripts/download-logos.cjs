@@ -9,9 +9,7 @@ const domains = [
   "leitersdorf.com", "bri.co.il", "ganeytikva.org.il", "lkltd.co.il",
   "producers.org.il", "rasner.co.il", "share.google"
 ];
-
-const destDir = path.join(__dirname, '..', 'public', 'images', 'clients');
-
+const destDir = path.join(__dirname, '..', 'src', 'assets', 'images', 'clients');
 if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
 }

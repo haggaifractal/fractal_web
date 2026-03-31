@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // הגדרת הדומיין הרשמי או כתובת השרת האוטומטית
   site: process.env.URL || 'https://www.fractal.co.il',
-  integrations: [tailwind()],
+  integrations: [tailwind(), sitemap()],
 });

@@ -45,6 +45,8 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:url" content={Astro.url.href} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={isHe ? "he_IL" : "en_US"} />
+    <meta property="og:locale:alternate" content={isHe ? "en_US" : "he_IL"} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImageUrl} />
     <ClientRouter />
@@ -370,8 +372,17 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
 
     <script is:inline>
         function loadAnalytics() {
-            // Analytics logic placeholder
             console.log("Analytics trackers allowed (consent granted).");
+            // GTM script injection (Strict Opt-In for Amendment 13)
+            const gtmId = 'GTM-XXXXXXX';
+            if (!window.gtmLoaded) {
+                window.gtmLoaded = true;
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer',gtmId);
+            }
         }
         if (localStorage.getItem('cookie-consent') === 'granted') {
             loadAnalytics();
