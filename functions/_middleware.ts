@@ -13,11 +13,10 @@ export async function onRequest(context: any) {
   
   let preferredLang = 'he'; // default
 
-  // Basic cookie parsing
-  if (cookies.includes('lang=en')) {
-    preferredLang = 'en';
-  } else if (cookies.includes('lang=he')) {
-    preferredLang = 'he';
+  // Reliable cookie parsing via Regex
+  const langMatch = cookies.match(/(?:^|;\s*)lang=(en|he)(?:;|$)/);
+  if (langMatch) {
+    preferredLang = langMatch[1];
   } else {
     // Check Accept-Language header if no cookie exists
     const acceptLanguage = request.headers.get('Accept-Language') || '';

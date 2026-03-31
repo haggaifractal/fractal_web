@@ -1,6 +1,7 @@
 ---
 import ContactSection from '../components/ContactSection.astro';
 import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
 
 export interface Props {
     lang?: 'en' | 'he';
@@ -35,7 +36,7 @@ const t = isHe ? heLocales.AboutTemplate : enLocales.AboutTemplate;
             
             <!-- Technical Service Card -->
             <div class="md:col-span-7 bg-surface-container-lowest p-10 md:p-14 rounded-[2.5rem] border border-outline-variant/30 shadow-[0_15px_40px_rgba(0,104,87,0.05)] relative overflow-hidden flex flex-col justify-center">
-                <span class={`material-symbols-outlined text-primary text-5xl mb-6 flex ${isHe ? 'justify-end' : 'justify-start'}`}>memory</span>
+                <Icon name="memory" class={`text-primary text-5xl mb-6 flex ${isHe ? 'justify-end' : 'justify-start'}`} />
                 <p class="text-on-surface-variant leading-loose text-lg font-medium relative z-10">
                     {t.card1Text}
                 </p>
@@ -54,7 +55,7 @@ const t = isHe ? heLocales.AboutTemplate : enLocales.AboutTemplate;
             <div class="md:col-span-12 mt-4 bg-[#001a15] text-emerald-50 p-10 md:p-16 rounded-[2.5rem] shadow-2xl relative overflow-hidden border border-emerald-900/40 flex flex-col md:flex-row gap-12 items-center">
                 <div class="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
                 <div class="flex-shrink-0 relative z-10 hidden md:block">
-                    <span class="material-symbols-outlined text-[100px] text-primary-fixed/80">domain</span>
+                    <Icon name="domain" class="text-[100px] text-primary-fixed/80" />
                 </div>
                 <div class="relative z-10">
                     <p class="leading-relaxed text-lg md:text-xl max-w-4xl font-light">
@@ -89,7 +90,7 @@ const t = isHe ? heLocales.AboutTemplate : enLocales.AboutTemplate;
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {t.testimonials.map((test) => (
                     <div class="flex flex-col p-8 bg-surface-container-lowest rounded-[2rem] shadow-sm border border-outline-variant/30 hover:shadow-lg transition-shadow relative">
-                        <span class={`material-symbols-outlined text-primary-fixed opacity-30 text-5xl absolute top-6 ${isHe ? 'right-6' : 'left-6'}`}>format_quote</span>
+                        <Icon name="format_quote" class={`text-primary-fixed opacity-30 text-5xl absolute top-6 ${isHe ? 'right-6' : 'left-6'}`} />
                         <p class={`text-on-surface-variant text-lg font-medium leading-relaxed my-8 relative z-10 flex-grow ${isHe ? 'text-right pr-6' : 'text-left pl-6'}`}>
                             "{test.quote}"
                         </p>

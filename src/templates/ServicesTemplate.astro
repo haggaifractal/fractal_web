@@ -1,6 +1,7 @@
 ---
 import ContactSection from '../components/ContactSection.astro';
 import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
 
 export interface Props {
     lang?: 'en' | 'he';
@@ -57,7 +58,7 @@ const t = isHe ? heLocales.ServicesTemplate : enLocales.ServicesTemplate;
 
             <!-- Service 2: Data Security Solutions -->
             <div class="md:col-span-4 md:row-span-1 bg-primary text-white p-10 relative overflow-hidden shadow-xl shadow-primary/20 flex flex-col justify-between rounded-[2.5rem] group">
-                <span class="material-symbols-outlined text-5xl mb-4 transition-transform duration-500 group-hover:scale-110" style="font-variation-settings: 'FILL' 1;">security</span>
+                <Icon name="security" class="text-5xl mb-4 transition-transform duration-500 group-hover:scale-110" />
                 <div class="relative z-10">
                     <h2 class="text-2xl font-bold font-headline mb-3">{t.s2Title}</h2>
                     <p class="text-primary-fixed/90 text-md leading-relaxed">{t.s2Desc}</p>
@@ -79,7 +80,7 @@ const t = isHe ? heLocales.ServicesTemplate : enLocales.ServicesTemplate;
             <!-- Service 4: Security Company Solution Maintenance -->
             <div class="md:col-span-4 md:row-span-1 bg-surface-container-lowest p-8 flex flex-col justify-between hover:bg-emerald-50 transition-colors duration-300 border border-outline-variant/30 rounded-[2.5rem] group">
                 <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:rotate-12">
-                    <span class="material-symbols-outlined text-3xl">policy</span>
+                    <Icon name="policy" class="text-3xl" />
                 </div>
                 <div>
                     <h2 class="text-xl font-bold font-headline text-on-surface mb-3">{t.s4Title}</h2>
@@ -90,7 +91,7 @@ const t = isHe ? heLocales.ServicesTemplate : enLocales.ServicesTemplate;
             <!-- Service 5: Network Solutions -->
             <div class="md:col-span-4 md:row-span-1 bg-surface-container-lowest p-8 flex flex-col justify-between hover:bg-emerald-50 transition-colors duration-300 border border-outline-variant/30 rounded-[2.5rem] group">
                 <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110">
-                    <span class="material-symbols-outlined text-3xl">hub</span>
+                    <Icon name="hub" class="text-3xl" />
                 </div>
                 <div>
                     <h2 class="text-xl font-bold font-headline text-on-surface mb-3">{t.s5Title}</h2>
@@ -101,7 +102,7 @@ const t = isHe ? heLocales.ServicesTemplate : enLocales.ServicesTemplate;
             <!-- Service 6: Support Consulting -->
             <div class="md:col-span-4 md:row-span-1 bg-primary-fixed/20 p-8 flex flex-col justify-center text-center border border-primary-fixed/30 hover:bg-primary-fixed/30 transition-colors duration-300 rounded-[2.5rem] group">
                 <div class="w-16 h-16 mx-auto bg-primary text-white rounded-full flex items-center justify-center mb-6 shadow-xl shadow-primary/30 transition-shadow group-hover:shadow-primary/50">
-                    <span class="material-symbols-outlined text-3xl">support_agent</span>
+                    <Icon name="support_agent" class="text-3xl" />
                 </div>
                 <h2 class="text-2xl font-bold font-headline text-primary mb-3">{t.s6Title}</h2>
                 <p class="text-[15px] text-on-surface-variant leading-relaxed">{t.s6Desc}</p>

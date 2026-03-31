@@ -1,0 +1,231 @@
+---
+import enLocales from '../locales/en.json';
+import heLocales from '../locales/he.json';
+import Icon from './Icon.astro';
+
+export interface Props {
+	lang?: 'en' | 'he';
+}
+
+const { lang = 'en' } = Astro.props;
+const isHe = lang === 'he';
+const pathname = Astro.url.pathname;
+const altPath = isHe 
+    ? '/en' + (pathname === '/' ? '' : pathname)
+    : pathname.replace(/^\/en/, '') || '/';
+
+const t = isHe ? heLocales.Layout : enLocales.Layout;
+---
+
+<fractal-nav>
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 transition-all duration-300 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
+        <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
+            <a href={isHe ? "/" : "/en/"} class="group flex items-center gap-1.5 sm:gap-2 md:gap-3 no-underline outline-none">
+                <img id="nav-logo" src="/logo-icon.png" alt="Fractal Logo Icon" width="64" height="64" class={`max-[360px]:w-11 max-[360px]:h-11 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -my-2 md:-my-3 lg:-my-6 transition-all duration-300 ${isHe ? '-mr-2 lg:-mr-4' : '-ml-2 lg:-ml-4'}`} />
+
+                <div class={`flex flex-col justify-center min-w-0 ${isHe ? 'items-end' : 'items-start'}`} dir={isHe ? 'rtl' : 'ltr'}>
+                    <div class="flex items-center gap-1 sm:gap-1.5 md:gap-2 whitespace-nowrap">
+                        <span class="max-[360px]:text-[1.1rem] text-[1.3rem] sm:text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-bold tracking-tight leading-none text-primary font-headline">{isHe ? 'פרקטל' : 'Fractal'}</span>
+                        <span class="max-[360px]:text-[0.55rem] text-secondary/70 text-[0.6rem] sm:text-sm md:text-base leading-none translate-y-[1px]">◆</span>
+                        <span class="max-[360px]:text-[1.1rem] text-[1.3rem] sm:text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-bold tracking-tight leading-none text-primary font-headline">{isHe ? 'Fractal' : 'פרקטל'}</span>
+                    </div>
+                    
+                    <div class={`max-[360px]:hidden w-full flex justify-center gap-1.5 sm:gap-2 md:gap-3 items-center text-[0.65rem] sm:text-[0.65rem] md:text-[0.7rem] lg:text-[0.8rem] font-bold text-slate-600/90 leading-none mt-1 font-headline tracking-widest whitespace-nowrap overflow-hidden text-ellipsis`}>
+                        {t.subTitle.map(s => s && <span>{s}</span>)}
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="hidden lg:flex flex-1 items-center justify-center pt-1 transition-all">
+            <div class="flex items-center justify-center w-full gap-6 xl:gap-10">
+                <a href={isHe ? "/" : "/en/"} class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">{t.nav.home}<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
+                <a href={isHe ? "/about" : "/en/about"} class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">{t.nav.about}<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
+                <a href={isHe ? "/services" : "/en/services"} class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">{t.nav.services}<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
+                <a href={isHe ? "/customers" : "/en/customers"} class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">{t.nav.customers}<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-4 relative z-10 shrink-0">
+            <a href={altPath} data-lang={isHe ? "en" : "he"} class="lang-toggle-btn hidden lg:flex text-on-surface-variant hover:text-primary transition-colors text-sm font-bold tracking-wide items-center font-headline uppercase" dir={isHe ? "ltr" : "rtl"}>{isHe ? "EN" : "HE"}</a>
+            
+            <div class="hidden lg:block h-5 w-px bg-outline-variant/30"></div>
+
+            <div class="hidden md:flex items-center gap-2">
+                <a href="tel:03-6168890" class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant/80 text-on-surface-variant hover:bg-primary hover:text-white transition-all hover:scale-105 active:scale-95" aria-label="Call">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="w-5 h-5 fill-current"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12Z"/></svg>                </a>
+                <a href="mailto:Office@fractal.co.il" class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant/80 text-on-surface-variant hover:bg-primary hover:text-white transition-all hover:scale-105 active:scale-95" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="w-5 h-5 fill-current"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg>                </a>
+            </div>
+
+            <div class="hidden md:block h-5 w-px bg-outline-variant/30"></div>
+
+            <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex px-4 py-2 sm:px-6 sm:py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full text-xs sm:text-sm font-semibold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">{t.techSupport}</a>
+            
+            <button id="mobile-btn" class="lg:hidden flex items-center justify-center p-2 rounded-full bg-surface-variant/80 text-on-surface hover:bg-primary hover:text-white transition-all" aria-label="Toggle Menu">
+                <div id="mobile-icon" class="relative w-6 h-6">
+                    <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="absolute inset-0 w-6 h-6 fill-current transition-opacity duration-300 opacity-100"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+                    <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="absolute inset-0 w-6 h-6 fill-current transition-opacity duration-300 opacity-0 pointer-events-none"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                </div>
+            </button>
+        </div>
+    </nav>
+    
+    <div id="mobile-nav" class="fixed inset-0 z-[45] bg-surface/95 backdrop-blur-3xl opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden flex flex-col pt-32 px-6 overscroll-none">
+        <div class="flex flex-col gap-2">
+            <div class={`flex px-6 mb-2 ${isHe ? 'justify-end' : 'justify-end'}`}>
+                <a href={altPath} data-lang={isHe ? "en" : "he"} class="lang-toggle-btn text-on-surface-variant hover:text-primary transition-colors text-lg font-bold tracking-wide font-headline uppercase" dir={isHe ? "ltr" : "rtl"}>{isHe ? "EN" : "HE"}</a>
+            </div>
+
+            <a href={isHe ? "/" : "/en/"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                {t.nav.home} <Icon name={isHe ? 'chevron_left' : 'chevron_right'} class="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+            </a>
+            <a href={isHe ? "/about" : "/en/about"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                {t.nav.about} <Icon name={isHe ? 'chevron_left' : 'chevron_right'} class="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+            </a>
+            <a href={isHe ? "/services" : "/en/services"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                {t.nav.services} <Icon name={isHe ? 'chevron_left' : 'chevron_right'} class="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+            </a>
+            <a href={isHe ? "/customers" : "/en/customers"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                {t.nav.customers} <Icon name={isHe ? 'chevron_left' : 'chevron_right'} class="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+            </a>
+            <a href={isHe ? "/#contact" : "/en/contact"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
+                {t.nav.contact} <Icon name={isHe ? 'chevron_left' : 'chevron_right'} class="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+            </a>
+            
+            <div class="mt-8 px-6">
+                <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all text-lg">
+                    <Icon name="support_agent" class="text-xl" />
+                    {t.techSupport}
+                </a>
+            </div>
+        </div>
+    </div>
+</fractal-nav>
+
+<script>
+    class FractalNav extends HTMLElement {
+        private btn: HTMLElement | null;
+        private nav: HTMLElement | null;
+        private icon: HTMLElement | null;
+        private mainNav: HTMLElement | null;
+        private navLogo: HTMLElement | null;
+        private links: NodeListOf<HTMLAnchorElement>;
+        private menuOpen: boolean = false;
+        
+        private boundToggleMenu: () => void;
+        private boundCheckScroll: () => void;
+        private observer: IntersectionObserver;
+
+        constructor() {
+            super();
+            this.btn = this.querySelector('button#mobile-btn');
+            this.nav = this.querySelector('div#mobile-nav');
+            this.icon = this.querySelector('span#mobile-icon');
+            this.mainNav = this.querySelector('nav#main-nav');
+            this.navLogo = this.querySelector('img#nav-logo');
+            this.links = this.querySelectorAll('a');
+
+            this.boundToggleMenu = this.toggleMenu.bind(this);
+            this.boundCheckScroll = this.checkScroll.bind(this);
+            
+            this.observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        this.observer.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.05 });
+        }
+
+        connectedCallback() {
+            if (this.btn) {
+                this.btn.addEventListener('click', this.boundToggleMenu);
+            }
+            
+            this.links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (this.menuOpen) this.boundToggleMenu();
+                });
+            });
+
+            window.addEventListener('scroll', this.boundCheckScroll, { passive: true });
+            this.checkScroll(); 
+            
+            // Note: reveal-on-scroll elements are scattered across the document, 
+            // so we observe them from the document level rather than just within this element.
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => this.observer.observe(el));
+
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-on-scroll:not(.is-visible)').forEach(el => {
+                    el.classList.add('is-visible');
+                    this.observer.unobserve(el);
+                });
+            }, 2000);
+        }
+
+        disconnectedCallback() {
+            if (this.btn) {
+                this.btn.removeEventListener('click', this.boundToggleMenu);
+            }
+            window.removeEventListener('scroll', this.boundCheckScroll);
+            this.observer.disconnect();
+        }
+
+        toggleMenu() {
+            if(!this.nav) return;
+            this.menuOpen = !this.menuOpen;
+            
+            const iconMenu = this.querySelector('#icon-menu');
+            const iconClose = this.querySelector('#icon-close');
+            
+            if(this.menuOpen) {
+                this.nav.classList.remove('opacity-0', 'pointer-events-none');
+                this.nav.classList.add('opacity-100', 'pointer-events-auto');
+                if (iconMenu && iconClose) {
+                    iconMenu.classList.replace('opacity-100', 'opacity-0');
+                    iconClose.classList.replace('opacity-0', 'opacity-100');
+                }
+                document.body.style.overflow = 'hidden';
+            } else {
+                this.nav.classList.add('opacity-0', 'pointer-events-none');
+                this.nav.classList.remove('opacity-100', 'pointer-events-auto');
+                if (iconMenu && iconClose) {
+                    iconMenu.classList.replace('opacity-0', 'opacity-100');
+                    iconClose.classList.replace('opacity-100', 'opacity-0');
+                }
+                document.body.style.overflow = '';
+            }
+        }
+
+        checkScroll() {
+            if (!this.mainNav) return;
+            if (window.scrollY > 50) {
+                this.mainNav.classList.add('bg-white/90', 'shadow-md', 'py-1');
+                this.mainNav.classList.remove('bg-white/70', 'py-2', 'md:py-3', 'shadow-[0_20px_40px_rgba(0,104,87,0.06)]');
+                this.navLogo?.classList.add('scale-75'); 
+            } else {
+                this.mainNav.classList.add('bg-white/70', 'py-2', 'md:py-3', 'shadow-[0_20px_40px_rgba(0,104,87,0.06)]');
+                this.mainNav.classList.remove('bg-white/90', 'shadow-md', 'py-1');
+                this.navLogo?.classList.remove('scale-75');
+            }
+        }
+    }
+
+    if (!customElements.get('fractal-nav')) {
+        customElements.define('fractal-nav', FractalNav);
+    }
+    
+    // Manage Language switching and cookie creation consistently across navigations
+    document.addEventListener('astro:page-load', () => {
+        document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const target = e.currentTarget as HTMLElement;
+                const lang = target.dataset.lang;
+                if (lang) {
+                    document.cookie = `lang=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+                }
+            });
+        });
+    });
+</script>

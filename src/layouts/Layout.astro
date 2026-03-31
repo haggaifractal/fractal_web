@@ -3,6 +3,9 @@ import { ClientRouter } from 'astro:transitions';
 import Footer from '../components/Footer.astro';
 import CookieBanner from '../components/CookieBanner.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
+import Navbar from '../components/Navbar.astro';
+import AnalyticsTracking from '../components/AnalyticsTracking.astro';
+import AccessibilityWidget from '../components/AccessibilityWidget.astro';
 
 export interface Props {
 	title: string;
@@ -51,18 +54,21 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
     <meta name="twitter:image" content={ogImageUrl} />
     <ClientRouter />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     {isHe ? (
         <>
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800;900&display=swap" />
             <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800;900&display=swap" rel="stylesheet">
         </>
     ) : (
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <>
+            <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+            <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        </>
     )}
     
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-
     <style is:global define:vars={{ lang }}>
         @tailwind base;
         @tailwind components;
@@ -114,7 +120,7 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
             animation: shimmerText 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
         
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
         
         html[lang="he"] body { 
             font-family: 'Heebo', sans-serif;
@@ -173,194 +179,7 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
     </style>
 </head>
 <body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
-    <fractal-nav>
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-2 md:py-3 transition-all duration-300 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl rounded-[2rem] mt-3 mx-3 md:mx-auto max-w-6xl shadow-[0_20px_40px_rgba(0,104,87,0.06)]">
-        <div class="flex items-center relative z-10 transition-transform hover:scale-105 active:scale-95 duration-300">
-            <a href={isHe ? "/" : "/en/"} class="group flex items-center gap-1.5 sm:gap-2 md:gap-3 no-underline outline-none">
-                <img id="nav-logo" src="/logo-icon.png" alt="Fractal Logo Icon" width="64" height="64" class={`w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 object-contain shrink-0 drop-shadow-xl -my-2 md:-my-3 lg:-my-6 transition-all duration-300 ${isHe ? '-mr-2 lg:-mr-4' : '-ml-2 lg:-ml-4'}`} />
-
-                <div class={`flex flex-col justify-center shrink-0 ${isHe ? 'items-end' : 'items-start'}`} dir={isHe ? 'rtl' : 'ltr'}>
-                    <div class="flex items-center gap-1 sm:gap-1.5 md:gap-2">
-                        <span class="text-[1.15rem] sm:text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-bold tracking-tight leading-none text-primary font-headline">{isHe ? 'פרקטל' : 'Fractal'}</span>
-                        <span class="text-secondary/70 text-[0.6rem] sm:text-sm md:text-base leading-none translate-y-[1px]">◆</span>
-                        <span class="text-[1.15rem] sm:text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-bold tracking-tight leading-none text-primary font-headline">{isHe ? 'Fractal' : 'פרקטל'}</span>
-                    </div>
-                    
-                    <div class={`w-full flex justify-center gap-1.5 sm:gap-2 md:gap-3 items-center text-[0.55rem] sm:text-[0.65rem] md:text-[0.7rem] lg:text-[0.8rem] font-bold text-slate-600/90 leading-none mt-1 font-headline tracking-widest`}>
-                        {t.subTitle.map(s => s && <span>{s}</span>)}
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="hidden lg:flex flex-1 items-center justify-center pt-1 transition-all">
-            <div class="flex items-center justify-center w-full gap-6 xl:gap-10">
-                <a href={isHe ? "/" : "/en/"} class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">{t.nav.home}<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
-                <a href={isHe ? "/about" : "/en/about"} class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">{t.nav.about}<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
-                <a href={isHe ? "/services" : "/en/services"} class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">{t.nav.services}<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
-                <a href={isHe ? "/customers" : "/en/customers"} class="whitespace-nowrap shrink-0 text-on-surface-variant font-medium hover:text-primary transition-colors text-[15px] tracking-wide relative group">{t.nav.customers}<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span></a>
-            </div>
-        </div>
-
-        <div class="flex items-center gap-2 sm:gap-4 relative z-10 shrink-0">
-            <a href={altPath} onclick={`document.cookie='lang=${isHe ? "en" : "he"}; path=/; max-age=31536000';`} class="hidden lg:flex text-on-surface-variant hover:text-primary transition-colors text-sm font-bold tracking-wide items-center font-headline uppercase" dir={isHe ? "ltr" : "rtl"}>{isHe ? "EN" : "HE"}</a>
-            
-            <div class="hidden lg:block h-5 w-px bg-outline-variant/30"></div>
-
-            <div class="hidden md:flex items-center gap-2">
-                <a href="tel:03-6168890" class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant/80 text-on-surface-variant hover:bg-primary hover:text-white transition-all hover:scale-105 active:scale-95" aria-label="Call">
-                    <span class="material-symbols-outlined text-[20px]">call</span>
-                </a>
-                <a href="#" onclick="window.location.href='mailto:Office@fractal.co.il'; return false;" class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-variant/80 text-on-surface-variant hover:bg-primary hover:text-white transition-all hover:scale-105 active:scale-95" aria-label="Email">
-                    <span class="material-symbols-outlined text-[20px]">mail</span>
-                </a>
-            </div>
-
-            <div class="hidden md:block h-5 w-px bg-outline-variant/30"></div>
-
-            <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex px-4 py-2 sm:px-6 sm:py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full text-xs sm:text-sm font-semibold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">{t.techSupport}</a>
-            
-            <button id="mobile-btn" class="lg:hidden flex items-center justify-center p-2 rounded-full bg-surface-variant/80 text-on-surface hover:bg-primary hover:text-white transition-all" aria-label="Toggle Menu">
-                <span class="material-symbols-outlined" id="mobile-icon">menu</span>
-            </button>
-        </div>
-    </nav>
-    
-    <div id="mobile-nav" class="fixed inset-0 z-[45] bg-surface/95 backdrop-blur-3xl opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden flex flex-col pt-32 px-6 overscroll-none">
-        <div class="flex flex-col gap-2">
-            <div class={`flex px-6 mb-2 ${isHe ? 'justify-end' : 'justify-end'}`}>
-                <a href={altPath} onclick={`document.cookie='lang=${isHe ? "en" : "he"}; path=/; max-age=31536000';`} class="text-on-surface-variant hover:text-primary transition-colors text-lg font-bold tracking-wide font-headline uppercase" dir={isHe ? "ltr" : "rtl"}>{isHe ? "EN" : "HE"}</a>
-            </div>
-
-            <a href={isHe ? "/" : "/en/"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
-                {t.nav.home} <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">{isHe ? 'chevron_left' : 'chevron_right'}</span>
-            </a>
-            <a href={isHe ? "/about" : "/en/about"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
-                {t.nav.about} <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">{isHe ? 'chevron_left' : 'chevron_right'}</span>
-            </a>
-            <a href={isHe ? "/services" : "/en/services"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
-                {t.nav.services} <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">{isHe ? 'chevron_left' : 'chevron_right'}</span>
-            </a>
-            <a href={isHe ? "/customers" : "/en/customers"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
-                {t.nav.customers} <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">{isHe ? 'chevron_left' : 'chevron_right'}</span>
-            </a>
-            <a href={isHe ? "/#contact" : "/en/contact"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
-                {t.nav.contact} <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-primary">{isHe ? 'chevron_left' : 'chevron_right'}</span>
-            </a>
-            
-            <div class="mt-8 px-6">
-                <a href="https://f2002.net/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all text-lg">
-                    <span class="material-symbols-outlined text-xl">support_agent</span>
-                    {t.techSupport}
-                </a>
-            </div>
-        </div>
-    </div>
-    </fractal-nav>
-
-    <script>
-        class FractalNav extends HTMLElement {
-            private btn: HTMLElement | null;
-            private nav: HTMLElement | null;
-            private icon: HTMLElement | null;
-            private mainNav: HTMLElement | null;
-            private navLogo: HTMLElement | null;
-            private links: NodeListOf<HTMLAnchorElement>;
-            private menuOpen: boolean = false;
-            
-            private boundToggleMenu: () => void;
-            private boundCheckScroll: () => void;
-            private observer: IntersectionObserver;
-
-            constructor() {
-                super();
-                this.btn = this.querySelector('button#mobile-btn');
-                this.nav = this.querySelector('div#mobile-nav');
-                this.icon = this.querySelector('span#mobile-icon');
-                this.mainNav = this.querySelector('nav#main-nav');
-                this.navLogo = this.querySelector('img#nav-logo');
-                this.links = this.querySelectorAll('a');
-
-                this.boundToggleMenu = this.toggleMenu.bind(this);
-                this.boundCheckScroll = this.checkScroll.bind(this);
-                
-                this.observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            this.observer.unobserve(entry.target);
-                        }
-                    });
-                }, { root: null, rootMargin: '0px', threshold: 0.05 });
-            }
-
-            connectedCallback() {
-                if (this.btn) {
-                    this.btn.addEventListener('click', this.boundToggleMenu);
-                }
-                
-                this.links.forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (this.menuOpen) this.boundToggleMenu();
-                    });
-                });
-
-                window.addEventListener('scroll', this.boundCheckScroll, { passive: true });
-                this.checkScroll(); 
-                
-                // Note: reveal-on-scroll elements are scattered across the document, 
-                // so we observe them from the document level rather than just within this element.
-                document.querySelectorAll('.reveal-on-scroll').forEach(el => this.observer.observe(el));
-
-                setTimeout(() => {
-                    document.querySelectorAll('.reveal-on-scroll:not(.is-visible)').forEach(el => {
-                        el.classList.add('is-visible');
-                        this.observer.unobserve(el);
-                    });
-                }, 2000);
-            }
-
-            disconnectedCallback() {
-                if (this.btn) {
-                    this.btn.removeEventListener('click', this.boundToggleMenu);
-                }
-                window.removeEventListener('scroll', this.boundCheckScroll);
-                this.observer.disconnect();
-            }
-
-            toggleMenu() {
-                if(!this.nav || !this.icon) return;
-                this.menuOpen = !this.menuOpen;
-                if(this.menuOpen) {
-                    this.nav.classList.remove('opacity-0', 'pointer-events-none');
-                    this.nav.classList.add('opacity-100', 'pointer-events-auto');
-                    this.icon.textContent = 'close';
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    this.nav.classList.add('opacity-0', 'pointer-events-none');
-                    this.nav.classList.remove('opacity-100', 'pointer-events-auto');
-                    this.icon.textContent = 'menu';
-                    document.body.style.overflow = '';
-                }
-            }
-
-            checkScroll() {
-                if (!this.mainNav) return;
-                if (window.scrollY > 50) {
-                    this.mainNav.classList.add('bg-white/90', 'shadow-md', 'py-1');
-                    this.mainNav.classList.remove('bg-white/70', 'py-2', 'md:py-3', 'shadow-[0_20px_40px_rgba(0,104,87,0.06)]');
-                    this.navLogo?.classList.add('scale-75'); 
-                } else {
-                    this.mainNav.classList.add('bg-white/70', 'py-2', 'md:py-3', 'shadow-[0_20px_40px_rgba(0,104,87,0.06)]');
-                    this.mainNav.classList.remove('bg-white/90', 'shadow-md', 'py-1');
-                    this.navLogo?.classList.remove('scale-75');
-                }
-            }
-        }
-
-        if (!customElements.get('fractal-nav')) {
-            customElements.define('fractal-nav', FractalNav);
-        }
-    </script>
+    <Navbar lang={lang} />
 
     <main class="flex-grow w-full pb-16 pt-24 relative z-0">
         <slot />
@@ -370,86 +189,7 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
     <CookieBanner lang={lang} />
     <ScrollToTop />
 
-    <script is:inline>
-        function loadAnalytics() {
-            console.log("Analytics trackers allowed (consent granted).");
-            const gtmId = 'G-989B9CSF2C';
-            
-            const script = document.createElement('script');
-            script.src = `https://www.googletagmanager.com/gtag/js?id=${gtmId}`;
-            script.async = true;
-            document.head.appendChild(script);
-
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', gtmId);
-            
-            // Google Ads Integration (Marketing/Retargeting) 
-            // TODO: Replace 'AW-XXXXXXX' with your actual Google Ads ID.
-            gtag('config', 'AW-XXXXXXX');
-            
-            console.log("Google Analytics and Google Ads injected successfully.");
-        }
-        if (localStorage.getItem('cookie-consent') === 'granted') {
-            loadAnalytics();
-        } else {
-            window.addEventListener('cookie-consent-granted', loadAnalytics);
-        }
-    </script>
-
-    <script>
-        document.addEventListener('astro:page-load', function() {
-            // Lazy load the accessibility widget without blocking the main thread
-            const loadAccessibility = async () => {
-                if (document.querySelector('.accessibility-menu')) return;
-                
-                try {
-                    const module = await import('accessibility');
-                    const Accessibility = module.Accessibility || module.default;
-                    const isHe = document.documentElement.lang === 'he';
-                    
-                    new Accessibility({
-                        labels: {
-                            menuTitle: isHe ? 'אפשרויות נגישות' : 'Accessibility Options',
-                            increaseText: isHe ? 'הגדל טקסט' : 'Increase Text',
-                            decreaseText: isHe ? 'הקטן טקסט' : 'Decrease Text',
-                            increaseTextSpacing: isHe ? 'הגדל מרווח טקסט' : 'Increase Text Spacing',
-                            decreaseTextSpacing: isHe ? 'הקטן מרווח טקסט' : 'Decrease Text Spacing',
-                            increaseLineHeight: isHe ? 'הגדל מרווח שורות' : 'Increase Line Height',
-                            decreaseLineHeight: isHe ? 'הקטן מרווח שורות' : 'Decrease Line Height',
-                            invertColors: isHe ? 'הפוך צבעים' : 'Invert Colors',
-                            grayHues: isHe ? 'גווני אפור' : 'Gray Hues',
-                            underlineLinks: isHe ? 'קו תחתון לקישורים' : 'Underline Links',
-                            bigCursor: isHe ? 'סמן גדול' : 'Big Cursor',
-                            readingGuide: isHe ? 'מדריך קריאה' : 'Reading Guide',
-                            textToSpeech: isHe ? 'הקראת טקסט' : 'Text to Speech',
-                            speechToText: isHe ? 'הכתבה קולית' : 'Speech to Text',
-                            resetTitle: isHe ? 'איפוס נגישות' : 'Reset Accessibility',
-                            closeTitle: isHe ? 'סגור' : 'Close',
-                            disableAnimations: isHe ? 'בטל אנימציות' : 'Disable Animations',
-                            hotkeyPrefix: isHe ? 'קיצור דרך:' : 'Hotkey:'
-                        },
-                        icon: {
-                            // @ts-ignore
-                            position: {
-                                bottom: { size: 30, units: 'px' },
-                                [isHe ? 'right' : 'left']: { size: 30, units: 'px' },
-                                type: 'fixed'
-                            }
-                        }
-                    });
-                } catch (e) {
-                    console.error("Accessibility widget failed to load", e);
-                }
-            };
-            
-            if ('requestIdleCallback' in window) {
-                requestIdleCallback(loadAccessibility, { timeout: 2000 });
-            } else {
-                setTimeout(loadAccessibility, 1500);
-            }
-        });
-    </script>
+    <AnalyticsTracking />
+    <AccessibilityWidget />
 </body>
 </html>

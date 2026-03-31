@@ -1,4 +1,6 @@
 ---
+import Icon from './Icon.astro';
+import WazeIcon from './icons/WazeIcon.astro';
 export interface Props {
     lang?: 'en' | 'he';
 }
@@ -44,19 +46,14 @@ const links = {
             <div class="flex flex-col items-center gap-3">
                 <h4 class="text-primary-fixed font-bold uppercase tracking-widest text-xs">{texts.address_title}</h4>
                 <p class="leading-relaxed">{texts.address_body1}<br/>{texts.address_body2}</p>
-                <div class="flex flex-wrap justify-center gap-3 mt-4 text-sm font-bold text-primary-fixed">
-                    <a href={links.gmaps} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-white hover:bg-white/5 border border-primary-fixed/20 bg-primary-fixed/10 px-4 py-2 rounded-full transition-all group shadow-sm shadow-primary/5 active:scale-95" aria-label="Google Maps">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current opacity-80 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        <span>{texts.google_maps}</span>
+                <div class="flex flex-wrap justify-center gap-4 mt-4 text-sm font-bold text-primary-fixed">
+                    <a href={links.gmaps} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary/40 px-5 py-2.5 rounded-2xl transition-all duration-300 group shadow-md hover:shadow-primary/20 active:scale-95" aria-label="Google Maps">
+                        <Icon name="location_on" class="text-xl text-primary-fixed group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300" />
+                        <span class="font-medium text-sm text-white/90 group-hover:text-white tracking-wide">{texts.google_maps}</span>
                     </a>
-                    <a href={links.waze} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-white hover:bg-white/5 border border-primary-fixed/20 bg-primary-fixed/10 px-4 py-2 rounded-full transition-all group shadow-sm shadow-primary/5 active:scale-95" aria-label="Waze">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current opacity-80 group-hover:opacity-100 transition-opacity" viewBox="0 0 512 512">
-                            <path d="M495.6 156.4c-8.9-38.3-26.6-70.2-52.7-94.8-21.7-20.5-47.5-35-77-43-34.9-9.5-72.3-10.7-108.6-4.5-38.2 6.5-73.4 22.2-103.4 46.5-27.4 22.3-48.4 51.5-61 85.3-10.6 28.5-15.8 59.2-15 90.1.7 28 5.7 55.4 14.8 81.3-49.8 1.9-88.7 8.3-90.1 8.5-4.4.7-7.8 4.2-8.5 8.7-.7 4.5.9 9.1 4.3 12.1 27.6 24 64.9 36.6 102.7 34.6 23.6 29 55.7 50.4 92.5 60.1 36.6 9.7 75.3 10.3 111.9 2 34.6-7.8 66-23.7 90.9-46.7 22.3-20.6 39.5-46.8 49.3-76.3 8.3-24.8 12.6-51.2 12.5-77.8-.1-29-4.8-58.1-13.8-86.1zM172 268.1c-14.7 0-26.6-11.9-26.6-26.6 0-14.7 11.9-26.6 26.6-26.6 14.7 0 26.6 11.9 26.6 26.6 0 14.7-11.9 26.6-26.6 26.6zm144.1 53.2c-12.7 16.3-33.1 25.1-54.1 25.1s-41.4-8.8-54.1-25.1c-4.4-5.6-3.4-13.8 2.2-18.1 5.6-4.4 13.8-3.4 18.1 2.2 6.4 8.2 18.5 14.3 33.7 14.3 15.2 0 27.3-6.1 33.7-14.3 4.4-5.6 12.6-6.6 18.1-2.2 5.7 4.3 6.7 12.5 2.4 18.1zm23.9-53.2c-14.7 0-26.6-11.9-26.6-26.6 0-14.7 11.9-26.6 26.6-26.6 14.7 0 26.6 11.9 26.6 26.6 0 14.7-11.9 26.6-26.6 26.6z"/>
-                            <path d="M141.6 447.8c0 35.4-28.7 64.1-64.1 64.1s-64.1-28.7-64.1-64.1 28.7-64.1 64.1-64.1 64.1 28.7 64.1 64.1zm299.7 0c0 35.4-28.7 64.1-64.1 64.1s-64.1-28.7-64.1-64.1 28.7-64.1 64.1-64.1 64.1 28.7 64.1 64.1z"/>
-                        </svg>
-                        <span>{texts.waze}</span>
+                    <a href={links.waze} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary/40 px-5 py-2.5 rounded-2xl transition-all duration-300 group shadow-md hover:shadow-primary/20 active:scale-95" aria-label="Waze">
+                        <WazeIcon class="w-5 h-5 text-primary-fixed group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300" />
+                        <span class="font-medium text-sm text-white/90 group-hover:text-white tracking-wide">{texts.waze}</span>
                     </a>
                 </div>
             </div>
@@ -65,14 +62,16 @@ const links = {
                 <h4 class="text-primary-fixed font-bold uppercase tracking-widest text-xs">{texts.contact_title}</h4>
                 <div class="flex items-center gap-2 w-fit shrink-0" dir="ltr">
                     <a href="tel:03-6168890" class="hover:text-white transition-colors block" dir="ltr">{texts.tel}</a>
-                    <button aria-label="Copy phone" class="group flex items-center justify-center bg-white/5 hover:bg-white/10 p-1.5 rounded-full transition-colors" onclick="navigator.clipboard.writeText('03-6168890'); this.querySelector('.copy-icon').textContent='check'; this.querySelector('.copy-icon').classList.add('text-primary-fixed'); setTimeout(()=>{this.querySelector('.copy-icon').textContent='content_copy'; this.querySelector('.copy-icon').classList.remove('text-primary-fixed');},2000);">
-                        <span class="material-symbols-outlined text-[13px] opacity-60 group-hover:opacity-100 transition-all copy-icon">content_copy</span>
+                    <button aria-label="Copy phone" class="group flex items-center justify-center bg-white/5 hover:bg-white/10 w-7 h-7 rounded-full transition-colors relative" onclick="navigator.clipboard.writeText('03-6168890'); this.querySelector('.copy-icon').style.opacity='0'; this.querySelector('.check-icon').style.opacity='1'; setTimeout(()=>{this.querySelector('.copy-icon').style.opacity=''; this.querySelector('.check-icon').style.opacity='0';},2000);">
+                        <Icon name="content_copy" class="absolute text-[13px] opacity-60 group-hover:opacity-100 transition-opacity copy-icon" />
+                        <Icon name="check" class="absolute text-[13px] opacity-0 transition-opacity text-primary-fixed check-icon" />
                     </button>
                 </div>
                 <div class="flex items-center gap-2 w-fit shrink-0" dir="ltr">
                     <a href="#" onclick="window.location.href = 'mailto:' + ['Office', 'fractal.co.il'].join('@'); return false;" class="hover:text-white transition-colors block">{texts.email}</a>
-                    <button aria-label="Copy email" class="group flex items-center justify-center bg-white/5 hover:bg-white/10 p-1.5 rounded-full transition-colors" onclick="navigator.clipboard.writeText('Office@fractal.co.il'); this.querySelector('.copy-icon').textContent='check'; this.querySelector('.copy-icon').classList.add('text-primary-fixed'); setTimeout(()=>{this.querySelector('.copy-icon').textContent='content_copy'; this.querySelector('.copy-icon').classList.remove('text-primary-fixed');},2000);">
-                        <span class="material-symbols-outlined text-[13px] opacity-60 group-hover:opacity-100 transition-all copy-icon">content_copy</span>
+                    <button aria-label="Copy email" class="group flex items-center justify-center bg-white/5 hover:bg-white/10 w-7 h-7 rounded-full transition-colors relative" onclick="navigator.clipboard.writeText('Office@fractal.co.il'); this.querySelector('.copy-icon').style.opacity='0'; this.querySelector('.check-icon').style.opacity='1'; setTimeout(()=>{this.querySelector('.copy-icon').style.opacity=''; this.querySelector('.check-icon').style.opacity='0';},2000);">
+                        <Icon name="content_copy" class="absolute text-[13px] opacity-60 group-hover:opacity-100 transition-opacity copy-icon" />
+                        <Icon name="check" class="absolute text-[13px] opacity-0 transition-opacity text-primary-fixed check-icon" />
                     </button>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 ---
 import ContactSection from '../components/ContactSection.astro';
 import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
 import clientsData from '../data/clients.json';
 import type { ClientData } from '../types';
 import { Image } from 'astro:assets';
@@ -73,7 +74,7 @@ const t = lang === 'he' ? heLocales.CustomersTemplate : enLocales.CustomersTempl
                                     {(i === 0 || i === Math.floor(col1.length / 2)) ? (
                                         <a href={t.ctaBoxLink} class="bg-surface-container/30 hover:bg-surface-container/80 h-36 rounded-2xl flex flex-col items-center justify-center p-4 text-center active:scale-95 transition-all group relative overflow-hidden border-2 border-dashed border-primary/40 hover:border-primary shrink-0">
                                             <div class="w-10 h-10 rounded mb-3 flex items-center justify-center bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                                                <span class="material-symbols-outlined text-[1.5rem]">person_add</span>
+                                                <Icon name="person_add" class="text-[1.5rem]" />
                                             </div>
                                             <span class="font-bold text-primary group-hover:text-primary-dark text-sm tracking-wide leading-snug transition-colors">{t.ctaBoxText}</span>
                                         </a>

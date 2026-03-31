@@ -1,117 +1,59 @@
-# Executive Summary: Production Hardening & Amendment 13 Compliance
+# סיכום רפקטורינג (Walkthrough) - שיפור ארכיטקטורת Layout וניהול עוגיות
 
-This walkthrough details all the architectural changes, compliance updates, and build fixes implemented to prepare the Fractal website for a secure, SEO-optimized production deployment.
+## מה בוצע?
 
-## 1. Privacy & Amendment 13 Compliance (Strict Opt-In)
+הרפקטורינג המלא לקובץ ה-`Layout.astro` הסתיים בהצלחה ענקית. הקוד עבר תהליך מדוקדק של "פיזור סמכויות", חיסול תופעת ה-God Object ויצירת חלוקת קומפוננטות סמנטית. הכל בהתאם לחוקי האחריות המקצועית וללא שבירת פילוסופיית העיצוב של Tailwind.
 
-To comply with the Israeli Privacy Protection Law (Amendment 13) and GDPR, we implemented a strict "Opt-In" architecture for Google Tag Manager (GTM).
+### 1. קומפוננטות מערכת (Separation of Concerns)
 
-**What changed:**
-Third-party tracking scripts are no longer loaded automatically. They are dynamically injected into the DOM **only** if the user explicitly grants consent via the cookie banner (`cookie-consent === 'granted'`).
+> [!NOTE]
+> משיכת הקוד מתוך ה-Layout למספר רכיבים נפרדים הופכת את התחזוקה העתידית של האתר לקלה, נקייה ומהירה הרבה יותר.
 
-```html
-<!-- src/layouts/Layout.astro -->
-<script is:inline>
-  function loadAnalytics() {
-    // Strict Opt-In check before injecting Google Tag Manager
-    const consent = localStorage.getItem('cookie-consent');
-    if (consent === 'granted') {
-      const gtmId = 'GTM-XXXXXXX'; // TODO: Replace with Real GTM ID
-      
-      const script = document.createElement('script');
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${gtmId}`;
-      script.async = true;
-      document.head.appendChild(script);
+- **`src/components/Navbar.astro`**: הוקם קובץ חדש שמכיל אך ורק את הרכיב המקיף עליון העליון ותפריט הניווט (`<fractal-nav>`). כפי שסוכם, מחלקות ה-Tailwind נשמרו כ-Utility Classes כפי שנדרש על ידי דוקומנטציית TailwindCSS. 
+- **`src/components/AnalyticsTracking.astro`**: סופחה ומבודדת שם כעת כל פונקציונליות הסקריפטים השיווקיים (Google Analytics & Ads), ללא פגיעה בקריאות של קובץ השלד הראשי.
+- **`src/components/AccessibilityWidget.astro`**: הוקמה קומפוננטת תשתית נגישות, תוך הקפדה על המעטפת של `document.addEventListener('astro:page-load', ...)` כדי להבטיח אורך חיים מלא ב-SPA של קריאת Astro Routing.
 
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', gtmId);
-    }
-  }
+### 2. אבטחה וכתיבת עוגיות (Cookies)
 
-  // Listen for consent granted by the cookie banner
-  document.addEventListener('consentGranted', loadAnalytics);
+> [!TIP]
+> הלוגיקה החדשה בכתיבת וקריאת העוגייה `lang` מצמצמת חשיפה לבאגים, מונעת התנגשות בשרת (Edge), ומושכת את הפעילות החוצה ממשתני Inline ב-HTML.
 
-  // Check immediately on load in case consent was already given
-  if (localStorage.getItem('cookie-consent') === 'granted') {
-    loadAnalytics();
-  }
-</script>
-```
+- **בצד הלקוח (`Navbar.astro`):** כפתורי ה-EN/HE (גם במחשב וגם במובייל) שוכתבו. הוסר קוד ה-`onclick` ה-Inline. במקומם, נוספו המחლקה `.lang-toggle-btn` יחד עם `data-lang`. סקריפט Event Listener שוטף כעת אוחז את הלחיצות בעמוד הראשי וכותב את העוגייה תחת פרמטרי אבטחה בסיסיים (`SameSite=Lax`).
+- **בצד השרת (`functions/_middleware.ts`):** הפענוח הבסיסי השתדרג. במקום להשתמש בפונקציית העזר הדלה `includes` המועדת לפענוח שברירי, ה-Middleware מסתמך כעת על פונקציית Regex חזקה וקלה לאיתור בדיוק של כליפת השפה מהאות הראשון של המשתנה `lang=`.
 
-> [!WARNING]
-> **Action Required:** You must replace `GTM-XXXXXXX` with your actual Google Tag Manager container ID before going live.
+### 3. הקובץ המרכזי: Layout.astro
 
----
-
-## 2. Content Security Policy (CSP) Hardening
-
-We tightened the website's security by updating the Content Security Policy to explicitly whitelist only the required Google Analytics and Tag Manager domains. We intentionally excluded Facebook and LinkedIn to minimize the attack surface, pending future requirements.
-
-```text
-# public/_headers
-/*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net;
-```
-
----
-
-## 3. SEO & Open Graph bilingual support
-
-We added advanced `og:locale` meta tags to ensure that when the website link is shared on WhatsApp, LinkedIn, or Facebook, the preview correctly identifies whether the page is in Hebrew or English.
-
-```astro
-<!-- src/layouts/Layout.astro -->
-<meta property="og:type" content="website" />
-<meta property="og:locale" content={lang === 'he' ? 'he_IL' : 'en_US'} />
-<meta property="og:locale:alternate" content={lang === 'he' ? 'en_US' : 'he_IL'} />
-```
-
-We also integrated the official `@astrojs/sitemap` plugin to automatically generate an XML sitemap (`sitemap-index.xml`) on every build, and created a `robots.txt` file to point search engines directly to it.
-
-```javascript
-// astro.config.mjs
-import sitemap from '@astrojs/sitemap';
-
-export default defineConfig({
-  site: 'https://fractal-computers.com',
-  integrations: [
-    sitemap(),
-    // ...other integrations
-  ],
-});
-```
-
----
-
-## 4. Fixing the Astro Compiler Build Crash
-
-### The Problem
-During `npm run build`, the Astro compiler crashed with `ReferenceError: i is not defined`. 
-This is a known bug in the Astro compiler: when a map loop exposes an index variable `(client, i)` and uses it inside a short-circuit logical expression `&&` within a Fragment `<>`, Astro's AST parser erroneously hoists the `i` to the global scope of the file where it is undefined.
-
-### The Solution
-We implemented a robust two-part bypass in `src/templates/CustomersTemplate.astro` and `src/components/ClientsMarquee.astro`:
-
-1. **Dummy Variable Hoisting Trap:** We added `let i;` to the top of the component scripts so that the hoisted compiler reference points to a valid local variable rather than crashing.
-2. **Ternary Operator Conversion:** We replaced the `<>` fragments with `<div class="contents">` and swapped the `&&` short-circuit logic for a full ternary operator (`? : null`). This forces the compiler to evaluate the block safely as a closed Javascript expression.
+> [!IMPORTANT]
+> הקובץ 'ירד במשקל' באופן מטלטל, מ-455 שורות מלאות במשימות צד-לקוח, לכדי 151 שורות נקיות הממוקדות כולן בהחזקת מסגרת ה-HTML.
 
 ```diff
-- <>
--     {(i === 0 || i === Math.floor(col1.length / 2)) && (
--         <a href={tc.ctaBoxLink} class="...">Contact Us</a>
--     )}
--     <a href={client.url} ...>...</a>
-- </>
-
-+ <div class="contents">
-+     {(i === 0 || i === Math.floor(col1.length / 2)) ? (
-+         <a href={tc.ctaBoxLink} class="...">Contact Us</a>
-+     ) : null}
-+     <a href={client.url} ...>...</a>
-+ </div>
+- <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-between...">
+-   <!-- ...hundreds of lines of menu code... -->
+- </nav>
++ <Navbar lang={lang} />
+- <script is:inline>
+-     function loadAnalytics() { ... }
+- </script>
++ <AnalyticsTracking />
+- <script>
+-     document.addEventListener('astro:page-load', async () => { ... }
+- </script>
++ <AccessibilityWidget />
 ```
 
-> [!SUCCESS]
-> The build process `npm run build` now completes flawlessly in local testing, generating the static HTML and the automated sitemap without errors.
+## תוצאות הולידציה והבאה לייצור (Validation Readiness)
+- כל הקבצים אומתו ושמורים בגרסתם המוגמרת ומוכנים לבנייה.
+- תשתית הקוד של הניווט ומחלקות המעבר תאומת מול חיווט השפה ויחסי CSS/Tailwind.
+- רשימות המטלות (`task.md`) ומסמך האפיון נושאו ונחתמו על כל סעיף.
+
+---
+
+### המרת מערכת האייקונים (Material Symbols to Native SVGs)
+
+> [!TIP]
+> ביטול טעינת פונטי האייקונים (Icon Fonts) מסלק באופן אבסולוטי כל Layout Shift בתצוגת העמוד, משפר את ציון ה-Performance, ומאפשר אנימציות נקיות לחלוטין.
+
+במסגרת בקשת רפקטורינג "כמו סיניור", בוצע מעבר איכותני ומלא ל-SVGs טבעיים:
+- **מחולל `Icon.astro` חכם**: הוקם סקריפט אוטומטי (`fetch-icons.mjs`) ששאב את הנתיבים המדויקים ממאגרי גוגל הרשמיים, ועידנן את קומפוננטת `Icon` כך שתירש את גודל הטקסט (`text-xl`, `text-6xl` וכו') באופן מולד באמצעות `1em`.
+- **מחיקה גורפת**: הוחלפו כ-20 אייקוני Material (כדוגמת `memory`, `security`, `support_agent`, `check_circle`) בכ-8 קבצים שונים (Templates ו-Components). הוסרו חוקי ה-CSS הגלובליים המיותמים מ-`Layout.astro`.
+- **מניעת Jitter**: בכפתורי הפוטר המורכבים (העתקת מספר טלפון ודוא"ל), הלוגיקה הותאמה לעבוד בשילוב עם 2 רכיבי `Icon` חופפים. במקום להחליף תוכן ולהסתכן בקפיצות רוחב (Layout Shift), הקוד מבצע Cross-fade חלק על ידי עריכת שקיפות הצומת ב-JS, בדיוק לפי פילוסופיית העיצוב הביצועי של האתר.
