@@ -9,6 +9,10 @@ const { lang = 'en', isMobile = false } = Astro.props;
 const isHe = lang === 'he';
 
 import clientsData from '../data/clients.json';
+import type { ClientData } from '../types';
+import { Image } from 'astro:assets';
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/clients/*.{jpeg,jpg,png,gif}');
 
 import enLocales from '../locales/en.json';
 import heLocales from '../locales/he.json';
@@ -16,9 +20,11 @@ import heLocales from '../locales/he.json';
 const t = isHe ? heLocales.ClientsMarquee : enLocales.ClientsMarquee;
 const tc = isHe ? heLocales.CustomersTemplate : enLocales.CustomersTemplate;
 // Reusing the robust client list from shared data
-const clients = clientsData.map(c => ({
+const typedClientsData = clientsData as ClientData[];
+const clients = typedClientsData.map(c => ({
   name: isHe ? c.nameHe : c.nameEn,
-  domain: c.domain
+  domain: c.domain,
+  url: isHe ? c.urlHe : c.urlEn
 }));
 
 const col1 = clients.slice(0, Math.ceil(clients.length / 2));
@@ -52,13 +58,12 @@ const col2 = clients.slice(Math.ceil(clients.length / 2));
                             </a>
                         )}
                         <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 w-full shrink-0 active:scale-95 transition-transform">
-                            <img 
-                                src={`/images/clients/${client.domain}.png`} 
+                            <Image 
+                                src={images[`/src/assets/images/clients/${client.domain}.png`]()} 
                                 alt={`${tc.logoAltPrefix} ${client.name}`}
-                                width="40"
-                                height="40"
+                                width={40}
+                                height={40}
                                 class="w-8 h-8 object-contain opacity-90"
-                                onerror="this.style.display='none';"
                             />
                             <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
                         </a>
@@ -70,13 +75,12 @@ const col2 = clients.slice(Math.ceil(clients.length / 2));
             <div class="flex flex-col animate-marquee-up gap-4 w-1/2 max-w-[160px]">
                 {[1, 2].map(() => col2.map((client) => (
                     <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="flex flex-col items-center justify-center gap-2 p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-[0_4px_12px_rgba(0,104,87,0.04)] border border-primary/5 w-full shrink-0 active:scale-95 transition-transform">
-                        <img 
-                            src={`/images/clients/${client.domain}.png`} 
+                        <Image 
+                            src={images[`/src/assets/images/clients/${client.domain}.png`]()} 
                             alt={`${tc.logoAltPrefix} ${client.name}`}
-                            width="40"
-                            height="40"
+                            width={40}
+                            height={40}
                             class="w-8 h-8 object-contain opacity-90"
-                            onerror="this.style.display='none';"
                         />
                         <span class="text-[0.7rem] font-bold font-headline text-on-surface-variant text-center leading-tight line-clamp-1">{client.name}</span>
                     </a>
@@ -104,13 +108,12 @@ const col2 = clients.slice(Math.ceil(clients.length / 2));
                                     </a>
                                 )}
                                 <a href={client.url} target="_blank" rel="noopener noreferrer" title={client.name} class="w-max flex items-center gap-3 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 shrink-0" dir={isHe ? 'rtl' : 'ltr'}>
-                                    <img 
-                                        src={`/images/clients/${client.domain}.png`} 
+                                    <Image 
+                                        src={images[`/src/assets/images/clients/${client.domain}.png`]()} 
                                         alt={`${tc.logoAltPrefix} ${client.name}`}
-                                        width="36"
-                                        height="36"
+                                        width={36}
+                                        height={36}
                                         class="w-7 h-7 md:w-9 md:h-9 object-contain drop-shadow-sm shrink-0"
-                                        onerror="this.style.display='none';"
                                     />
                                     <span class="text-lg md:text-xl font-bold font-headline text-on-surface-variant whitespace-nowrap shrink-0">{client.name}</span>
                                 </a>

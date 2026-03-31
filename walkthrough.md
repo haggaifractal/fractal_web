@@ -1,19 +1,31 @@
-# Feature Walkthrough: Mobile Dual-Scroll Customers View
+# סיכום העדכונים 🚀
 
-## What was built?
-We transformed the static grid layout on the Customers mobile page into an interactive, continuously scrolling dual-column marquee, complete with a call-to-action conversion block.
+פרויקט Fractal עודכן בהצלחה בהתאם להערות הסיניור: ביצועי האתר ושחלקות הניווט שופרו אקספוננציאלית.
 
-## Key Changes Made
-1. **DRY CSS Refactoring:** Moved all the `@keyframes` (marquee-up, marquee-down, etc.) and hardware acceleration classes from `ClientsMarquee.astro` into the global CSS of `Layout.astro`. This eliminated duplication and ensured maximum performance globally.
-2. **Translation Updates:** Added `ctaBoxText` and `ctaBoxLink` keys to both `he.json` and `en.json` to keep text completely externalised and localizable.
-3. **CustomersTemplate.astro Architecture:**
-   * Handled data splitting into `col1` and `col2` smoothly.
-   * Defined `<div class="hidden md:grid ...">` to preserve the precise legacy B2B appearance on Desktop displays.
-   * Created the completely new `<div class="md:hidden ...">` block for mobile.
-   * In the right column (`col1`), injected the "Your place is here" CTA Box natively with an inner `{loopIndex === 1 && ...}` condition. This absolutely prevents spamming the CTA box inside the infinite loop sequence.
-4. **CTA Box Styling:** Implemented your suggested design using `bg-primary`, `text-white`, and an `arrow_downward` icon from Google Material Symbols to drive the user directly to the `#contact` section below.
+## מה בוצע?
 
-## Verification
-- Load `/customers` on mobile or emulate in Chrome DevTools.
-- Ensure the scrolling is seamless and hardware accelerated (perf monitor should show 60 FPS).
-- Click the CTA box to verify the native anchor jump to the Contact Form below.
+### 1. ניתוב שפה ב-Edge (Cloudflare Pages)
+- הסרנו את הפניית ברירת המחדל (localStorage) מהקליינט שגרמה ל-Flash of Unstyled Content (FOUC).
+- נוצר קובץ [functions/_middleware.ts](file:///c:/Users/User/Documents/fractalwebside/fractal-web/functions/_middleware.ts) שירוץ ב-Edge של Cloudflare לפני רינדור העמוד.
+- הניווט (Navbar ו-Mobile Nav בקובץ [Layout.astro](file:///c:/Users/User/Documents/fractalwebside/fractal-web/src/layouts/Layout.astro)) כעת זורק עוגיית `lang` שתקפה לשנה, שה-Middleware משתמש בה כדי להפנות ל-`/en` (או ל-`/`) מידיית.
+
+### 2. אופטימיזציית תמונות חכמה (Astro:assets)
+- כלל הלוגואים של הלקוחות הועברו לתיקייה `src/assets/images/clients/`.
+- קומפוננטות הלקוחות עודכנו להשתמש ב-`import.meta.glob` ובקומפוננטת  `<Image />` הרשמית של Astro.
+- מעתה במהלך ה-Build, אסטרו יוסיף אוטומטית המרות לפורמטים מתקדמים (WebP / AVIF), הקטנת מימדים (Responsive sizing), ודחיסה אופטימלית ללא פגיעה באיכות. 
+
+### 3. Type Safety מלא
+- הוספנו הגדרה ל-[types.ts](file:///c:/Users/User/Documents/fractalwebside/fractal-web/src/types.ts) עם Interface מסודר (`ClientData`) כדי לוודא ששום מפתח מ-JSON (כמו `c.nameHe` או `c.urlHe`) לא יתפספס ללא הגנה.
+
+### 4. דחיית וידג'ט הנגישות לטובת TTI
+- בוצע שינוי ב-[Layout.astro](file:///c:/Users/User/Documents/fractalwebside/fractal-web/src/layouts/Layout.astro) - סקריפט הנגישות בוטל מיבוא חוסם (`import { Accessibility }`) ועבר לטעינת אירועי `requestIdleCallback` או `setTimeout`. זה דואג לטעינה אסינכרונית ללא חסימת נראות לעמוד.
+
+---
+
+> [!TIP]
+> מומלץ להריץ את פקודות הבדיקה במחשב שלך כדי לוודא שאין שגיאות בזמן בנייה (Build) וש-Astro אכן מאקטב את כיווץ התמונות מול CF Edge Functions:
+
+```bash
+npm run build
+npx wrangler pages dev ./dist
+```

@@ -49,23 +49,6 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
     <meta name="twitter:image" content={ogImageUrl} />
     <ClientRouter />
 
-    <script is:inline>
-        (function() {
-            try {
-                if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
-                var override = localStorage.getItem('lang');
-                var isEn = window.location.pathname.startsWith('/en');
-                var path = window.location.pathname;
-                if (!isEn && override === 'en') {
-                    window.location.replace('/en' + path + window.location.search + window.location.hash);
-                } else if (isEn && override === 'he') {
-                    var newPath = path.replace(/^\/en/, '');
-                    window.location.replace((newPath || '/') + window.location.search + window.location.hash);
-                }
-            } catch (e) {}
-        })();
-    </script>
-
     {isHe ? (
         <>
             <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -217,7 +200,7 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
         </div>
 
         <div class="flex items-center gap-2 sm:gap-4 relative z-10 shrink-0">
-            <a href={altPath} onclick={`localStorage.setItem('lang', '${isHe ? "en" : "he"}');`} class="hidden lg:flex text-on-surface-variant hover:text-primary transition-colors text-sm font-bold tracking-wide items-center font-headline uppercase" dir={isHe ? "ltr" : "rtl"}>{isHe ? "EN" : "HE"}</a>
+            <a href={altPath} onclick={`document.cookie='lang=${isHe ? "en" : "he"}; path=/; max-age=31536000';`} class="hidden lg:flex text-on-surface-variant hover:text-primary transition-colors text-sm font-bold tracking-wide items-center font-headline uppercase" dir={isHe ? "ltr" : "rtl"}>{isHe ? "EN" : "HE"}</a>
             
             <div class="hidden lg:block h-5 w-px bg-outline-variant/30"></div>
 
@@ -243,7 +226,7 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
     <div id="mobile-nav" class="fixed inset-0 z-[45] bg-surface/95 backdrop-blur-3xl opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden flex flex-col pt-32 px-6 overscroll-none">
         <div class="flex flex-col gap-2">
             <div class={`flex px-6 mb-2 ${isHe ? 'justify-end' : 'justify-end'}`}>
-                <a href={altPath} onclick={`localStorage.setItem('lang', '${isHe ? "en" : "he"}');`} class="text-on-surface-variant hover:text-primary transition-colors text-lg font-bold tracking-wide font-headline uppercase" dir={isHe ? "ltr" : "rtl"}>{isHe ? "EN" : "HE"}</a>
+                <a href={altPath} onclick={`document.cookie='lang=${isHe ? "en" : "he"}; path=/; max-age=31536000';`} class="text-on-surface-variant hover:text-primary transition-colors text-lg font-bold tracking-wide font-headline uppercase" dir={isHe ? "ltr" : "rtl"}>{isHe ? "EN" : "HE"}</a>
             </div>
 
             <a href={isHe ? "/" : "/en/"} class="text-xl text-slate-700 font-medium py-4 px-6 rounded-2xl hover:bg-primary/5 hover:text-primary transition-all flex justify-between items-center group">
@@ -398,43 +381,55 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
     </script>
 
     <script>
-        import { Accessibility } from 'accessibility';
-        
         document.addEventListener('astro:page-load', function() {
-            const isHe = document.documentElement.lang === 'he';
-            
-            // מניעת שכפול הווידג'ט במעברי עמוד
-            if (!document.querySelector('.accessibility-menu')) {
-                new Accessibility({
-                    labels: {
-                        menuTitle: isHe ? 'אפשרויות נגישות' : 'Accessibility Options',
-                        increaseText: isHe ? 'הגדל טקסט' : 'Increase Text',
-                        decreaseText: isHe ? 'הקטן טקסט' : 'Decrease Text',
-                        increaseTextSpacing: isHe ? 'הגדל מרווח טקסט' : 'Increase Text Spacing',
-                        decreaseTextSpacing: isHe ? 'הקטן מרווח טקסט' : 'Decrease Text Spacing',
-                        increaseLineHeight: isHe ? 'הגדל מרווח שורות' : 'Increase Line Height',
-                        decreaseLineHeight: isHe ? 'הקטן מרווח שורות' : 'Decrease Line Height',
-                        invertColors: isHe ? 'הפוך צבעים' : 'Invert Colors',
-                        grayHues: isHe ? 'גווני אפור' : 'Gray Hues',
-                        underlineLinks: isHe ? 'קו תחתון לקישורים' : 'Underline Links',
-                        bigCursor: isHe ? 'סמן גדול' : 'Big Cursor',
-                        readingGuide: isHe ? 'מדריך קריאה' : 'Reading Guide',
-                        textToSpeech: isHe ? 'הקראת טקסט' : 'Text to Speech',
-                        speechToText: isHe ? 'הכתבה קולית' : 'Speech to Text',
-                        resetTitle: isHe ? 'איפוס נגישות' : 'Reset Accessibility',
-                        closeTitle: isHe ? 'סגור' : 'Close',
-                        disableAnimations: isHe ? 'בטל אנימציות' : 'Disable Animations',
-                        hotkeyPrefix: isHe ? 'קיצור דרך:' : 'Hotkey:'
-                    },
-                    icon: {
-                        // @ts-ignore - The module's typescript definitions are missing the 'position' interface which is valid in JS
-                        position: {
-                            bottom: { size: 30, units: 'px' },
-                            [isHe ? 'right' : 'left']: { size: 30, units: 'px' },
-                            type: 'fixed'
+            // Lazy load the accessibility widget without blocking the main thread
+            const loadAccessibility = async () => {
+                if (document.querySelector('.accessibility-menu')) return;
+                
+                try {
+                    const module = await import('accessibility');
+                    const Accessibility = module.Accessibility || module.default;
+                    const isHe = document.documentElement.lang === 'he';
+                    
+                    new Accessibility({
+                        labels: {
+                            menuTitle: isHe ? 'אפשרויות נגישות' : 'Accessibility Options',
+                            increaseText: isHe ? 'הגדל טקסט' : 'Increase Text',
+                            decreaseText: isHe ? 'הקטן טקסט' : 'Decrease Text',
+                            increaseTextSpacing: isHe ? 'הגדל מרווח טקסט' : 'Increase Text Spacing',
+                            decreaseTextSpacing: isHe ? 'הקטן מרווח טקסט' : 'Decrease Text Spacing',
+                            increaseLineHeight: isHe ? 'הגדל מרווח שורות' : 'Increase Line Height',
+                            decreaseLineHeight: isHe ? 'הקטן מרווח שורות' : 'Decrease Line Height',
+                            invertColors: isHe ? 'הפוך צבעים' : 'Invert Colors',
+                            grayHues: isHe ? 'גווני אפור' : 'Gray Hues',
+                            underlineLinks: isHe ? 'קו תחתון לקישורים' : 'Underline Links',
+                            bigCursor: isHe ? 'סמן גדול' : 'Big Cursor',
+                            readingGuide: isHe ? 'מדריך קריאה' : 'Reading Guide',
+                            textToSpeech: isHe ? 'הקראת טקסט' : 'Text to Speech',
+                            speechToText: isHe ? 'הכתבה קולית' : 'Speech to Text',
+                            resetTitle: isHe ? 'איפוס נגישות' : 'Reset Accessibility',
+                            closeTitle: isHe ? 'סגור' : 'Close',
+                            disableAnimations: isHe ? 'בטל אנימציות' : 'Disable Animations',
+                            hotkeyPrefix: isHe ? 'קיצור דרך:' : 'Hotkey:'
+                        },
+                        icon: {
+                            // @ts-ignore
+                            position: {
+                                bottom: { size: 30, units: 'px' },
+                                [isHe ? 'right' : 'left']: { size: 30, units: 'px' },
+                                type: 'fixed'
+                            }
                         }
-                    }
-                });
+                    });
+                } catch (e) {
+                    console.error("Accessibility widget failed to load", e);
+                }
+            };
+            
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(loadAccessibility, { timeout: 2000 });
+            } else {
+                setTimeout(loadAccessibility, 1500);
             }
         });
     </script>
