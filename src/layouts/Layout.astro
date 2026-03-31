@@ -74,9 +74,18 @@ const t = isHe ? heLocales.Layout : enLocales.Layout;
         @tailwind components;
         @tailwind utilities;
 
-        /* Prevent the accessibility widget from altering the base font size on load */
-        html:not(._access-font-size) {
-            font-size: 16px !important;
+        /* Secure base font-size to prevent accessibility plugin from shrinking the layout */
+        html {
+            font-size: var(--access-base-font-size, 16px) !important;
+        }
+        
+        /* Enforce line-height and spacing overrides strictly across all scoped tailwind utilities when active */
+        html.access-line-height-active, html.access-line-height-active * {
+            line-height: var(--access-line-height) !important;
+        }
+        html.access-spacing-active, html.access-spacing-active * {
+            letter-spacing: var(--access-letter-spacing) !important;
+            word-spacing: var(--access-word-spacing) !important;
         }
 
         /* Define core variables if not already defined entirely by Tailwind */

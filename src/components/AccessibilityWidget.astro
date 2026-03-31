@@ -12,6 +12,8 @@
                 const isHe = document.documentElement.lang === 'he';
                 
                 new Accessibility({
+                    textPixelMode: false,
+                    textEmlMode: false,
                     labels: {
                         menuTitle: isHe ? 'אפשרויות נגישות' : 'Accessibility Options',
                         increaseText: isHe ? 'הגדל טקסט' : 'Increase Text',
@@ -39,6 +41,59 @@
                             [isHe ? 'right' : 'left']: { size: 30, units: 'px' },
                             type: 'fixed'
                         }
+                    }
+                });
+
+                // Custom handling for font-size because Tailwind uses root (rem) units
+                let currentScale = 16;
+                let currentLineHeight = 1.5;
+                let currentWordSpacing = 0;
+                let currentLetterSpacing = 0;
+                
+                document.documentElement.style.setProperty('--access-base-font-size', '16px');
+                
+                document.addEventListener('click', (e) => {
+                    const target = e.target.closest('[data-access-action], ._menu-reset-btn');
+                    if (!target) return;
+                    
+                    const action = target.getAttribute('data-access-action') || (target.classList.contains('_menu-reset-btn') ? 'reset' : null);
+                    
+                    if (action === 'increaseText') {
+                        currentScale = Math.min(currentScale + 1.5, 32);
+                        document.documentElement.style.setProperty('--access-base-font-size', `${currentScale}px`);
+                    } else if (action === 'decreaseText') {
+                        currentScale = Math.max(currentScale - 1.5, 12);
+                        document.documentElement.style.setProperty('--access-base-font-size', `${currentScale}px`);
+                        
+                    } else if (action === 'increaseLineHeight') {
+                        currentLineHeight = Math.min(currentLineHeight + 0.2, 2.5);
+                        document.documentElement.style.setProperty('--access-line-height', `${currentLineHeight}`);
+                        document.documentElement.classList.add('access-line-height-active');
+                    } else if (action === 'decreaseLineHeight') {
+                        currentLineHeight = Math.max(currentLineHeight - 0.2, 1.1);
+                        document.documentElement.style.setProperty('--access-line-height', `${currentLineHeight}`);
+                        document.documentElement.classList.toggle('access-line-height-active', currentLineHeight > 1.5 || currentLineHeight < 1.4); // allow removing at standard range 1.5
+                        
+                    } else if (action === 'increaseTextSpacing') {
+                        currentWordSpacing = Math.min(currentWordSpacing + 0.1, 0.5);
+                        currentLetterSpacing = Math.min(currentLetterSpacing + 0.05, 0.25);
+                        document.documentElement.style.setProperty('--access-word-spacing', `${currentWordSpacing}em`);
+                        document.documentElement.style.setProperty('--access-letter-spacing', `${currentLetterSpacing}em`);
+                        document.documentElement.classList.add('access-spacing-active');
+                    } else if (action === 'decreaseTextSpacing') {
+                        currentWordSpacing = Math.max(currentWordSpacing - 0.1, 0);
+                        currentLetterSpacing = Math.max(currentLetterSpacing - 0.05, 0);
+                        document.documentElement.style.setProperty('--access-word-spacing', `${currentWordSpacing}em`);
+                        document.documentElement.style.setProperty('--access-letter-spacing', `${currentLetterSpacing}em`);
+                        document.documentElement.classList.toggle('access-spacing-active', currentWordSpacing > 0);
+                        
+                    } else if (action === 'reset') {
+                        currentScale = 16;
+                        currentLineHeight = 1.5;
+                        currentWordSpacing = 0;
+                        currentLetterSpacing = 0;
+                        document.documentElement.style.setProperty('--access-base-font-size', '16px');
+                        document.documentElement.classList.remove('access-line-height-active', 'access-spacing-active');
                     }
                 });
             } catch (e) {
